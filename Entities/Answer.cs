@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    class Answer
+    public class Answer
     {
+
+        public Answer(string value)
+        {
+            Text = value;
+        }
+
+        public string Text { get; set; }
     }
 }

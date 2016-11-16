@@ -8,5 +8,14 @@ namespace Entities
 {
     public class Question
     {
+
+        public Question(string question)
+        {
+            Text = question;
+            Answers = new List<Answer>();
+        }
+
+        public ICollection<Answer> Answers { get; set; }
+        public string Text { get; set; }
     }
 }
