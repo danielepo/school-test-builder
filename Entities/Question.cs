@@ -12,22 +12,23 @@ namespace Entities
         public Question(string question)
         {
             Text = question;
-            Answers = new List<Answer>();
+            Choiches = new List<Answer>();
         }
 
-        public ICollection<Answer> Answers { get; set; }
+        public int Answer { get { return Choiches.Select((c, i) => new { Index = i, Choiche = c }).First(x => x.Choiche.Points == 1).Index + 1 ; } }
+        public ICollection<Answer> Choiches { get; set; }
         public string Text { get; set; }
 
         public void Add(Answer answer)
         {
-            Answers.Add(answer);
+            Choiches.Add(answer);
         }
 
         internal Question Clone()
         {
             return new Question(Text)
             {
-                Answers = Answers.Shuffle(new Random()).ToList()
+                Choiches = Choiches.Shuffle(new Random()).ToList()
             };
         }
     }

@@ -19,35 +19,35 @@ namespace BL.Test
         //}
         IEnumerable<Question> questions = new List<Question> {
                 new Question("Domanda 1"){
-                    Answers = new List<Answer>{
+                    Choiches = new List<Answer>{
                         new Answer("risposta 1"),
                         new Answer("risposta 2"),
                         new Answer("risposta 3"),
                     }
                 },
                 new Question("Domanda 2"){
-                    Answers = new List<Answer>{
+                    Choiches = new List<Answer>{
                         new Answer("risposta 4"),
                         new Answer("risposta 5"),
                         new Answer("risposta 6"),
                     }
                 },
                 new Question("Domanda 3"){
-                    Answers = new List<Answer>{
+                    Choiches = new List<Answer>{
                         new Answer("risposta 7"),
                         new Answer("risposta 8"),
                         new Answer("risposta 9"),
                     }
                 },
                 new Question("Domanda 4"){
-                    Answers = new List<Answer>{
+                    Choiches = new List<Answer>{
                         new Answer("risposta 10"),
                         new Answer("risposta 11"),
                         new Answer("risposta 12"),
                     }
                 },
                 new Question("Domanda 5"){
-                    Answers = new List<Answer>{
+                    Choiches = new List<Answer>{
                         new Answer("risposta 13"),
                         new Answer("risposta 14"),
                         new Answer("risposta 15"),

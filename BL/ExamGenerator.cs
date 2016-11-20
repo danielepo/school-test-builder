@@ -16,7 +16,11 @@ namespace BL
         {
             var exams = new List<Exam>();
             for (int i = 0; i < size; i++)
-                exams.Add(exam.Clone());
+            {
+                var clone = exam.Clone();
+                clone.Title += " - " + (i + 1);
+                exams.Add(clone);
+            }
             return exams;
         }
     }

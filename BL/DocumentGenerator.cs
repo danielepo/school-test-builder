@@ -79,7 +79,7 @@ namespace BL
         private void AppendQuestion(Body body, Question question)
         {
             body.Append(ParagraphFrom(question));
-            foreach (var answer in question.Answers)
+            foreach (var answer in question.Choiches)
                 body.Append(ParagraphFrom(answer));
         }
 
