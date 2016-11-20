@@ -17,5 +17,10 @@ namespace Entities
 
         public ICollection<Answer> Answers { get; set; }
         public string Text { get; set; }
+
+        public void Add(Answer answer)
+        {
+            Answers.Add(answer);
+        }
     }
 }

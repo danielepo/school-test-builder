@@ -28,7 +28,7 @@ namespace BL.Test
         public void OnlyQuestionReturnsOne()
         {
             string questionText = "text";
-            var questions = parse.Parse($"1. {questionText}");
+            var questions = parse.Parse($"{questionText}");
             Assert.That(questions.Count(), Is.EqualTo(1));
             var first = questions.First();
             Assert.That(first.Text, Is.EqualTo(questionText));
@@ -36,21 +36,34 @@ namespace BL.Test
         [Test]
         public void TwoQuestionsReturnsTwo()
         {
-            var questions = parse.Parse("1. questionText\n2. second");
+            var questions = parse.Parse("questionText\nsecond");
             Assert.That(questions.Count(), Is.EqualTo(2));
         }
         [Test]
         public void OneQuestionsOneAnswerReturnsOneQuestionWithAnswer()
         {
-            var questions = parse.Parse("1. question\na. answer");
+            var questions = parse.Parse("question\n1. answer");
             Assert.That(questions.Count(), Is.EqualTo(1));
             var first = questions.First();
             Assert.That(first.Answers.First().Text, Is.EqualTo("answer"));
         }
         [Test]
+        public void AnswerWithPointsParsesCorrectlyPoints()
+        {
+            var questions = parse.Parse("question\n1. answer:1\n2. wrong:0");
+            Assert.That(questions.Count(), Is.EqualTo(1));
+            var question = questions.First();
+            var answer = question.Answers.First();
+            Assert.That(answer.Text, Is.EqualTo("answer"));
+            Assert.That(answer.Points, Is.EqualTo(1));
+            answer = question.Answers.Skip(1).First();
+            Assert.That(answer.Text, Is.EqualTo("wrong"));
+            Assert.That(answer.Points, Is.EqualTo(0));
+        }
+        [Test]
         public void MultipleReturnsMultiple()
         {
-            var questions = parse.Parse("1. question\na. answer\nb. secondo\n2. question2\na. answer2\nb. secondo2\n1. question3\na. answer3\nb. secondo3");
+            var questions = parse.Parse("question\n1. answer\n2. secondo\nquestion2\n1. answer2\n2. secondo2\nquestion3\n1. answer3\n2. secondo3");
             Assert.That(questions.Count(), Is.EqualTo(3));
         }
     }

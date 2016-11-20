@@ -9,30 +9,33 @@ namespace BL
 {
     public class QuestionParser
     {
+        private List<Question> questions;
+
         public IEnumerable<Question> Parse(string text)
         {
-            if (string.IsNullOrWhiteSpace(text))
-                return new List<Question>();
+            questions = new List<Question>();
 
-            var questions = new List<Question>();
+            if (string.IsNullOrWhiteSpace(text))
+                return questions;
+
             var rows = text.Split('\n');
             foreach (var row in rows)
-            {
-                var firstPoint = row.IndexOf('.');
-                var prefix = row.Substring(0, firstPoint);
-                var value = row.Substring(firstPoint + 1).Trim();
-                int ignored;
-                if (int.TryParse(prefix, out ignored))
-                {
-                    questions.Add(new Question(value));
-                }
-                else
-                {
-                    questions.Last().Answers.Add(new Answer(value));
-                }
-            }
+                ParseRow(row);
 
             return questions;
+        }
+
+        private void ParseRow(string row)
+        {
+            row = row.Trim();
+            if (Answer.IsValid(row))
+            {
+                questions.Last().Add(Answer.FromRow(row));
+            }
+            else
+            {
+                questions.Add(new Question(row));
+            }
         }
     }
 }
