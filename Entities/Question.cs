@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Entities.Extensions;
 namespace Entities
 {
     public class Question
@@ -21,6 +21,14 @@ namespace Entities
         public void Add(Answer answer)
         {
             Answers.Add(answer);
+        }
+
+        internal Question Clone()
+        {
+            return new Question(Text)
+            {
+                Answers = Answers.Shuffle(new Random()).ToList()
+            };
         }
     }
 }

@@ -38,6 +38,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExamsGeneratorTest.cs" />
     <Compile Include="DocumentGeneratorTest.cs" />
     <Compile Include="QuestionParserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
