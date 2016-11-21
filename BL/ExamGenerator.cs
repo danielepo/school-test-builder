@@ -19,7 +19,7 @@ namespace BL
             for (int i = 0; i < size; i++)
             {
                 var clone = exam.Clone(random);
-                clone.Title += " - " + (i + 1);
+                clone.Type = i + 1;
                 exams.Add(clone);
             }
             return exams;

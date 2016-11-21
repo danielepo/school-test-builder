@@ -73,9 +73,9 @@ namespace BL.Test
         public void ChangeTitle()
         {
             var exams = generator.Create(exam, 3);
-            Assert.That(exams.ElementAt(0).Title, Is.EqualTo("Titolo - " + 1));
-            Assert.That(exams.ElementAt(1).Title, Is.EqualTo("Titolo - " + 2));
-            Assert.That(exams.ElementAt(2).Title, Is.EqualTo("Titolo - " + 3));
+            Assert.That(exams.ElementAt(0).Type, Is.EqualTo(1));
+            Assert.That(exams.ElementAt(1).Type, Is.EqualTo(2));
+            Assert.That(exams.ElementAt(2).Type, Is.EqualTo(3));
         }
 
         private bool IsRandomAt(int index, ICollection<Exam> exams)

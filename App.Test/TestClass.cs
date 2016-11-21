@@ -185,6 +185,9 @@ In caso di diabete mellito che alimenti si devono evitare?
 Si verifica spesso carenza glucidica? Spiega il perché
 1.	Sì: 0
 2.	No: 1
+
+
+
 I grassi insaturi si trovano in buona quantità in:
 1.	pesce: 1
 2.	burro: 0
@@ -289,11 +292,6 @@ La vitamina C viene distrutta col calore
 Assumendo troppe vitamine del gruppo B posso andare incontro a problemi di accumulo
 1.	VERO: 0
 2.	FALSO: 1
-
-
-
-
-
 ";
     }
 }

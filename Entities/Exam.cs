@@ -11,6 +11,7 @@ namespace Entities
         public string Instructions { get; set; }
         public IEnumerable<Question> Questions { get; set; }
         public string Title { get; set; }
+        public int Type { get; set; }
 
         public Exam Clone(Random random)
         {

@@ -24,7 +24,8 @@ namespace Entities
                           : "";
             }
         }
-        public ICollection<Answer> Choiches { get; set; }
+        public IList<Answer> Choiches { get; set; }
+        public int Space { get; set; }
         public string Text { get; set; }
 
         public void Add(Answer answer)
@@ -36,7 +37,8 @@ namespace Entities
         {
             return new Question(Text)
             {
-                Choiches = Choiches.Shuffle(random).ToList()
+                Choiches = Choiches.Shuffle(random).ToList(),
+                Space = Space
             };
         }
     }

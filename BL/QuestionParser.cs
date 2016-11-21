@@ -29,7 +29,10 @@ namespace BL
         {
             row = row.Trim();
             if (string.IsNullOrWhiteSpace(row))
+            {
+                questions.Last().Space++;
                 return;
+            }
             if (Answer.IsValid(row))
             {
                 questions.Last().Add(Answer.FromRow(row));
