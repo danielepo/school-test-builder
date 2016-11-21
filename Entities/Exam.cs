@@ -12,13 +12,13 @@ namespace Entities
         public IEnumerable<Question> Questions { get; set; }
         public string Title { get; set; }
 
-        public Exam Clone()
+        public Exam Clone(Random random)
         {
             return new Exam()
             {
                 Title = Title,
                 Instructions = Instructions,
-                Questions = Questions.Select(q => q.Clone()).Shuffle(new Random())
+                Questions = Questions.Select(q => q.Clone(random)).Shuffle(random)
             };
         }
     }

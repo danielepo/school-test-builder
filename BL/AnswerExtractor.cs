@@ -12,7 +12,7 @@ namespace BL
 {
     public class AnswerExtractor
     {
-        public IEnumerable<IEnumerable<int>> Extract(IEnumerable<Exam> exams)
+        public IEnumerable<IEnumerable<string>> Extract(IEnumerable<Exam> exams)
         {
             return exams.Select(e => e.Questions.Select(q => q.Answer));
         }

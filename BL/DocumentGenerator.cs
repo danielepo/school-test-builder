@@ -14,7 +14,7 @@ namespace BL
     {
         public void Create(Exam exam)
         {
-            using (WordprocessingDocument package = WordprocessingDocument.Create(@"C:\Users\m.pozzobon\Documents\visual studio 2015\Projects\QuizH\BL\bin\Debug\TestDocument.docx", WordprocessingDocumentType.Document))
+            using (WordprocessingDocument package = WordprocessingDocument.Create($"C:\\Users\\m.pozzobon\\Documents\\visual studio 2015\\Projects\\QuizH\\BL\\bin\\Debug\\{exam.Title}.docx", WordprocessingDocumentType.Document))
             {
                 MainDocumentPart mainDocumentPart = package.AddMainDocumentPart();
 

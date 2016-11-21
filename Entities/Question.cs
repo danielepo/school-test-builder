@@ -15,7 +15,15 @@ namespace Entities
             Choiches = new List<Answer>();
         }
 
-        public int Answer { get { return Choiches.Select((c, i) => new { Index = i, Choiche = c }).First(x => x.Choiche.Points == 1).Index + 1 ; } }
+        public string Answer
+        {
+            get
+            {
+                return Choiches.Any(x => x.Points == 1)
+                          ? string.Join(",", Choiches.Select((c, i) => new { Index = i, Choiche = c }).Where(x => x.Choiche.Points == 1).Select(x => x.Index + 1))
+                          : "";
+            }
+        }
         public ICollection<Answer> Choiches { get; set; }
         public string Text { get; set; }
 
@@ -24,11 +32,11 @@ namespace Entities
             Choiches.Add(answer);
         }
 
-        internal Question Clone()
+        internal Question Clone(Random random)
         {
             return new Question(Text)
             {
-                Choiches = Choiches.Shuffle(new Random()).ToList()
+                Choiches = Choiches.Shuffle(random).ToList()
             };
         }
     }

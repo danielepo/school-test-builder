@@ -83,10 +83,10 @@ namespace BL.Test
         {
             var answers = extractor.Extract(new List<Exam> { exam, exam2, exam3 });
             Assert.That(answers.Count, Is.EqualTo(3));
-            Assert.That(answers, Is.EquivalentTo(new List<List<int>> {
-                new List<int>{1, 2},
-                new List<int>{2, 3},
-                new List<int>{3, 1},
+            Assert.That(answers, Is.EquivalentTo(new List<List<string>> {
+                new List<string>{"1", "2"},
+                new List<string>{"2", "3"},
+                new List<string>{"3", "1"},
             }));
         }
     }

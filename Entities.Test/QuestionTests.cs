@@ -21,7 +21,7 @@ namespace Entities.Test
                     new Answer("text") { Points = 0},
                 },
             };
-            Assert.That(question.Answer, Is.EqualTo(1));
+            Assert.That(question.Answer, Is.EqualTo("1"));
         }
         [Test]
         public void SecondAnswerIsCorrectReturns2()
@@ -34,7 +34,21 @@ namespace Entities.Test
                     new Answer("text") { Points = 1},
                 },
             };
-            Assert.That(question.Answer, Is.EqualTo(2));
+            Assert.That(question.Answer, Is.EqualTo("2"));
+        }
+        [Test]
+        public void TwoCorrectAnswersReturns2Comma3()
+        {
+            var question = new Question("Text")
+            {
+                Choiches = new List<Answer>
+                {
+                    new Answer("text") { Points = 0},
+                    new Answer("text") { Points = 1},
+                    new Answer("text") { Points = 1},
+                },
+            };
+            Assert.That(question.Answer, Is.EqualTo("2,3"));
         }
     }
 }

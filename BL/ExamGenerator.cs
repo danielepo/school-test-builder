@@ -15,9 +15,10 @@ namespace BL
         public ICollection<Exam> Create(Exam exam, int size)
         {
             var exams = new List<Exam>();
+            var random = new Random();
             for (int i = 0; i < size; i++)
             {
-                var clone = exam.Clone();
+                var clone = exam.Clone(random);
                 clone.Title += " - " + (i + 1);
                 exams.Add(clone);
             }

@@ -28,6 +28,8 @@ namespace BL
         private void ParseRow(string row)
         {
             row = row.Trim();
+            if (string.IsNullOrWhiteSpace(row))
+                return;
             if (Answer.IsValid(row))
             {
                 questions.Last().Add(Answer.FromRow(row));
