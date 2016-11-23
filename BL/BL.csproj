@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="AnswerSheetWriter.cs" />
     <Compile Include="AnswerExtractor.cs" />
+    <Compile Include="DocumentReader.cs" />
     <Compile Include="ExamGenerator.cs" />
     <Compile Include="DocumentGenerator.cs" />
     <Compile Include="QuestionParser.cs" />
