@@ -3,10 +3,6 @@ using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using Entities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BL
 {
@@ -14,12 +10,12 @@ namespace BL
     {
         public void Create(Exam exam)
         {
-            using (WordprocessingDocument package = WordprocessingDocument.Create($"C:\\Users\\m.pozzobon\\Documents\\visual studio 2015\\Projects\\QuizH\\BL\\bin\\Debug\\{exam.Title} - {exam.Type}.docx", WordprocessingDocumentType.Document))
+            var location =  $"{AppDomain.CurrentDomain.BaseDirectory}/{exam.Title} - {exam.Type}.docx";
+            using (var package = WordprocessingDocument.Create(location, WordprocessingDocumentType.Document))
             {
-                MainDocumentPart mainDocumentPart = package.AddMainDocumentPart();
+                var mainDocumentPart = package.AddMainDocumentPart();
 
-                Document document = CreateDocument(exam);
-                document.Save(mainDocumentPart);
+                CreateDocument(exam).Save(mainDocumentPart);
             }
         }
 
