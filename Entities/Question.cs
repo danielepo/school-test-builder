@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Entities.Extensions;
 namespace Entities
 {
@@ -20,7 +18,9 @@ namespace Entities
             get
             {
                 return Choiches.Any(x => x.Points == 1)
-                          ? string.Join(",", Choiches.Select((c, i) => new { Index = i, Choiche = c }).Where(x => x.Choiche.Points == 1).Select(x => x.Index + 1))
+                          ? string.Join(",", Choiches.Select((c, i) => new { Index = i, Choiche = c })
+                                                     .Where(x => x.Choiche.Points == 1)
+                                                     .Select(x => x.Index + 1))
                           : "";
             }
         }

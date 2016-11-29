@@ -16,7 +16,7 @@ namespace Entities.Test
         [Test]
         public void PointsCanBeAssigned()
         {
-            var answer = new Answer("irrilevant") { Points = 1 };
+            var answer = new Answer("irrilevant",1);
             Assert.That(answer.Points, Is.EqualTo(1));
         }
 
@@ -36,19 +36,19 @@ namespace Entities.Test
         public void AnswerWithText()
         {
             var parsed = Answer.FromRow(".first:5");
-            Assert.That(parsed, Is.EqualTo(new Answer("first") {Points = 5}));
+            Assert.That(parsed, Is.EqualTo(new Answer("first",5)));
         }
         [Test]
         public void AnswerWithTextWithWrongPoints()
         {
             var parsed = Answer.FromRow(".first:wrong");
-            Assert.That(parsed, Is.EqualTo(new Answer("first") { Points = 0 }));
+            Assert.That(parsed, Is.EqualTo(new Answer("first",5)));
         }
         [Test]
         public void EmptyAnswerWithWithPoints()
         {
             var parsed = Answer.FromRow(".:5");
-            Assert.That(parsed, Is.EqualTo(new Answer("") { Points = 5 }));
+            Assert.That(parsed, Is.EqualTo(new Answer("",5)));
         }
     }
 }

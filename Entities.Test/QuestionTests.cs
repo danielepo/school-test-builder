@@ -17,8 +17,8 @@ namespace Entities.Test
             {
                 Choiches = new List<Answer>
                 {
-                    new Answer("text") { Points = 1},
-                    new Answer("text") { Points = 0},
+                    new Answer("text",1),
+                    new Answer("text",0),
                 },
             };
             Assert.That(question.Answer, Is.EqualTo("1"));
@@ -30,8 +30,8 @@ namespace Entities.Test
             {
                 Choiches = new List<Answer>
                 {
-                    new Answer("text") { Points = 0},
-                    new Answer("text") { Points = 1},
+                    new Answer("text",0),
+                    new Answer("text",1),
                 },
             };
             Assert.That(question.Answer, Is.EqualTo("2"));
@@ -43,9 +43,9 @@ namespace Entities.Test
             {
                 Choiches = new List<Answer>
                 {
-                    new Answer("text") { Points = 0},
-                    new Answer("text") { Points = 1},
-                    new Answer("text") { Points = 1},
+                    new Answer("text",0),
+                    new Answer("text",1),
+                    new Answer("text",1),
                 },
             };
             Assert.That(question.Answer, Is.EqualTo("2,3"));

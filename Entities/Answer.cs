@@ -9,14 +9,25 @@ namespace Entities
 {
     public class Answer
     {
+        private readonly string _text;
+        private readonly int _points;
         //why not use a constructor that also have the points?
         public Answer(string value)
         {
-            Text = value;
+            _text = value;
+            _points = 0;
         }
 
-        public string Text { get; private set; }
-        public int Points { get; set; }
+        public Answer(string value, int points)
+        {
+            _text = value;
+            _points = points;
+        }
+
+        public string Text => _text;
+
+        public int Points => _points;
+
         // should be part of the answer or part of a validator/parser
         // there's nothing about the answer here
         public static bool IsValid(string row)
@@ -44,10 +55,7 @@ namespace Entities
             }
             end -= start + 1;
             var value = row.Substring(start + 1, end).Trim();
-            return new Answer(value)
-            {
-                Points = points
-            };
+            return new Answer(value, points);
         }
 
         public override bool Equals(object obj)
@@ -69,7 +77,7 @@ namespace Entities
         {
             unchecked
             {
-                return ((Text?.GetHashCode() ?? 0)*397) ^ Points;
+                return ((Text?.GetHashCode() ?? 0) * 397) ^ Points;
             }
         }
     }
