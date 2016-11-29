@@ -19,7 +19,7 @@ namespace BL
             {
                 MainDocumentPart mainDocumentPart = package.MainDocumentPart;
 
-                var p = mainDocumentPart.Document.Body.ChildElements.Where(x => x is Paragraph).Select(x => (Paragraph)x).ToList();
+                var p = mainDocumentPart.Document.Body.ChildElements.OfType<Paragraph>().ToList();
                 foreach (var x in p)
                 {
                     if (x.ParagraphProperties != null && x.ParagraphProperties.NumberingProperties != null && x.ParagraphProperties.NumberingProperties.NumberingLevelReference != null)
