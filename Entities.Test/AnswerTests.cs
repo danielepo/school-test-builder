@@ -1,9 +1,4 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Entities.Test
 {
@@ -40,8 +35,20 @@ namespace Entities.Test
         [Test]
         public void AnswerWithText()
         {
-            var answer = Answer.FromRow(".first:5");
-            Assert.That(answer, Is.EqualTo(new Answer("first") {Points = 5}));
+            var parsed = Answer.FromRow(".first:5");
+            Assert.That(parsed, Is.EqualTo(new Answer("first") {Points = 5}));
+        }
+        [Test]
+        public void AnswerWithTextWithWrongPoints()
+        {
+            var parsed = Answer.FromRow(".first:wrong");
+            Assert.That(parsed, Is.EqualTo(new Answer("first") { Points = 0 }));
+        }
+        [Test]
+        public void EmptyAnswerWithWithPoints()
+        {
+            var parsed = Answer.FromRow(".:5");
+            Assert.That(parsed, Is.EqualTo(new Answer("") { Points = 5 }));
         }
     }
 }
