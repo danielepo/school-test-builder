@@ -8,18 +8,7 @@ namespace Entities.Test
     [TestFixture]
     public class ExamTests
     {
-        [Test]
-        public void HasAStringTitle()
-        {
-            var exam = new Exam();
-            Assert.That(exam.Title.GetType(),Is.EqualTo(typeof(string)));
-        }
-        [Test]
-        public void HasAStringInstructions()
-        {
-            var exam = new Exam();
-            Assert.That(exam.Instructions.GetType(), Is.EqualTo(typeof(string)));
-        }
+
         [Test]
         public void HasANumericType()
         {

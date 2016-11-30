@@ -13,49 +13,47 @@ namespace BL.Test
     public class ExamsGeneratorTest
     {
         ExamGenerator generator = new ExamGenerator();
-        
-        Exam exam = new Exam
+        private Exam exam;
+        [SetUp]
+        public void SetUp()
         {
-            Questions = new List<Question> {
-                new Question("Domanda 1"){
-                    Choiches = new List<Answer>{
-                        new Answer("risposta 1"),
-                        new Answer("risposta 2"),
-                        new Answer("risposta 3"),
-                    }
-                },
-                new Question("Domanda 2"){
-                    Choiches = new List<Answer>{
-                        new Answer("risposta 4"),
-                        new Answer("risposta 5"),
-                        new Answer("risposta 6"),
-                    }
-                },
-                new Question("Domanda 3"){
-                    Choiches = new List<Answer>{
-                        new Answer("risposta 7"),
-                        new Answer("risposta 8"),
-                        new Answer("risposta 9"),
-                    }
-                },
-                new Question("Domanda 4"){
-                    Choiches = new List<Answer>{
-                        new Answer("risposta 10"),
-                        new Answer("risposta 11"),
-                        new Answer("risposta 12"),
-                    }
-                },
-                new Question("Domanda 5"){
-                    Choiches = new List<Answer>{
-                        new Answer("risposta 13"),
-                        new Answer("risposta 14"),
-                        new Answer("risposta 15"),
-                    }
-                },
-            },
-            Title = "Titolo",
-            Instructions = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
-        };
+            exam = new Exam();
+            exam.Insert(new Question("Domanda 1"){
+                Choiches = new List<Answer>{
+                    new Answer("risposta 1"),
+                    new Answer("risposta 2"),
+                    new Answer("risposta 3"),
+                }
+            });
+            exam.Insert(new Question("Domanda 2"){
+                Choiches = new List<Answer>{
+                    new Answer("risposta 4"),
+                    new Answer("risposta 5"),
+                    new Answer("risposta 6"),
+                }
+            });
+            exam.Insert(new Question("Domanda 3"){
+                Choiches = new List<Answer>{
+                    new Answer("risposta 7"),
+                    new Answer("risposta 8"),
+                    new Answer("risposta 9"),
+                }
+            });
+            exam.Insert(new Question("Domanda 4"){
+                Choiches = new List<Answer>{
+                    new Answer("risposta 10"),
+                    new Answer("risposta 11"),
+                    new Answer("risposta 12"),
+                }
+            });
+            exam.Insert(new Question("Domanda 5"){
+                Choiches = new List<Answer>{
+                    new Answer("risposta 13"),
+                    new Answer("risposta 14"),
+                    new Answer("risposta 15"),
+                }
+            });
+        }
 
         [Test]
         public void RandomizeExams()

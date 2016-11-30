@@ -1,11 +1,7 @@
 ﻿using Entities;
 using NUnit.Framework;
-using NUnit.Framework.Constraints;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BL.Test
 {
@@ -13,90 +9,87 @@ namespace BL.Test
     public class AnswerExtractorTest
     {
         AnswerExtractor extractor = new AnswerExtractor();
-
-        Exam exam = new Exam
+        private Exam exam;
+        private Exam exam2;
+        private Exam exam3;
+        [SetUp]
+        public void SetUp()
         {
-            Questions = new List<Question>
+            exam = new Exam
             {
-                new Question("Domanda 1")
+                Title = "Titolo",
+                Instructions =
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+            };
+            exam.Insert(new Question("Domanda 1")
+            {
+                Choiches = new List<Answer>
                 {
-                    Choiches = new List<Answer>
-                    {
-                        new Answer("risposta 1", 1),
-                        new Answer("risposta 2"),
-                        new Answer("risposta 3"),
-                    }
-                },
-                new Question("Domanda 2")
+                    new Answer("risposta 1", 1),
+                    new Answer("risposta 2"),
+                    new Answer("risposta 3"),
+                }
+            });
+            exam.Insert(new Question("Domanda 2")
+            {
+                Choiches = new List<Answer>
                 {
-                    Choiches = new List<Answer>
-                    {
-                        new Answer("risposta 4"),
-                        new Answer("risposta 5", 1),
-                        new Answer("risposta 6"),
-                    }
-                },
-            },
-            Title = "Titolo",
-            Instructions =
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
-        };
+                    new Answer("risposta 4"),
+                    new Answer("risposta 5", 1),
+                    new Answer("risposta 6"),
+                }
+            });
+            exam2 = new Exam
+            {
+                Title = "Titolo",
+                Instructions =
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+            };
+            exam2.Insert(new Question("Domanda 2")
+            {
+                Choiches = new List<Answer>
+                {
+                    new Answer("risposta 4"),
+                    new Answer("risposta 5", 1),
+                    new Answer("risposta 6"),
+                }
+            });
+            exam2.Insert(new Question("Domanda 1")
+            {
+                Choiches = new List<Answer>
+                {
+                    new Answer("risposta 2"),
+                    new Answer("risposta 3"),
+                    new Answer("risposta 1", 1),
+                }
+            });
 
-        Exam exam2 = new Exam
-        {
-            Questions = new List<Question>
-            {
-                new Question("Domanda 2")
-                {
-                    Choiches = new List<Answer>
-                    {
-                        new Answer("risposta 4"),
-                        new Answer("risposta 5", 1),
-                        new Answer("risposta 6"),
-                    }
-                },
-                new Question("Domanda 1")
-                {
-                    Choiches = new List<Answer>
-                    {
-                        new Answer("risposta 2"),
-                        new Answer("risposta 3"),
-                        new Answer("risposta 1", 1),
-                    }
-                },
-            },
-            Title = "Titolo",
-            Instructions =
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
-        };
 
-        Exam exam3 = new Exam
-        {
-            Questions = new List<Question>
+            exam3 = new Exam
             {
-                new Question("Domanda 1")
+                Title = "Titolo",
+                Instructions =
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+            };
+            exam3.Insert(new Question("Domanda 1")
+            {
+                Choiches = new List<Answer>
                 {
-                    Choiches = new List<Answer>
-                    {
-                        new Answer("risposta 2"),
-                        new Answer("risposta 3"),
-                        new Answer("risposta 1", 1),
-                    }
-                },
-                new Question("Domanda 2")
+                    new Answer("risposta 2"),
+                    new Answer("risposta 3"),
+                    new Answer("risposta 1", 1),
+                }
+            });
+            exam3.Insert(new Question("Domanda 2")
+            {
+                Choiches = new List<Answer>
                 {
-                    Choiches = new List<Answer>
-                    {
-                        new Answer("risposta 5", 1),
-                        new Answer("risposta 4"),
-                        new Answer("risposta 6"),
-                    }
-                },
-            },
-            Title = "Titolo",
-            Instructions =
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
-        };
+                    new Answer("risposta 5", 1),
+                    new Answer("risposta 4"),
+                    new Answer("risposta 6"),
+                }
+            });
+        }
 
         [Test]
         public void ExtractAnswers()
