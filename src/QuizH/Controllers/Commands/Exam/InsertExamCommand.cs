@@ -1,7 +1,7 @@
 using MediatR;
 using QuizH.ViewModels;
 
-namespace QuizH.Controllers
+namespace QuizH.Controllers.Commands.Exam
 {
     public class InsertExamCommand : IRequest
     {

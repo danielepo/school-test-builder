@@ -1,10 +1,9 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using DAL;
-using Entities;
 using MediatR;
+using QuizH.Controllers.Commands.Exam;
 
-namespace QuizH.Controllers
+namespace QuizH.Controllers.Handlers.Exam
 {
     public class InsertExamCommandHandler : RequestHandler<InsertExamCommand>
     {
@@ -24,7 +23,7 @@ namespace QuizH.Controllers
         {
 
             var examVM = message.Exam;
-            var exam = new Exam
+            var exam = new Entities.Exam
             {
                 Title = examVM.Title,
                 Instructions = examVM.Instructions,

@@ -7,6 +7,7 @@ using QuizH.ViewModels;
 using Entities;
 using DAL;
 using MediatR;
+using QuizH.Controllers.Commands.Exam;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -28,7 +29,14 @@ namespace QuizH.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            var vm = _mediator.Send(new QueryExamDetailsViewModel());
+            var vm = _mediator.Send(new QueryExamListViewModel());
+
+            return View(vm);
+        }
+        [HttpGet]
+        public IActionResult Details(string title)
+        {
+            var vm = _mediator.Send(new QueryExamDetailsViewModel {Title = title});
 
             return View(vm);
         }
