@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DAL;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -33,10 +35,33 @@ namespace QuizH
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //var builder = new ContainerBuilder();
+            //builder.RegisterSource(new ContravariantRegistrationSource());
+            //builder.RegisterAssemblyTypes(typeof (IMediator).Assembly).AsImplementedInterfaces();
+            //builder.RegisterAssemblyTypes(typeof (Startup).Assembly).AsImplementedInterfaces();
+            //builder.Register<SingleInstanceFactory>(ctx =>
+            //{
+            //    var c = ctx.Resolve<IComponentContext>();
+            //    return t => c.Resolve(t);
+            //});
+            //builder.Register<MultiInstanceFactory>(ctx =>
+            //{
+            //    var c = ctx.Resolve<IComponentContext>();
+            //    return t => (IEnumerable<object>) c.Resolve(typeof (IEnumerable<>).MakeGenericType(t));
+            //});
+         
+
+            //var container = builder.Build();
+
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
 
             services.AddMvc();
+            services.AddMediatR();
+
+            services.AddSingleton<ICourseRepository, CourseRepository>();
+            services.AddSingleton<IExamRepository, ExamRepository>();
+            services.AddSingleton<IQuestionRepository, QuestionRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

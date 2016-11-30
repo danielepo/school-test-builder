@@ -4,7 +4,7 @@ using Entities;
 
 namespace DAL
 {
-    public class ExamRepository
+    public class ExamRepository : IExamRepository
     {
         private static List<Exam> Exams = new List<Exam>();
         public Exam GetByTitle(string title)

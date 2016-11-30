@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using QuizH.ViewModels;
 using Entities;
 using DAL;
+using MediatR;
+
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace QuizH.Controllers
@@ -16,50 +18,32 @@ namespace QuizH.Controllers
     }
     public class ExamController : Controller
     {
-        CourseRepository courses;
-        QuestionRepository questions;
-        ExamRepository exams;
-        public ExamController()
+        private readonly IMediator _mediator;
+
+        public ExamController(IMediator mediator)
         {
-            courses = new CourseRepository();
-            exams = new ExamRepository();
-            questions = new QuestionRepository();
+            _mediator = mediator;
         }
+
         // GET: /<controller>/
         public IActionResult Index()
         {
-            return View(new ExamListViewModel()
-            {
-                Exams = exams.GetAll().Select(x => new ExamDetailsViewModel() {
-                    Title = x.Title,
-                    Instructions = x.Instructions,
-                    Course = x.Course.Title
-                })
-            });
+            var vm = _mediator.Send(new QueryExamDetailsViewModel());
+
+            return View(vm);
         }
         [HttpGet]
         public IActionResult Insert()
         {
-            return View(new ExamCreationViewModel()
-            {
-                AvailableCourses = courses.GetAll().Select(x => x.Title).ToList(),
-                AvailableQuestions = questions.GetAll().Select(x=> x.Text).ToList()
-            });
+            var vm = _mediator.Send(new QueryInsertExamViewModel());
+
+            return View(vm);
         }
         [HttpPost]
         public IActionResult Insert(ExamCreationViewModel examVM)
         {
-            var exam = new Exam
-            {
-                Title = examVM.Title,
-                Instructions = examVM.Instructions,
-                Course = courses.GetByTitle(examVM.Course),
+            _mediator.Send(new InsertExamCommand {Exam = examVM});
 
-            };
-
-            exam.Insert(questions.GetAll().Where(x => examVM.Questions.Contains(x.Text)));
-
-            exams.Insert(exam);
             return RedirectToAction("Index");
         }
     }

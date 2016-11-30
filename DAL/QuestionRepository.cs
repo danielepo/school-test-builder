@@ -3,7 +3,7 @@ using Entities;
 
 namespace DAL
 {
-    public class QuestionRepository
+    public class QuestionRepository : IQuestionRepository
     {
         private static List<Question> questions = new List<Question>()
         {

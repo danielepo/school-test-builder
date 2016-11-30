@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class CourseRepository
+    public class CourseRepository : ICourseRepository
     {
         private List<Course> Courses = new List<Course>
         {
