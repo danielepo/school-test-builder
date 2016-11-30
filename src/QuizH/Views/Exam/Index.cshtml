@@ -1,0 +1,15 @@
+﻿@model QuizH.ViewModels.ExamListViewModel
+
+
+<table class="table table-striped">
+    <thead><tr><td>Title</td><td>Course</td></tr></thead>
+    <tbody>
+
+        @foreach (var exam in Model.Exams)
+            {
+            <tr><td>@exam.Title</td><td>@exam.Course</td></tr>
+        }
+    </tbody>
+</table>
+
+@Html.ActionLink("Insert a new Exam", "Insert")
