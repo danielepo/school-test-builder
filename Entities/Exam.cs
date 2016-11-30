@@ -8,19 +8,34 @@ namespace Entities
 {
     public class Exam
     {
+        private IList<Question> _questions;
         public string Instructions { get; set; }
-        public IEnumerable<Question> Questions { get; set; }
+
+        public IEnumerable<Question> Questions => _questions;
+
         public string Title { get; set; }
         public int Type { get; set; }
+        public Course Course { get; set; }
 
+        public Exam()
+        {
+            _questions = new List<Question>();
+            Course = new Course();
+        }
+        
         public Exam Clone(Random random)
         {
             return new Exam()
             {
                 Title = Title,
                 Instructions = Instructions,
-                Questions = Questions.Select(q => q.Clone(random)).Shuffle(random)
+                _questions = Questions.Select(q => q.Clone(random)).Shuffle(random).ToList()
             };
+        }
+
+        public void Insert(Question question)
+        {
+            _questions.Add(question);
         }
     }
 
