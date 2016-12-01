@@ -7,4 +7,8 @@ namespace QuizH.Controllers.Commands.Exam
     {
         public string Title;
     }
+    public class QueryExamEditViewModel : IRequest<EditExamViewModel>
+    {
+        public string Title;
+    }
 }

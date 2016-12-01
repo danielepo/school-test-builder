@@ -36,9 +36,23 @@ namespace QuizH.Controllers
         [HttpGet]
         public IActionResult Details(string title)
         {
-            var vm = _mediator.Send(new QueryExamDetailsViewModel {Title = title});
+            var vm = _mediator.Send(new QueryExamDetailsViewModel { Title = title });
 
             return View(vm);
+        }
+        [HttpGet]
+        public IActionResult Edit(string title)
+        {
+            var vm = _mediator.Send(new QueryExamEditViewModel { Title = title });
+
+            return View(vm);
+        }
+        [HttpPost]
+        public IActionResult Edit(EditExamViewModel exam)
+        {
+            _mediator.Send(new EditExamCommand { Exam = exam });
+
+            return RedirectToAction("Details", new { exam.Title });
         }
         [HttpGet]
         public IActionResult Insert()
@@ -50,7 +64,7 @@ namespace QuizH.Controllers
         [HttpPost]
         public IActionResult Insert(ExamCreationViewModel examVM)
         {
-            _mediator.Send(new InsertExamCommand {Exam = examVM});
+            _mediator.Send(new InsertExamCommand { Exam = examVM });
 
             return RedirectToAction("Index");
         }

@@ -8,5 +8,6 @@ namespace DAL
         IEnumerable<Exam> GetAll();
         Exam GetByTitle(string title);
         void Insert(Exam exam);
+        void Update(Exam exam, Exam newExam);
     }
 }

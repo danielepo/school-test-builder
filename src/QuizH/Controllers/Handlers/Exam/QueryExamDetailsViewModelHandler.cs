@@ -19,4 +19,27 @@ namespace QuizH.Controllers.Handlers.Exam
             return ExamDetailsViewModel.Create(exams.GetByTitle(message.Title));
         }
     }
+    public class QueryExamEditViewModelHandler : IRequestHandler<QueryExamEditViewModel, EditExamViewModel>
+    {
+        readonly IExamRepository exams;
+
+        public QueryExamEditViewModelHandler(IExamRepository exams)
+        {
+            this.exams = exams;
+        }
+
+        public EditExamViewModel Handle(QueryExamEditViewModel message)
+        {s
+            message.
+            new EditExamViewModel()
+            {
+                Title = exam.Title,
+                Course = exam.Course.Title,
+                Instructions = exam.Instructions,
+                Questions = exam.Questions.Select(x => x.Text).ToList(),
+            };
+            return EditExamViewModel.Create(exams.GetByTitle(message.Title));
+        }
+    }
+
 }

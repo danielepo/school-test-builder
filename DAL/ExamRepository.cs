@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Entities;
 
@@ -18,6 +19,20 @@ namespace DAL
         public void Insert(Exam exam)
         {
             Exams.Add(exam);
+        }
+
+        public void Update(Exam exam, Exam newExam)
+        {
+            foreach (var question in exam.Questions)
+            {
+                exam.Remove(question);
+            }
+            exam.Insert(newExam.Questions);
+
+            exam.Course = newExam.Course;
+            exam.Instructions = newExam.Instructions;
+            exam.Title = newExam.Title;
+            exam.Type = newExam.Type;
         }
     }
 }
