@@ -23,9 +23,10 @@ namespace DAL
 
         public void Update(Exam exam, Exam newExam)
         {
-            foreach (var question in exam.Questions)
+            var questions = exam.Questions.ToArray();
+            for (var i = 0; i < questions.Count(); i++)
             {
-                exam.Remove(question);
+                exam.Remove(questions[i]);
             }
             exam.Insert(newExam.Questions);
 

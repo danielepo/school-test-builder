@@ -17,10 +17,6 @@ namespace QuizH.ViewModels
         public List<string> Questions { get; set; }
         public List<string> AvailableQuestions { get; set; }
 
-        public static EditExamViewModel Create(Exam exam)
-        {
-            return 
-        }
     }
     
 }

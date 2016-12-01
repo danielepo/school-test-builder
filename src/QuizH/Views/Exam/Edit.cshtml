@@ -1,17 +1,17 @@
-﻿@model QuizH.ViewModels.ExamDetailsViewModel
+﻿@model QuizH.ViewModels.EditExamViewModel
 
-<form asp-controller="Exam" asp-action="Insert" method="post">
+<form asp-controller="Exam" asp-action="Edit" method="post">
     <div class="form-group">
         <label asp-for="Title">
             Title
-            <input type="hidden" class="form-control" disabled="disabled" asp-for="OldTitle" value="@Model.Title" />
-            <input class="form-control" asp-for="Title" value="Title" />
+            <input type="hidden" asp-for="OldTitle" />
+            <input class="form-control" asp-for="Title" />
         </label>
     </div>
     <div class="form-group">
         <label asp-for="Instructions">
             Instructions
-            <input class="form-control" asp-for="Instructions" value="@Model.Instructions"/>
+            <input class="form-control" asp-for="Instructions" />
         </label><br />
     </div>
     <div class="form-group">
