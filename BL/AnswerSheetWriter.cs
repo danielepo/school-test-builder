@@ -19,7 +19,8 @@ namespace BL
             var workbook = new XLWorkbook();
             var worksheet = workbook.Worksheets.Add("Sheet 1");
             AddContent(1, 1, worksheet, answers);
-            workbook.SaveAs("C:\\Users\\m.pozzobon\\Documents\\visual studio 2015\\Projects\\QuizH\\BL\\bin\\Debug\\risposte1.xlsx");
+            var location = $"{AppDomain.CurrentDomain.BaseDirectory}/risposte.xlsx";
+            workbook.SaveAs(location);
         }
         protected void AddContent(int startRow, int startColumn, IXLWorksheet worksheet, IEnumerable<IEnumerable<string>> data)
         {
