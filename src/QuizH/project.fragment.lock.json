@@ -1,0 +1,39 @@
+{
+  "version": 2,
+  "exports": {
+    "DAL/1.0.0": {
+      "type": "project",
+      "framework": ".NETFramework,Version=v4.6.1",
+      "compile": {
+        "bin/Debug/DAL.dll": {}
+      },
+      "runtime": {
+        "bin/Debug/DAL.dll": {}
+      },
+      "contentFiles": {
+        "bin/Debug/DAL.pdb": {
+          "buildAction": "None",
+          "codeLanguage": "any",
+          "copyToOutput": true
+        }
+      }
+    },
+    "Entities/1.0.0": {
+      "type": "project",
+      "framework": ".NETFramework,Version=v4.6.1",
+      "compile": {
+        "bin/Debug/Entities.dll": {}
+      },
+      "runtime": {
+        "bin/Debug/Entities.dll": {}
+      },
+      "contentFiles": {
+        "bin/Debug/Entities.pdb": {
+          "buildAction": "None",
+          "codeLanguage": "any",
+          "copyToOutput": true
+        }
+      }
+    }
+  }
+}
