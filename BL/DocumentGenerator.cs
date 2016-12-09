@@ -3,6 +3,8 @@ using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using Entities;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BL
 {
@@ -10,7 +12,7 @@ namespace BL
     {
         public void Create(Exam exam)
         {
-            var location =  $"{AppDomain.CurrentDomain.BaseDirectory}/{exam.Title} - {exam.Type}.docx";
+            var location = $"{AppDomain.CurrentDomain.BaseDirectory}/{exam.Title} - {exam.Type}.docx";
             using (var package = WordprocessingDocument.Create(location, WordprocessingDocumentType.Document))
             {
                 var mainDocumentPart = package.AddMainDocumentPart();
@@ -84,20 +86,22 @@ namespace BL
         }
         private Paragraph Title(string text)
         {
-            var paragraphProperties = new ParagraphProperties(new Justification { Val = JustificationValues.Center }, new SpacingBetweenLines { Before = "120", After = "360" });
+            var paragraphProperties = new ParagraphProperties(new Justification { Val = JustificationValues.Center }, new SpacingBetweenLines { Before = "0", After = "240" });
             var runProperties = new RunProperties(new FontSize { Val = "28" }, new Kern { Val = 28 }, new FontSizeComplexScript { Val = "56" }, new Bold());
             return ParagraphFrom(text, paragraphProperties, runProperties);
         }
         private Paragraph Instruction(string text)
         {
             var paragraphProperties = new ParagraphProperties(new ParagraphBorders(new BottomBorder { Val = BorderValues.Single, Size = 4, Space = 3, Color = "auto" }),
-                 new SpacingBetweenLines { Before = "400", After = "240", LineRule = LineSpacingRuleValues.Auto });
+                 new SpacingBetweenLines { Before = "200", After = "200", LineRule = LineSpacingRuleValues.Auto });
             var runProperties = new RunProperties(new FontSize { Val = "20" }, new Italic());
             return ParagraphFrom(text, paragraphProperties, runProperties);
         }
-        private Paragraph Label(string text)
+        private Paragraph Label(string text, bool keepNext = false)
         {
-            var paragraphProperties = new ParagraphProperties();
+            var paragraphProperties = new ParagraphProperties(new SpacingBetweenLines { Before = "0", After = "25", LineRule = LineSpacingRuleValues.Auto });
+            if (keepNext)
+                paragraphProperties.Append(new KeepNext());
             var runProperties = new RunProperties(new FontSize { Val = "20" });
             return ParagraphFrom(text, paragraphProperties, runProperties);
         }
@@ -110,31 +114,70 @@ namespace BL
         private void AppendQuestion(Body body, Question question)
         {
             body.Append(ParagraphFrom(question));
-            var length = question.Choiches.Count;
-            for (int i = 0; i < length; i++)
-            {
-                var answer = question.Choiches[i];
-                body.Append(ParagraphFrom(answer, i != length - 1));
-            }
+            body.Append(TableChoiches(question.Choiches));
         }
-
+        private Table TableChoiches(ICollection<Answer> choiches)
+        {
+            var properties = new TableProperties(
+                //new TableIndentation { Width = 720, Type = TableWidthUnitValues.Dxa },
+                new TableWidth { Type = TableWidthUnitValues.Pct, Width = "5000" },
+                new TableLayout { Type = TableLayoutValues.Fixed },
+                new TableCellMargin
+                {
+                    TopMargin = new TopMargin { Width = "0", Type = TableWidthUnitValues.Dxa },
+                    LeftMargin = new LeftMargin { Width = "0", Type = TableWidthUnitValues.Dxa },
+                    RightMargin = new RightMargin { Width = "0", Type = TableWidthUnitValues.Dxa }
+                },
+                new TableLook
+                {
+                    Val = "0000",
+                    FirstColumn = new OnOffValue(false),
+                    FirstRow = new OnOffValue(false),
+                    LastColumn = new OnOffValue(false),
+                    LastRow = new OnOffValue(false),
+                    NoHorizontalBand = new OnOffValue(false),
+                    NoVerticalBand = new OnOffValue(false),
+                });
+            var grid = new TableGrid(
+                new GridColumn { Width = "4096" },
+                new GridColumn { Width = "4096" }
+                );
+            var table = new Table(properties, grid);
+            TableRow row = null;
+            for (int i = 0; i < choiches.Count; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    if (row != null)
+                        table.Append(row);
+                    row = new TableRow();
+                }
+                row.Append(new TableCell(ParagraphFrom(choiches.ElementAt(i), i, i < choiches.Count - 2)));
+                //row.Append(new TableCell(Label("    " + (i + 1) + ". " + choiches.ElementAt(i).Text, i < choiches.Count - 2)));
+            }
+            if (row != null)
+                table.Append(row);
+            return table;
+        }
         private Paragraph ParagraphFrom(Question question)
         {
             var paragraphProperties = new ParagraphProperties(new NumberingProperties(new NumberingLevelReference() { Val = 0 }, new NumberingId() { Val = 1 }),
+                new SpacingBetweenLines { Before = "75", After = "0", LineRule = LineSpacingRuleValues.Auto },
                 new KeepNext());
             var runProperties = new RunProperties(new FontSize() { Val = "22" });
             var extraSpace = 0;
             if (question.Space > 2)
                 extraSpace = question.Space - 2;
-            return ParagraphFrom(question.Text, paragraphProperties, runProperties,extraSpace);
+            return ParagraphFrom(question.Text, paragraphProperties, runProperties, extraSpace);
 
         }
-        private Paragraph ParagraphFrom(Answer answer, bool keepNext)
+        private Paragraph ParagraphFrom(Answer answer, int index, bool keepNext)
         {
-            var paragraphProperties = new ParagraphProperties(new NumberingProperties(new NumberingLevelReference() { Val = 1 }, new NumberingId() { Val = 1 }));
+            var paragraphProperties = new ParagraphProperties(new NumberingProperties(new NumberingLevelReference() { Val = 1 }, new NumberingId() { Val = 1 }),
+                new SpacingBetweenLines { Before = "0", After = "0", LineRule = LineSpacingRuleValues.Auto });
             if (keepNext)
                 paragraphProperties.Append(new KeepNext());
-            var runProperties = new RunProperties(new FontSize() { Val = "18" });
+            var runProperties = new RunProperties(new FontSize() { Val = "22" });
             return ParagraphFrom(answer.Text, paragraphProperties, runProperties);
         }
         private Paragraph ParagraphFrom(string paragraphText, ParagraphProperties paragraphProperties = null, RunProperties runProperties = null, int? breaks = 0)
