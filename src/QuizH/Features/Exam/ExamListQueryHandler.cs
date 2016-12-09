@@ -1,24 +1,23 @@
 using System.Linq;
 using DAL;
 using MediatR;
-using QuizH.Controllers.Commands.Exam;
 using QuizH.ViewModels;
 
-namespace QuizH.Controllers.Handlers.Exam
+namespace QuizH.Features.Exam
 {
-    public class QueryExamListViewModelHandler : IRequestHandler<QueryExamListViewModel, ExamListViewModel>
+    public class ExamListQueryHandler : IRequestHandler<ExamListQuery, ExamListViewModel>
     {
         readonly ICourseRepository courses;
         readonly IExamRepository exams;
 
         //private readonly ExamRepository _context;
-        public QueryExamListViewModelHandler(IExamRepository exams)
+        public ExamListQueryHandler(IExamRepository exams)
         {
             this.exams = exams;
         }
 
 
-        public ExamListViewModel Handle(QueryExamListViewModel message)
+        public ExamListViewModel Handle(ExamListQuery message)
         {
             return new ExamListViewModel
             {

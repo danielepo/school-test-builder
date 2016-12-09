@@ -1,9 +1,9 @@
 using MediatR;
 using QuizH.ViewModels;
 
-namespace QuizH.Controllers.Commands.Exam
+namespace QuizH.Features.Exam
 {
-    public class InsertExamCommand : IRequest
+    public class ExamInsertCommand : IRequest
     {
         public ExamCreationViewModel Exam { get; set; }
     }

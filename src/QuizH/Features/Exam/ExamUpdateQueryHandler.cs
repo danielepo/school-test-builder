@@ -1,39 +1,24 @@
+using System.Linq;
 using DAL;
 using MediatR;
-using QuizH.Controllers.Commands.Exam;
 using QuizH.ViewModels;
-using System.Linq;
 
-namespace QuizH.Controllers.Handlers.Exam
+namespace QuizH.Features.Exam
 {
-    public class QueryExamDetailsViewModelHandler : IRequestHandler<QueryExamDetailsViewModel, ExamDetailsViewModel>
-    {
-        private readonly IExamRepository exams;
-        
-        public QueryExamDetailsViewModelHandler(IExamRepository exams)
-        {
-            this.exams = exams;
-        }
-
-        public ExamDetailsViewModel Handle(QueryExamDetailsViewModel message)
-        {
-            return ExamDetailsViewModel.Create(exams.GetByTitle(message.Title));
-        }
-    }
-    public class QueryExamEditViewModelHandler : IRequestHandler<QueryExamEditViewModel, EditExamViewModel>
+    public class ExamUpdateQueryHandler : IRequestHandler<ExamUpdateQuery, EditExamViewModel>
     {
         readonly IExamRepository exams;
         private readonly ICourseRepository courses;
         private readonly IQuestionRepository questions;
 
-        public QueryExamEditViewModelHandler(IExamRepository exams, IQuestionRepository questions, ICourseRepository courses)
+        public ExamUpdateQueryHandler(IExamRepository exams, IQuestionRepository questions, ICourseRepository courses)
         {
             this.exams = exams;
             this.questions = questions;
             this.courses = courses;
         }
 
-        public EditExamViewModel Handle(QueryExamEditViewModel message)
+        public EditExamViewModel Handle(ExamUpdateQuery message)
         {
             var exam = exams.GetByTitle(message.Title);
             return new EditExamViewModel
@@ -48,5 +33,4 @@ namespace QuizH.Controllers.Handlers.Exam
             };
         }
     }
-
 }
