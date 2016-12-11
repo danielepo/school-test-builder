@@ -1,9 +1,9 @@
 using MediatR;
 using QuizH.ViewModels;
 
-namespace QuizH.Controllers.Commands.Exam
+namespace QuizH.Features.Exam
 {
-    public class EditExamCommand : IRequest
+    public class ExamUpdateCommand : IRequest
     {
         public EditExamViewModel Exam { get; set; }
 

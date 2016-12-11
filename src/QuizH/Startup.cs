@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using DAL;
+﻿using DAL;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using QuizH.Data;
+using QuizH.Models;
+using QuizH.Services;
 
 namespace QuizH
 {
@@ -26,6 +27,8 @@ namespace QuizH
             {
                 // This will push telemetry data through Application Insights pipeline faster, allowing you to view results immediately.
                 builder.AddApplicationInsightsSettings(developerMode: true);
+                // For more details on using the user secret store see https://go.microsoft.com/fwlink/?LinkID=532709
+                //builder.AddUserSecrets();
             }
             Configuration = builder.Build();
         }
@@ -35,33 +38,29 @@ namespace QuizH
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //var builder = new ContainerBuilder();
-            //builder.RegisterSource(new ContravariantRegistrationSource());
-            //builder.RegisterAssemblyTypes(typeof (IMediator).Assembly).AsImplementedInterfaces();
-            //builder.RegisterAssemblyTypes(typeof (Startup).Assembly).AsImplementedInterfaces();
-            //builder.Register<SingleInstanceFactory>(ctx =>
-            //{
-            //    var c = ctx.Resolve<IComponentContext>();
-            //    return t => c.Resolve(t);
-            //});
-            //builder.Register<MultiInstanceFactory>(ctx =>
-            //{
-            //    var c = ctx.Resolve<IComponentContext>();
-            //    return t => (IEnumerable<object>) c.Resolve(typeof (IEnumerable<>).MakeGenericType(t));
-            //});
-         
-
-            //var container = builder.Build();
-
             // Add framework services.
+            var connectionString = Configuration.GetConnectionString("MyConnection");
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlite(connectionString)
+            );
+
             services.AddApplicationInsightsTelemetry(Configuration);
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
 
             services.AddMvc();
             services.AddMediatR();
 
+            // Add application services.            
             services.AddSingleton<ICourseRepository, CourseRepository>();
             services.AddSingleton<IExamRepository, ExamRepository>();
             services.AddSingleton<IQuestionRepository, QuestionRepository>();
+
+
+            services.AddTransient<IEmailSender, AuthMessageSender>();
+            services.AddTransient<ISmsSender, AuthMessageSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -75,6 +74,7 @@ namespace QuizH
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
                 app.UseBrowserLink();
             }
             else
@@ -85,6 +85,10 @@ namespace QuizH
             app.UseApplicationInsightsExceptionTelemetry();
 
             app.UseStaticFiles();
+
+            app.UseIdentity();
+
+            // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
 
             app.UseMvc(routes =>
             {
