@@ -1,4 +1,5 @@
-﻿using Entities;
+﻿using BL.Interfaces;
+using Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    public class QuestionParser
+    public class QuestionParser : IQuestionParser
     {
         private List<Question> questions;
 

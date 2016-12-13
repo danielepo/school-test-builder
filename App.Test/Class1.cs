@@ -13,7 +13,7 @@ namespace App.Test
     {
 
         [Test]
-        [Ignore]
+        [Ignore("Non è un vero test, serve a generare un esame")]
         public void TestMethod()
         {
             var parser = new QuestionParser();

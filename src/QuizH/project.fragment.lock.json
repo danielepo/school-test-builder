@@ -1,6 +1,44 @@
 {
   "version": 2,
   "exports": {
+    "BL.Interfaces/1.0.0": {
+      "type": "project",
+      "framework": ".NETFramework,Version=v4.6.1",
+      "compile": {
+        "bin/Debug/BL.Interfaces.dll": {}
+      },
+      "runtime": {
+        "bin/Debug/BL.Interfaces.dll": {}
+      },
+      "contentFiles": {
+        "bin/Debug/BL.Interfaces.pdb": {
+          "buildAction": "None",
+          "codeLanguage": "any",
+          "copyToOutput": true
+        }
+      }
+    },
+    "BL/1.0.0": {
+      "type": "project",
+      "framework": ".NETFramework,Version=v4.6.1",
+      "compile": {
+        "bin/Debug/BL.dll": {}
+      },
+      "runtime": {
+        "../packages/ClosedXML.0.80.1/lib/net40-client/ClosedXML.dll": {},
+        "../packages/DocumentFormat.OpenXml.2.5/lib/DocumentFormat.OpenXml.dll": {},
+        "../packages/OpenXMLSDK-MOT.2.6.0.0/lib/System.IO.Packaging.dll": {},
+        "../packages/System.Management.Automation.6.1.7601.17515/lib/net45/System.Management.Automation.dll": {},
+        "bin/Debug/BL.dll": {}
+      },
+      "contentFiles": {
+        "bin/Debug/BL.pdb": {
+          "buildAction": "None",
+          "codeLanguage": "any",
+          "copyToOutput": true
+        }
+      }
+    },
     "DAL/1.0.0": {
       "type": "project",
       "framework": ".NETFramework,Version=v4.6.1",

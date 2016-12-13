@@ -38,6 +38,12 @@
   "frameworks": {
     "net461": {
       "dependencies": {
+        "BL": {
+          "target": "project"
+        },
+        "BL.Interfaces": {
+          "target": "project"
+        },
         "DAL": {
           "target": "project"
         },

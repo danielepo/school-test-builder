@@ -6,5 +6,6 @@ namespace DAL
     public interface IQuestionRepository
     {
         IEnumerable<Question> GetAll();
+        void Add(Question q);
     }
 }

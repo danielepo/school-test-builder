@@ -1,4 +1,6 @@
-﻿using DAL;
+﻿using BL;
+using BL.Interfaces;
+using DAL;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -54,9 +56,12 @@ namespace QuizH
             services.AddMediatR();
 
             // Add application services.            
+            //DAL
             services.AddSingleton<ICourseRepository, CourseRepository>();
             services.AddSingleton<IExamRepository, ExamRepository>();
             services.AddSingleton<IQuestionRepository, QuestionRepository>();
+            //BL
+            services.AddTransient<IQuestionParser, QuestionParser>();
 
 
             services.AddTransient<IEmailSender, AuthMessageSender>();
