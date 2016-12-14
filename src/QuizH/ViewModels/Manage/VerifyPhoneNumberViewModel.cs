@@ -1,9 +1,12 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace QuizH.Models.ManageViewModels
+namespace QuizH.ViewModels.Manage
 {
-    public class AddPhoneNumberViewModel
+    public class VerifyPhoneNumberViewModel
     {
+        [Required]
+        public string Code { get; set; }
+
         [Required]
         [Phone]
         [Display(Name = "Phone number")]

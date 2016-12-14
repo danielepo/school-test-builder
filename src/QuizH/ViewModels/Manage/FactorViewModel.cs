@@ -1,4 +1,4 @@
-namespace QuizH.Models.ManageViewModels
+namespace QuizH.ViewModels.Manage
 {
     public class FactorViewModel
     {

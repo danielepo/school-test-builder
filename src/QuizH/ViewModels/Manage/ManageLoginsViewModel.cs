@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Http.Authentication;
 using Microsoft.AspNetCore.Identity;
 
-namespace QuizH.Models.ManageViewModels
+namespace QuizH.ViewModels.Manage
 {
     public class ManageLoginsViewModel
     {

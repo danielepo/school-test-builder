@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using QuizH.Models;
-using QuizH.Models.AccountViewModels;
 using QuizH.Services;
+using QuizH.ViewModels.Account;
 
 namespace QuizH.Controllers
 {

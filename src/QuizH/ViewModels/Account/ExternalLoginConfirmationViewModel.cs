@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace QuizH.Models.AccountViewModels
+namespace QuizH.ViewModels.Account
 {
     public class ExternalLoginConfirmationViewModel
     {

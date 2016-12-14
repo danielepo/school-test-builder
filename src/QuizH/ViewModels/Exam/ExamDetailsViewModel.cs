@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using Entities;
 
-namespace QuizH.ViewModels
+namespace QuizH.ViewModels.Exam
 {
     public class ExamDetailsViewModel
     {
@@ -11,7 +10,7 @@ namespace QuizH.ViewModels
         public string Course { get; set; }
         public List<string> Questions { get; set; }
 
-        public static ExamDetailsViewModel Create(Exam exam)
+        public static ExamDetailsViewModel Create(Entities.Exam exam)
         {
             return new ExamDetailsViewModel
             {

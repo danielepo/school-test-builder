@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using QuizH.Models;
-using QuizH.Models.ManageViewModels;
 using QuizH.Services;
+using QuizH.ViewModels.Manage;
 
 namespace QuizH.Controllers
 {

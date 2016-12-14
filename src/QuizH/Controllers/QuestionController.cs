@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using QuizH.Features.Exam;
 using QuizH.Features.Question;
+using QuizH.ViewModels.Exam;
 
 namespace QuizH.Controllers
 {

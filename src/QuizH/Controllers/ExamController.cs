@@ -4,6 +4,7 @@ using QuizH.ViewModels;
 using Entities;
 using MediatR;
 using QuizH.Features.Exam;
+using QuizH.ViewModels.Exam;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 

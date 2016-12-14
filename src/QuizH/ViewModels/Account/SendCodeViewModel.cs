@@ -1,12 +1,16 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace QuizH.Models.ManageViewModels
+namespace QuizH.ViewModels.Account
 {
-    public class ConfigureTwoFactorViewModel
+    public class SendCodeViewModel
     {
         public string SelectedProvider { get; set; }
 
         public ICollection<SelectListItem> Providers { get; set; }
+
+        public string ReturnUrl { get; set; }
+
+        public bool RememberMe { get; set; }
     }
 }

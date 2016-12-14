@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 
-namespace QuizH.Models.ManageViewModels
+namespace QuizH.ViewModels.Manage
 {
     public class IndexViewModel
     {

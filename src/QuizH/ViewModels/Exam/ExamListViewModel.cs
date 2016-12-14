@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace QuizH.ViewModels
+namespace QuizH.ViewModels.Exam
 {
     public class ExamListViewModel
     {

@@ -1,8 +1,6 @@
-using Entities;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace QuizH.ViewModels
+namespace QuizH.ViewModels.Exam
 {
     public class QuestionImportViewModel
     {
