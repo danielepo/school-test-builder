@@ -11,6 +11,10 @@ namespace Entities
     {
         private readonly string _text;
         private readonly int _points;
+        public string Text => _text;
+
+        public int Points => _points;
+
         //why not use a constructor that also have the points?
         public Answer(string value)
         {
@@ -23,10 +27,6 @@ namespace Entities
             _text = value;
             _points = points;
         }
-
-        public string Text => _text;
-
-        public int Points => _points;
 
         // should be part of the answer or part of a validator/parser
         // there's nothing about the answer here
@@ -68,17 +68,22 @@ namespace Entities
                    Text == that.Text;
         }
 
-        protected bool Equals(Answer other)
-        {
-            return string.Equals(Text, other.Text) && Points == other.Points;
-        }
-
         public override int GetHashCode()
         {
             unchecked
             {
                 return ((Text?.GetHashCode() ?? 0) * 397) ^ Points;
             }
+        }
+
+        public override string ToString()
+        {
+            return $"{Text}: {Points}";
+        }
+
+        protected bool Equals(Answer other)
+        {
+            return string.Equals(Text, other.Text) && Points == other.Points;
         }
     }
 }

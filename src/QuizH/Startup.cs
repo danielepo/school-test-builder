@@ -17,6 +17,8 @@ namespace QuizH
 {
     public class Startup
     {
+        public IConfigurationRoot Configuration { get; }
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -34,8 +36,6 @@ namespace QuizH
             }
             Configuration = builder.Build();
         }
-
-        public IConfigurationRoot Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -55,14 +55,14 @@ namespace QuizH
             services.AddMvc();
             services.AddMediatR();
 
-            // Add application services.            
+            // Add application services.
             //DAL
             services.AddSingleton<ICourseRepository, CourseRepository>();
             services.AddSingleton<IExamRepository, ExamRepository>();
             services.AddSingleton<IQuestionRepository, QuestionRepository>();
+            services.AddSingleton<ISubjectRepository, SubjectRepository>();
             //BL
             services.AddTransient<IQuestionParser, QuestionParser>();
-
 
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
