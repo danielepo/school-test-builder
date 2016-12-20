@@ -50,5 +50,15 @@ namespace Entities.Test
             };
             Assert.That(question.Answer, Is.EqualTo("2,3"));
         }
+        [Test]
+        public void QuestionCanHaveAProfessor()
+        {
+            var prof = new Professor();
+            var question = new Question("Test")
+            {
+                Creator = prof
+            };
+            Assert.That(question.Creator, Is.EqualTo(prof));
+        }
     }
 }

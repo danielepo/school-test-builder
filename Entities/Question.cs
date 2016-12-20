@@ -6,7 +6,7 @@ namespace Entities
 {
     public class Question
     {
-
+        public Professor Creator { get; set; }
         public Question(string question)
         {
             Text = question;
