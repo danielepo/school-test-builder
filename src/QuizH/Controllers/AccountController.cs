@@ -107,6 +107,10 @@ namespace QuizH.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    var users = _userManager.Users;
+
+                    await _userManager.AddClaimAsync(user, new Claim("IsProfessor", "true"));
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=532713
                     // Send an email with this link
                     //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

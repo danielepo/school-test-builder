@@ -60,6 +60,7 @@ namespace QuizH
             services.AddSingleton<ICourseRepository, CourseRepository>();
             services.AddSingleton<IExamRepository, ExamRepository>();
             services.AddSingleton<IQuestionRepository, QuestionRepository>();
+            services.AddSingleton<IProfessorRepository, ProfessorRepository>();
             //BL
             services.AddTransient<IQuestionParser, QuestionParser>();
 
@@ -92,7 +93,6 @@ namespace QuizH
             app.UseStaticFiles();
 
             app.UseIdentity();
-
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
 
             app.UseMvc(routes =>
