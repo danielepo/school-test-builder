@@ -7,13 +7,8 @@ namespace Entities
 {
     public class Question
     {
+        public int Id; 
         public Professor Creator { get; set; }
-        public Question(string question)
-        {
-            Text = question;
-            Choiches = new List<Answer>();
-        }
-        public int Id;
 
         public string Answer
         {
