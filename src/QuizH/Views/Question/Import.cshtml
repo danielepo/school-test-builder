@@ -2,10 +2,16 @@
 
 <form asp-controller="Question" asp-action="Import" method="post">
     <div class="form-group">
-        <label asp-for="Questions">
-            Questions
-            <textarea class="form-control" asp-for="Questions" ></textarea>
+        <label asp-for="Subject">
+            Subject
+            <select class="form-control" asp-for="Subject" asp-items="@(new SelectList(Model.AvailableSubjects))"></select>
         </label>
     </div>
-    <input type="submit" class="btn btn-default"/>
+    <div class="form-group">
+        <label asp-for="Questions">
+            Questions
+            <textarea class="form-control" asp-for="Questions"></textarea>
+        </label>
+    </div>
+    <input type="submit" class="btn btn-default" />
 </form>

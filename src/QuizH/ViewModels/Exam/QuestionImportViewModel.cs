@@ -6,6 +6,8 @@ namespace QuizH.ViewModels.Exam
     {
         [Required]
         public string Questions { get; set; }
+
+        public string Subject { get; set; }
+        public List<string> AvailableSubjects { get; set; }
     }
-    
 }

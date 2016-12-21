@@ -45,6 +45,7 @@
     <Compile Include="Course.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Exam.cs" />
+    <Compile Include="Subject.cs" />
     <Compile Include="Professor.cs" />
     <Compile Include="Question.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

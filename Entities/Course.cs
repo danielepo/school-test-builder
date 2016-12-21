@@ -9,14 +9,19 @@ namespace Entities
 
         public Course(string title, string description)
         {
-            if(string.IsNullOrEmpty(title))
+            if (string.IsNullOrEmpty(title))
                 throw new ArgumentException("title");
 
-            if(string.IsNullOrEmpty(description))
+            if (string.IsNullOrEmpty(description))
                 throw new ArgumentException("description");
 
             Title = title;
             Description = description;
+        }
+
+        public override string ToString()
+        {
+            return $"{Title} - {Description}";
         }
     }
 }
