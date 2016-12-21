@@ -1,17 +1,22 @@
 ﻿@model QuizH.ViewModels.Professor.UnasignedUsersListViewModel
 <form asp-controller="Professor" asp-action="Assign" method="post">
 
-    <table>
+    <table class="table table-striped">
 
         @for (var i = 0; i < Model.Users.Count; i++)
         {
             var user = Model.Users[i];
             <tr>
                 <td>
-                    <input type="checkbox" name="professors[@i].IsProfessor" value="true"/>@user.UserName
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="professors[@i].IsProfessor" value="true" /> @user.UserName
+                        </label>
+                    </div>
                     <input type="hidden" name="professors[@i].UserName" value="@user.UserName"/>
                     <input type="hidden" name="professors[@i].Id" value="@user.Id"/>
                 </td>
+                
             </tr>
         }
     </table>

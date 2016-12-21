@@ -18,18 +18,21 @@ namespace QuizH.Controllers
 
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IProfessorRepository professorRepository;
-        public ProfessorController(UserManager<ApplicationUser> userManager,IProfessorRepository repo)
+        public ProfessorController(UserManager<ApplicationUser> userManager, IProfessorRepository repo, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
-            professorRepository = repo; 
+            this.roleManager = roleManager;
+            professorRepository = repo;
         }
         // GET: /<controller>/
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var professors = await _userManager.GetUsersForClaimAsync(new System.Security.Claims.Claim("IsProfessor", "true"));
             var users = _userManager.Users
-                .Where(x => x.Claims.All(y=>y.ClaimType != "Professor"))
+                .Where(x => !professors.Any(y => y.Id == x.Id))
                 .Select(x => new UserViewModel { Id = x.Id, UserName = x.UserName })
                 .ToList();
+
             var vm = new UnasignedUsersListViewModel()
             {
                 Users = users
@@ -43,17 +46,19 @@ namespace QuizH.Controllers
             foreach (var professor in choosen)
             {
                 var user = _userManager.Users.First(x => x.Id == professor.Id);
-
-                var result = await _userManager.AddClaimAsync(user, new Claim("IsProfessor", "true"));
-                if (result.Succeeded)
-                {
-                    return View();
-                }
-
-                professorRepository.Insert(new Entities.Professor() { Id = new Guid(professor.Id) });
+                await Setup(user);
             }
-            
-            return View();
+
+            return RedirectToAction("Index");
+        }
+        private async Task<IActionResult> Setup(ApplicationUser user)
+        {
+            await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("IsProfessor", "true"));
+            professorRepository.Insert(new Entities.Professor
+            {
+                Id = new Guid(user.Id)
+            });
+            return Ok();
         }
     }
 }
