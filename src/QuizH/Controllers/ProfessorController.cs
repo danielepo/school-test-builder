@@ -21,7 +21,6 @@ namespace QuizH.Controllers
         public ProfessorController(UserManager<ApplicationUser> userManager, IProfessorRepository repo, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
-            this.roleManager = roleManager;
             professorRepository = repo;
         }
         // GET: /<controller>/
