@@ -3,6 +3,7 @@ using DAL;
 using MediatR;
 using QuizH.ViewModels;
 using QuizH.ViewModels.Exam;
+using System.Collections.Generic;
 
 namespace QuizH.Features.Exam
 {
@@ -23,7 +24,10 @@ namespace QuizH.Features.Exam
             return new ExamCreationViewModel
             {
                 AvailableCourses = courses.GetAll().Select(x => x.Title).ToList(),
-                AvailableQuestions = questions.GetAll().Select(x => x.Text).ToList()
+                AvailableQuestions = questions.GetAll().Aggregate(new Dictionary<string, string>(), (acc, x) => {
+                    acc.Add(x.Id.ToString(), x.Text);
+                    return acc;
+                })
             };
         }
     }

@@ -12,6 +12,7 @@ namespace Entities
             Text = question;
             Choiches = new List<Answer>();
         }
+        public int Id;
 
         public string Answer
         {
@@ -27,7 +28,6 @@ namespace Entities
         public IList<Answer> Choiches { get; set; }
         public int Space { get; set; }
         public string Text { get; set; }
-
         public void Add(Answer answer)
         {
             Choiches.Add(answer);

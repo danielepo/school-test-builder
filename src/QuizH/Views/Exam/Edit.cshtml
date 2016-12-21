@@ -1,31 +1,49 @@
 ﻿@model QuizH.ViewModels.Exam.EditExamViewModel
+<div class="row">
+    <div class="col-md-6">
 
-<form asp-controller="Exam" asp-action="Edit" method="post">
-    <div class="form-group">
-        <label asp-for="Title">
-            Title
-            <input type="hidden" asp-for="OldTitle" />
-            <input class="form-control" asp-for="Title" />
-        </label>
+        <form asp-controller="Exam" asp-action="Edit" method="post">
+            <div class="form-group">
+                <label asp-for="Title">
+                    Title
+                    <input type="hidden" asp-for="OldTitle" />
+                    <input class="form-control" asp-for="Title" />
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Instructions">
+                    Instructions
+                    <input class="form-control" asp-for="Instructions" />
+                </label><br />
+            </div>
+            <div class="form-group">
+                <label asp-for="Course">
+                    Course
+                    <select class="form-control" asp-for="Course" asp-items="@(new SelectList(Model.AvailableCourses))"></select>
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Questions">
+                    Questions
+
+                </label>
+            </div>
+            <input type="submit" class="btn btn-default" />
+        </form>
     </div>
-    <div class="form-group">
-        <label asp-for="Instructions">
-            Instructions
-            <input class="form-control" asp-for="Instructions" />
-        </label><br />
+    <div class="col-md-6">
+        @foreach (var question in Model.AvailableQuestions)
+        {
+            <div class="row">
+                <div class="col-md-1">
+                    @question.Key
+                </div>
+                <div class="col-md-11">
+                    @question.Value
+                </div>
+            </div>
+
+        }
+
     </div>
-    <div class="form-group">
-        <label asp-for="Course">
-            Course
-            <select class="form-control" asp-for="Course" asp-items="@(new SelectList(Model.AvailableCourses))"
-                    ></select>
-        </label>
-    </div>
-    <div class="form-group">
-        <label asp-for="Questions">
-            Questions
-            <select class="form-control" asp-for="Questions" asp-items="@(new SelectList(Model.AvailableQuestions))"></select>
-        </label>
-    </div>
-    <input type="submit" class="btn btn-default" />
-</form>
+</div>
