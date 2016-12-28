@@ -11,10 +11,15 @@
                 <td>@exam.Title</td>
                 <td>@exam.Course</td>
                 <td>@Html.ActionLink("Edit", "Edit", new { title = exam.Title })</td>
-                <td>@Html.ActionLink("Details", "Details", new {title = exam.Title})</td>
+                <td>@Html.ActionLink("Details", "Details", new { title = exam.Title })</td>
             </tr>
         }
     </tbody>
 </table>
 
+
 @Html.ActionLink("Insert a new Exam", "Insert")
+@section scripts{
+
+    <script src="~/js/Exam.js" asp-append-version="true"></script>
+}

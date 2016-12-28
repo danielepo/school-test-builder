@@ -240,3 +240,8 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/src/QuizH/wwwroot/js/*.ts
+/src/QuizH/wwwroot/js/*.js.map
+/src/QuizH/wwwroot/js/*.js
+/src/QuizH/scripts/*.js.map
+/src/QuizH/scripts/*.js
