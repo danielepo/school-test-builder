@@ -32,18 +32,15 @@
         </form>
     </div>
     <div class="col-md-6">
-        @foreach (var question in Model.AvailableQuestions)
-        {
-            <div class="row">
-                <div class="col-md-1">
-                    @question.Key
-                </div>
-                <div class="col-md-11">
-                    @question.Value
-                </div>
-            </div>
-
-        }
+        
 
     </div>
 </div>
+@section Scripts {
+
+    <script src="~/js/Exam.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        var vm = @Json.Serialize(Model.AvailableQuestions)
+        ko.applyBindings(vm);
+    </script>
+}

@@ -31,10 +31,12 @@ namespace QuizH.Features.Exam
                 Instructions = exam.Instructions,
                 Questions = exam.Questions.Select(x => x.Text).ToList(),
                 AvailableCourses = courses.GetAll().Select(x => x.Title).ToList(),
-                AvailableQuestions = questions.GetAll().Aggregate(new Dictionary<string,string>(),(acc,x)=> {
-                    acc.Add(x.Id.ToString(), x.Text);
-                    return acc;
-                })
+                AvailableQuestions = questions.GetAll().Select(x => 
+                    new QuestionViewModel
+                    {
+                        Id = x.Id,
+                        Text = x.Text
+                    }).ToList()
             };
         }
     }

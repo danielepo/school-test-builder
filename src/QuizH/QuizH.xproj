@@ -20,10 +20,10 @@
     <DnxInvisibleContent Include=".bowerrc" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\BL.Interfaces\BL.Interfaces.csproj" />
-    <ProjectReference Include="..\..\BL\BL.csproj" />
-    <ProjectReference Include="..\..\DAL\DAL.csproj" />
-    <ProjectReference Include="..\..\Entities\Entities.csproj" />
+    <ProjectReference Include="..\BL.Interfaces\BL.Interfaces.csproj" />
+    <ProjectReference Include="..\BL\BL.csproj" />
+    <ProjectReference Include="..\DAL\DAL.csproj" />
+    <ProjectReference Include="..\Entities\Entities.csproj" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\DotNet.Web\Microsoft.DotNet.Web.targets" Condition="'$(VSToolsPath)' != ''" />
 </Project>

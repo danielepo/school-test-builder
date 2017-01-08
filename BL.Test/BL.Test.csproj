@@ -49,17 +49,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BL\BL.csproj">
-      <Project>{d9402d7f-7906-439d-8dba-3e86b2f3cdae}</Project>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\src\BL\BL.csproj">
+      <Project>{D9402D7F-7906-439D-8DBA-3E86B2F3CDAE}</Project>
       <Name>BL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Entities\Entities.csproj">
+    <ProjectReference Include="..\src\Entities\Entities.csproj">
       <Project>{695f8bf4-1f78-4948-8f3b-f53381289aa5}</Project>
       <Name>Entities</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

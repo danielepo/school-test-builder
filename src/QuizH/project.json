@@ -1,6 +1,7 @@
 {
   "userSecretsId": "aspnet-quizh-053ff11b-fd32-4c63-b35d-651f334ae285",
     "dependencies": {
+        "ClosedXML": "0.85.0",
         "MediatR": "2.1.0",
         "MediatR.Extensions.Microsoft.DependencyInjection": "1.0.1",
         "Microsoft.ApplicationInsights.AspNetCore": "1.0.0",
@@ -29,7 +30,9 @@
         "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
         "Microsoft.TypeScript.Compiler": "2.1.4",
         "Microsoft.TypeScript.MSBuild": "2.1.4",
-        "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0"
+        "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
+        "System.Management.Automation": "6.1.7601.17515",
+        "System.Management.Automation.dll": "10.0.10586"
     },
 
   "tools": {
@@ -40,20 +43,20 @@
 
   "frameworks": {
     "net461": {
-      "dependencies": {
-        "BL": {
-          "target": "project"
-        },
-        "BL.Interfaces": {
-          "target": "project"
-        },
-        "DAL": {
-          "target": "project"
-        },
-        "Entities": {
-          "target": "project"
+        "dependencies": {
+            "BL": {
+                "target": "project"
+            },
+            "BL.Interfaces": {
+                "target": "project"
+            },
+            "DAL": {
+                "target": "project"
+            },
+            "Entities": {
+                "target": "project"
+            }
         }
-      }
     }
   },
 
