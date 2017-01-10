@@ -27,7 +27,7 @@ namespace QuizH.Features.Exam
                 Course = courses.GetByTitle(examVM.Course),
             };
 
-            exam.Insert(questions.GetAll().Where(x => examVM.Questions.Contains(x.Text)));
+            exam.Insert(questions.GetAll().Where(x => examVM.Questions.Contains(x.Id)));
 
             exams.Insert(exam);
         }

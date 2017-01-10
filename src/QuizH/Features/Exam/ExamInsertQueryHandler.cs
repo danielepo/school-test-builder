@@ -25,12 +25,12 @@ namespace QuizH.Features.Exam
             return new ExamCreationViewModel
             {
                 AvailableCourses = courses.GetAll().Select(x => x.Title).ToList(),
-                AvailableQuestions = questions.GetAll()
-                    .Select(x =>
-                        new QuestionViewModel {
-                            Id = x.Id,
-                            Text = x.Text
-                        })
+                //AvailableQuestions = questions.GetAll()
+                //    .Select(x =>
+                //        new QuestionViewModel {
+                //            Id = x.Id,
+                //            Text = x.Text
+                //        })
 
             };
         }

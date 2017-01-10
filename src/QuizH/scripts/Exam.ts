@@ -7,16 +7,17 @@ interface IQuestion {
 }
 
 class ExamsViewModel {
-    availableQuestions: Array<IQuestion>;
+    availableQuestions: KnockoutObservableArray<IQuestion>;
     selectedQuestions: KnockoutObservableArray<IQuestion>;
 
     constructor(questions: any) {
-        this.availableQuestions = questions;
+        this.availableQuestions = ko.observableArray<IQuestion>(questions);
         this.selectedQuestions = ko.observableArray<IQuestion>([]);
         
     }
     selectQuestion(id: KnockoutObservable<number>) {
-        this.selectedQuestions.push(this.availableQuestions[id()]);
+        this.selectedQuestions.push(this.availableQuestions()[id()]);
+        this.availableQuestions.splice(id(), 1);
     }
 }
 $.getJSON("/Question/Get",function (data) {

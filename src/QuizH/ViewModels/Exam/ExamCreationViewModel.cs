@@ -12,8 +12,7 @@ namespace QuizH.ViewModels.Exam
         public string Instructions { get; set; }
         public string Course { get; set; }
         public List<string> AvailableCourses { get; set; }
-        public List<string> Questions { get; set; }
-        public IEnumerable<QuestionViewModel> AvailableQuestions { get; set; }
+        public List<int> Questions { get; set; }
     }
     
 }

@@ -32,7 +32,11 @@
                     <tbody data-bind="foreach: selectedQuestions">
                         <tr>
                             <td data-bind="text: id"></td>
-                            <td data-bind="text: text"></td>
+                            <td data-bind="text: text">
+                            </td>
+                            <td>
+                                <input type="hidden" data-bind="value: text, attr: { name: 'Questions['+$index()+']'}" />
+                            </td>
                         </tr>
                     </tbody>
                 </table>
