@@ -4,6 +4,7 @@ using MediatR;
 using QuizH.ViewModels;
 using QuizH.ViewModels.Exam;
 using System.Collections.Generic;
+using QuizH.ViewModels.Question;
 
 namespace QuizH.Features.Exam
 {

@@ -19,6 +19,8 @@ class ExamsViewModel {
         this.selectedQuestions.push(this.availableQuestions[id()]);
     }
 }
-
-var vm = new ExamsViewModel([{ "id": 0, "text": "Question 1" }, { "id": 1, "text": "Question 2" }]);
-ko.applyBindings(vm);
+$.getJSON("/Question/Get",function (data) {
+        var vm = new ExamsViewModel(data);
+        ko.applyBindings(vm);
+    }
+);

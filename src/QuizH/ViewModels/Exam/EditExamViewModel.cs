@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using QuizH.ViewModels.Question;
 
 namespace QuizH.ViewModels.Exam
 {

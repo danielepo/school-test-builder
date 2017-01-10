@@ -33,5 +33,10 @@ namespace QuizH.Controllers
             var result = mediator.Send(new QuestionImportCommand() { Questions = vm });
             return RedirectToAction("Index");
         }
+        public IActionResult Get()
+        {
+            var result = mediator.Send(new QuestionListQuery());
+            return Json(result.Questions);
+        }
     }
 }

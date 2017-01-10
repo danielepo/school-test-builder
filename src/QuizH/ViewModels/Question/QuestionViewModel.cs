@@ -1,4 +1,4 @@
-﻿namespace QuizH.ViewModels.Exam
+﻿namespace QuizH.ViewModels.Question
 {
     public class QuestionViewModel
     {
