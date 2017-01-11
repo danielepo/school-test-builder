@@ -23,7 +23,7 @@
             <div class="form-group">
                 <label asp-for="Questions">
                     Questions
-
+                    <input type="hidden" id="preloaded-questions" value="@Json.Serialize(Model.Questions)" />
                 </label>
                 <table>
                     <thead>

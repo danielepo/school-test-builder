@@ -8,7 +8,7 @@ using QuizH.ViewModels.Question;
 
 namespace QuizH.Features.Exam
 {
-    public class ExamUpdateQueryHandler : IRequestHandler<ExamUpdateQuery, EditExamViewModel>
+    public class ExamUpdateQueryHandler : IRequestHandler<ExamUpdateQuery, ExamCreationViewModel>
     {
         readonly IExamRepository exams;
         private readonly ICourseRepository courses;
@@ -21,23 +21,17 @@ namespace QuizH.Features.Exam
             this.courses = courses;
         }
 
-        public EditExamViewModel Handle(ExamUpdateQuery message)
+        public ExamCreationViewModel Handle(ExamUpdateQuery message)
         {
             var exam = exams.GetByTitle(message.Title);
-            return new EditExamViewModel
+            return new ExamCreationViewModel
             {
-                OldTitle = exam.Title,
+                Id = exam.Id,
                 Title = exam.Title,
                 Course = exam.Course.Title,
                 Instructions = exam.Instructions,
-                Questions = exam.Questions.Select(x => x.Text).ToList(),
-                AvailableCourses = courses.GetAll().Select(x => x.Title).ToList(),
-                AvailableQuestions = questions.GetAll().Select(x => 
-                    new QuestionViewModel
-                    {
-                        Id = x.Id,
-                        Text = x.Text
-                    }).ToList()
+                Questions = exam.Questions.Select(x => x.Id).ToList(),
+                AvailableCourses = courses.GetAll().Select(x => x.Title).ToList()
             };
         }
     }

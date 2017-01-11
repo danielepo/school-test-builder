@@ -16,6 +16,7 @@ namespace Entities
         public string Title { get; set; }
         public int Type { get; set; }
         public Course Course { get; set; }
+        public int Id { get; set; }
 
         public Exam()
         {

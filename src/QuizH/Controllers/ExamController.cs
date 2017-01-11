@@ -42,7 +42,7 @@ namespace QuizH.Controllers
         {
             var vm = _mediator.Send(new ExamUpdateQuery { Title = title });
 
-            return View(vm);
+            return View("Insert",vm);
         }
         [HttpPost]
         public IActionResult Edit(EditExamViewModel exam)
