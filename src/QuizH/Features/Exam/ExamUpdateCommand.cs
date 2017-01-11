@@ -6,7 +6,7 @@ namespace QuizH.Features.Exam
 {
     public class ExamUpdateCommand : IRequest
     {
-        public EditExamViewModel Exam { get; set; }
+        public ExamCreationViewModel Exam { get; set; }
 
     }
 }

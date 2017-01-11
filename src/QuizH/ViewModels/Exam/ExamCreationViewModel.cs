@@ -13,7 +13,7 @@ namespace QuizH.ViewModels.Exam
         public string Course { get; set; }
         public List<string> AvailableCourses { get; set; }
         public List<int> Questions { get; set; }
-        public int Id { get; internal set; }
+        public int Id { get;  set; }
     }
     
 }

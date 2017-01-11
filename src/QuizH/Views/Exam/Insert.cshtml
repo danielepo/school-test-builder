@@ -2,6 +2,7 @@
 <div class="row">
     <div class="col-md-6">
         <form asp-controller="Exam" asp-action="Insert" method="post">
+            <input class="form-control" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Title">
                     Title
@@ -23,7 +24,6 @@
             <div class="form-group">
                 <label asp-for="Questions">
                     Questions
-                    <input type="hidden" id="preloaded-questions" value="@Json.Serialize(Model.Questions)" />
                 </label>
                 <table>
                     <thead>
@@ -32,8 +32,7 @@
                     <tbody data-bind="foreach: selectedQuestions">
                         <tr>
                             <td data-bind="text: id"></td>
-                            <td data-bind="text: text">
-                            </td>
+                            <td data-bind="text: text"></td>
                             <td>
                                 <input type="hidden" data-bind="value: id, attr: { name: 'Questions['+$index()+']'}" />
                             </td>
@@ -65,8 +64,14 @@
 
 @section Scripts {
 
-    @*<script src="~/js/Exam.js" asp-append-version="true"></script>*@
+    <script src="~/js/Exam.js"  asp-append-version="true"></script>
     <script type="text/javascript">
-        require(["../js/Exam"])
+        //require(["../js/Exam"])
+        var questions = @Json.Serialize(Model.Questions ?? new List<int>());
+        $.getJSON("/Question/Get",function (data) {
+            var vm = new ExamsViewModel(data, questions);
+            ko.applyBindings(vm);
+        }
+);
     </script>
 }

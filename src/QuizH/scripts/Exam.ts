@@ -10,9 +10,16 @@ class ExamsViewModel {
     availableQuestions: KnockoutObservableArray<IQuestion>;
     selectedQuestions: KnockoutObservableArray<IQuestion>;
 
-    constructor(questions: any) {
-        this.availableQuestions = ko.observableArray<IQuestion>(questions);
-        this.selectedQuestions = ko.observableArray<IQuestion>([]);
+    constructor(available: Array<IQuestion>, inModel: Array<number>) {
+        var availableQuestions = available.filter(function (value: IQuestion, index: number, array: IQuestion[]) {
+            return inModel.indexOf(value.id) < 0;
+        });
+        this.availableQuestions = ko.observableArray<IQuestion>(availableQuestions);
+
+        var questionsInModel = available.filter(function (value: IQuestion, index: number, array: IQuestion[]) {
+            return inModel.indexOf(value.id) >= 0;
+        });
+        this.selectedQuestions = ko.observableArray<IQuestion>(questionsInModel);
         
     }
     selectQuestion(id: KnockoutObservable<number>) {
@@ -20,8 +27,3 @@ class ExamsViewModel {
         this.availableQuestions.splice(id(), 1);
     }
 }
-$.getJSON("/Question/Get",function (data) {
-        var vm = new ExamsViewModel(data);
-        ko.applyBindings(vm);
-    }
-);

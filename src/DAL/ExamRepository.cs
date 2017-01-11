@@ -18,6 +18,7 @@ namespace DAL
         }
         public void Insert(Exam exam)
         {
+            exam.Id = Exams.Count() + 1;
             Exams.Add(exam);
         }
 
@@ -34,6 +35,11 @@ namespace DAL
             exam.Instructions = newExam.Instructions;
             exam.Title = newExam.Title;
             exam.Type = newExam.Type;
+        }
+
+        public Exam GetById(int id)
+        {
+            return Exams.First(x => x.Id == id);
         }
     }
 }

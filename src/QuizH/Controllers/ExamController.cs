@@ -44,13 +44,7 @@ namespace QuizH.Controllers
 
             return View("Insert",vm);
         }
-        [HttpPost]
-        public IActionResult Edit(EditExamViewModel exam)
-        {
-            _mediator.Send(new ExamUpdateCommand { Exam = exam });
-
-            return RedirectToAction("Details", new { exam.Title });
-        }
+        
         [HttpGet]
         public IActionResult Insert()
         {
@@ -59,9 +53,12 @@ namespace QuizH.Controllers
             return View(vm);
         }
         [HttpPost]
-        public IActionResult Insert(ExamCreationViewModel examVM)
+        public IActionResult Insert(ExamCreationViewModel exam)
         {
-            _mediator.Send(new ExamInsertCommand { Exam = examVM });
+            if(exam.Id == 0)
+                _mediator.Send(new ExamInsertCommand { Exam = exam });
+            else
+                _mediator.Send(new ExamUpdateCommand { Exam = exam });
 
             return RedirectToAction("Index");
         }

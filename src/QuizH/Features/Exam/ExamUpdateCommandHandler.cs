@@ -28,9 +28,9 @@ namespace QuizH.Features.Exam
 
             };
 
-            newExam.Insert(questions.GetAll().Where(x => examVM.Questions.Contains(x.Text)));
+            newExam.Insert(questions.GetAll().Where(x => examVM.Questions.Contains(x.Id)));
 
-            var exam = exams.GetByTitle(message.Exam.OldTitle);
+            var exam = exams.GetById(message.Exam.Id);
             exams.Update(exam, newExam);
         }
     }
