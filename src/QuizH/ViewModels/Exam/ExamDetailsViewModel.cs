@@ -1,3 +1,4 @@
+using QuizH.ViewModels.Question;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,7 +9,7 @@ namespace QuizH.ViewModels.Exam
         public string Title { get; set; }
         public string Instructions { get; set; }
         public string Course { get; set; }
-        public List<string> Questions { get; set; }
+        public List<QuestionViewModel> Questions { get; set; }
 
         public static ExamDetailsViewModel Create(Entities.Exam exam)
         {
@@ -17,7 +18,11 @@ namespace QuizH.ViewModels.Exam
                 Title = exam.Title,
                 Course = exam.Course.Title,
                 Instructions = exam.Instructions,
-                Questions = exam.Questions.Select(x => x.Text).ToList(),
+                Questions = exam.Questions.Select(x => new QuestionViewModel
+                {
+                    Id = x.Id,
+                    Text = x.Text
+                }).ToList(),
             };
         }
 
