@@ -10,9 +10,10 @@ class ExamsViewModel {
     availableQuestions: KnockoutObservableArray<IQuestion>;
     selectedQuestions: KnockoutObservableArray<IQuestion>;
 
-    constructor(questions: any) {
+    constructor(questions: any,preloaded:any) {
         this.availableQuestions = ko.observableArray<IQuestion>(questions);
-        this.selectedQuestions = ko.observableArray<IQuestion>([]);
+        
+        this.selectedQuestions = ko.observableArray<IQuestion>(preloaded);
         
     }
     selectQuestion(id: KnockoutObservable<number>) {
@@ -20,8 +21,3 @@ class ExamsViewModel {
         this.availableQuestions.splice(id(), 1);
     }
 }
-$.getJSON("/Question/Get",function (data) {
-        var vm = new ExamsViewModel(data);
-        ko.applyBindings(vm);
-    }
-);
