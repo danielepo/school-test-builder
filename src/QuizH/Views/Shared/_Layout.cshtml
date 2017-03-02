@@ -63,12 +63,24 @@
                 asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
         </script>
         <script src="//cloud.tinymce.com/stable/tinymce.min.js"></script>
-        <script>tinymce.init({ selector:'textarea' });</script>
 
     </environment>
     <script src="~/lib/knockout/dist/knockout.js"></script>
     <script src="~/lib/requirejs/require.js"></script>
     <script src="~/js/require-config.js"></script>
+
+    <script>
+        //https://www.tinymce.com
+        tinymce.init({
+            selector: 'textarea',
+            plugins: "spellchecker",
+            menubar: "tools",
+            toolbar: "spellchecker",
+            browser_spellcheck: true,
+            contextmenu: false,
+            spellchecker_language: 'it_IT'
+        });
+    </script>
 
     @RenderSection("scripts", required: false)
 </body>
