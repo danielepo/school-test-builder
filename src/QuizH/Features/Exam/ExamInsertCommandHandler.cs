@@ -20,8 +20,10 @@ namespace QuizH.Features.Exam
         protected override void HandleCore(ExamInsertCommand message)
         {
             var examVM = message.Exam;
+
             var exam = new Entities.Exam
             {
+
                 Title = examVM.Title,
                 Instructions = examVM.Instructions,
                 Course = courses.GetByTitle(examVM.Course),

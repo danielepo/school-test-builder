@@ -10,10 +10,16 @@ class ExamsViewModel {
     availableQuestions: KnockoutObservableArray<IQuestion>;
     selectedQuestions: KnockoutObservableArray<IQuestion>;
 
-    constructor(questions: any,preloaded:any) {
-        this.availableQuestions = ko.observableArray<IQuestion>(questions);
-        
-        this.selectedQuestions = ko.observableArray<IQuestion>(preloaded);
+    constructor(available: Array<IQuestion>, inModel: Array<number>) {
+        var availableQuestions = available.filter(function (value: IQuestion, index: number, array: IQuestion[]) {
+            return inModel.indexOf(value.id) < 0;
+        });
+        this.availableQuestions = ko.observableArray<IQuestion>(availableQuestions);
+
+        var questionsInModel = available.filter(function (value: IQuestion, index: number, array: IQuestion[]) {
+            return inModel.indexOf(value.id) >= 0;
+        });
+        this.selectedQuestions = ko.observableArray<IQuestion>(questionsInModel);
         
     }
     selectQuestion(id: KnockoutObservable<number>) {

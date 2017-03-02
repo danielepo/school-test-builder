@@ -9,5 +9,6 @@ namespace DAL
         Exam GetByTitle(string title);
         void Insert(Exam exam);
         void Update(Exam exam, Exam newExam);
+        Exam GetById(int id);
     }
 }
