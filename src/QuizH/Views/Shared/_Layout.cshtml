@@ -50,8 +50,7 @@
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
-        <script src="//cloud.tinymce.com/stable/tinymce.min.js"></script>
-        <script>tinymce.init({ selector:'textarea' });</script>
+
     </environment>
     <environment names="Staging,Production">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.3.min.js"
@@ -62,24 +61,17 @@
                 asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
                 asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
         </script>
-        <script src="//cloud.tinymce.com/stable/tinymce.min.js"></script>
+    
 
     </environment>
     <script src="~/lib/knockout/dist/knockout.js"></script>
-    <script src="~/lib/requirejs/require.js"></script>
-    <script src="~/js/require-config.js"></script>
+    // api per spellcheck 
+    // https://www.microsoft.com/cognitive-services/en-us/bing-spell-check-api
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 
     <script>
-        //https://www.tinymce.com
-        tinymce.init({
-            selector: 'textarea',
-            plugins: "spellchecker",
-            menubar: "tools",
-            toolbar: "spellchecker",
-            browser_spellcheck: true,
-            contextmenu: false,
-            spellchecker_language: 'it_IT'
-        });
+        var simplemde = new SimpleMDE({ element: document.getElementsByTagName("textarea")[0] });
     </script>
 
     @RenderSection("scripts", required: false)
