@@ -245,3 +245,5 @@ ModelManifest.xml
 /src/QuizH/wwwroot/js/*.js
 /src/QuizH/scripts/*.js.map
 /src/QuizH/scripts/*.js
+
+.idea/
