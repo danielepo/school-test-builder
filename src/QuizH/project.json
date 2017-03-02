@@ -28,8 +28,7 @@
         "Microsoft.Extensions.Logging.Console": "1.0.0",
         "Microsoft.Extensions.Logging.Debug": "1.0.0",
         "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
-        "Microsoft.TypeScript.Compiler": "2.1.4",
-        "Microsoft.TypeScript.MSBuild": "2.1.4",
+        "Microsoft.TypeScript.Compiler": "2.2.1",
         "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
       "System.IO.FileSystem": "4.3.0",
         "System.Management.Automation": "6.1.7601.17515",
@@ -43,7 +42,7 @@
   },
 
   "frameworks": {
-    "net461": {
+    "net462": {
         "dependencies": {
             "BL": {
                 "target": "project"

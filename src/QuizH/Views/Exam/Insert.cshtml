@@ -76,11 +76,10 @@
 
     <script src="~/js/Exam.js" asp-append-version="true"></script>
     <script type="text/javascript">
-        var preloadedQuestions= @Json.Serialize(Model.Questions);
         //require(["../js/Exam"])
+        var questions = @Json.Serialize(Model.Questions ?? new List<int>());
         $.getJSON("/Question/Get",function (data) {
-            var vm;
-            vm = new ExamsViewModel(data,preloadedQuestions);
+            var vm = new ExamsViewModel(data, questions);
             ko.applyBindings(vm);
         }
 );

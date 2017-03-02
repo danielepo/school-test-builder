@@ -22,6 +22,5 @@ gulp.task('clean', function () {
 
 gulp.task('default', function () {
     gulp.src(paths.scripts).pipe(gulp.dest('wwwroot/js'));
-    gulp.src(['node_modules/requirejs/require.js'])
-        .pipe(gulp.dest('wwwroot/lib/requirejs'));
+
 });
