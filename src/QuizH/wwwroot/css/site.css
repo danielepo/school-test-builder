@@ -3,6 +3,7 @@
     padding-bottom: 20px;
 }
 
+
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
@@ -17,6 +18,14 @@ textarea {
     max-width: 280px;
 }
 
+a {
+    color: #7daed8;
+    text-decoration: none;
+}
+a:hover, a:focus {
+    color: #67a1d4;
+    text-decoration: none;
+}
 /* Carousel */
 .carousel-caption p {
     font-size: 20px;
@@ -35,4 +44,28 @@ textarea {
   .carousel-caption {
     display: none
   }
+}
+
+
+.navbar-inverse {
+    background-color: #78daff;
+    border-color: #3236b3;
+}
+.navbar-inverse .navbar-brand {
+    color: #000db7;
+}
+.navbar-inverse .navbar-nav > li > a {
+    color: #000db7;
+}
+.navbar-inverse .btn-link {
+    color: #000db7;
+    text-decoration: none;
+}
+/*.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > li > a:focus {
+        color: #b8daff;
+        background-color: #a2e1f9;
+      }*/
+.carousel {
+    display:none;
 }
