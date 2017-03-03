@@ -10,11 +10,12 @@ namespace QuizH.Features.Exam
         private readonly IQuestionRepository questions;
         private readonly IExamRepository exams;
 
-        public ExamInsertCommandHandler(IExamRepository exams, IQuestionRepository questions, ICourseRepository courses)
+        public ExamInsertCommandHandler(IExamRepository exams, IQuestionRepository questions, ICourseRepository courses, Data.ApplicationDbContext context)
         {
             this.exams = exams;
             this.questions = questions;
             this.courses = courses;
+            
         }
 
         protected override void HandleCore(ExamInsertCommand message)

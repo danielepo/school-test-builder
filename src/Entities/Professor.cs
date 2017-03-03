@@ -5,6 +5,6 @@ namespace Entities
 {
     public class Professor
     {
-        public Guid Id { get; set; }
+        public Guid ProfessorId { get; set; }
     }
 }

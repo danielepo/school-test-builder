@@ -7,30 +7,11 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    public class Answer
+    public static class AnswerExtension
     {
-        private readonly string _text;
-        private readonly int _points;
-        public string Text => _text;
-
-        public int Points => _points;
-
-        //why not use a constructor that also have the points?
-        public Answer(string value)
-        {
-            _text = value;
-            _points = 0;
-        }
-
-        public Answer(string value, int points)
-        {
-            _text = value;
-            _points = points;
-        }
-
         // should be part of the answer or part of a validator/parser
         // there's nothing about the answer here
-        public static bool IsValid(string row)
+        public static bool IsValidAnswer(string row)
         {
             var start = row.IndexOf('.');
             if (start < 0)
@@ -41,7 +22,7 @@ namespace Entities
         }
 
         // why return always a good answer?
-        public static Answer FromRow(string row)
+        public static Answer AnswerFromRow(string row)
         {
             var start = row.IndexOf('.');
             var end = row.LastIndexOf(':');
@@ -58,6 +39,27 @@ namespace Entities
             return new Answer(value, points);
         }
 
+    }
+    public class Answer
+    {
+        public int AnswerId { get; set; }
+        public string Text { get; set; }
+
+        public int Points { get; set; }
+
+        //why not use a constructor that also have the points?
+        public Answer(string value)
+        {
+            Text = value;
+            Points = 0;
+        }
+
+        public Answer(string value, int points)
+        {
+            Text = value;
+            Points = points;
+        }
+        
         public override bool Equals(object obj)
         {
             if (!(obj is Answer))

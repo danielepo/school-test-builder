@@ -45,6 +45,9 @@ namespace QuizH
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(connectionString)
             );
+            services.AddDbContext<EntitiesDbContext>(options =>
+                options.UseSqlite(connectionString)
+            );
 
             services.AddApplicationInsightsTelemetry(Configuration);
 

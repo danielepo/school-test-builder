@@ -4,8 +4,9 @@ namespace Entities
 {
     public class Course
     {
-        public string Title { get; private set; }
-        public string Description { get; private set; }
+        public int CourseId { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
 
         public Course(string title, string description)
         {

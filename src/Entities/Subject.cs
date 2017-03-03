@@ -7,6 +7,7 @@ namespace Entities
 {
     public class Subject
     {
+        public int SubjectId { get; set; }
         public string Title { get; set; }
 
         public Subject(string subject)

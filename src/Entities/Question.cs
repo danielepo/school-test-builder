@@ -5,22 +5,34 @@ using System.Linq;
 
 namespace Entities
 {
-    public class Question
+    public static class QuestionExtension
     {
-        public int Id; 
-        public Professor Creator { get; set; }
-
-        public string Answer
+        public static string Answer(this Question question)
         {
-            get
-            {
-                return Choiches.Any(x => x.Points == 1)
-                          ? string.Join(",", Choiches.Select((c, i) => new { Index = i, Choiche = c })
+                return question.Choiches.Any(x => x.Points == 1)
+                          ? string.Join(",", question.Choiches.Select((c, i) => new { Index = i, Choiche = c })
                                                      .Where(x => x.Choiche.Points == 1)
                                                      .Select(x => x.Index + 1))
                           : "";
-            }
+         
         }
+        public static void Add(this Question question, Answer answer)
+        {
+            question.Choiches.Add(answer);
+        }
+        internal static Question Clone(this Question question, Random random)
+        {
+            return new Question(question.Text)
+            {
+                Choiches = question.Choiches.Shuffle(random).ToList(),
+                Space = question.Space
+            };
+        }
+    }
+    public class Question
+    {
+        public int QuestionId; 
+        public Professor Creator { get; set; }
 
         public IList<Answer> Choiches { get; set; }
 
@@ -36,23 +48,12 @@ namespace Entities
             Choiches = new List<Answer>();
         }
 
-        public void Add(Answer answer)
-        {
-            Choiches.Add(answer);
-        }
-
+            
         public override string ToString()
         {
             return $"{Text} [{string.Join(", ", Choiches)}]";
         }
 
-        internal Question Clone(Random random)
-        {
-            return new Question(Text)
-            {
-                Choiches = Choiches.Shuffle(random).ToList(),
-                Space = Space
-            };
-        }
+        
     }
 }
