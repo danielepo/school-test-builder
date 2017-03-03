@@ -1,13 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using QuizH.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using QuizH.Features.Exam;
 using QuizH.Features.Question;
-using QuizH.ViewModels.Exam;
+using QuizH.ViewModels.Question;
 
 namespace QuizH.Controllers
 {
