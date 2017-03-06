@@ -52,9 +52,9 @@ namespace Entities.Test
             var prof = new Professor();
             var question = new Question("Test")
             {
-                Creator = prof
+                Professor = prof
             };
-            Assert.That(question.Creator, Is.EqualTo(prof));
+            Assert.That(question.Professor, Is.EqualTo(prof));
         }
         [Test]
         public void CanBeAssignedASubject()

@@ -1,6 +1,8 @@
 ﻿using Entities.Extensions;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
 namespace Entities
@@ -29,17 +31,21 @@ namespace Entities
             };
         }
     }
+
     public class Question
     {
-        public int QuestionId; 
-        public Professor Creator { get; set; }
+        public int QuestionId { get; set; }
 
-        public IList<Answer> Choiches { get; set; }
+        public int ProfessorId { get; set; }
+        public Professor Professor { get; set; }
+
+        public ICollection<Answer> Choiches { get; set; }
 
         public int Space { get; set; }
 
         public string Text { get; set; }
 
+        public int SubjectId { get; set; }
         public virtual Subject Subject { get; set; }
 
         public Question(string question)

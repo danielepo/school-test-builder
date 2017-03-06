@@ -15,7 +15,7 @@ namespace DAL
         }
         public void Add(Question q)
         {
-            q.Id = questions.Count;
+            q.QuestionId = questions.Count;
             questions.Add(q);
         }
 

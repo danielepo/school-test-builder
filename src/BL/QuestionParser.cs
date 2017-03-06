@@ -34,9 +34,9 @@ namespace BL
                 questions.Last().Space++;
                 return;
             }
-            if (Answer.IsValid(row))
+            if (AnswerExtension.IsValidAnswer(row))
             {
-                questions.Last().Add(Answer.FromRow(row));
+                questions.Last().Add(AnswerExtension.AnswerFromRow(row));
             }
             else
             {

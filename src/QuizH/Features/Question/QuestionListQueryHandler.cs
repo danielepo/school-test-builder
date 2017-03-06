@@ -26,7 +26,7 @@ namespace QuizH.Features.Question
                 Questions = questions.GetAll().Select(x => new QuestionViewModel
                 {
                     Text = x.Text,
-                    Id = x.Id
+                    Id = x.QuestionId
                 }).ToList()
             };
         }

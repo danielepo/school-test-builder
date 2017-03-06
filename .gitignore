@@ -247,3 +247,4 @@ ModelManifest.xml
 /src/QuizH/scripts/*.js
 
 .idea/
+/src/QuizH/*.lock.json

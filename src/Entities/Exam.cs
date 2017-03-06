@@ -38,7 +38,7 @@ namespace Entities
     {
         public string Instructions { get; set; }
 
-        public IList<Question> Questions { get; set; }
+        public IList<Question> Questions { get; set; }//TODO aggiungere tabella relazionale many to many
 
         public string Title { get; set; }
         public int Type { get; set; }

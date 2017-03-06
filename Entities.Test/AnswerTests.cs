@@ -23,31 +23,31 @@ namespace Entities.Test
         [Test]
         public void EmptyAnswerFromEmptyString()
         {
-            var answer = Answer.FromRow("");
+            var answer = AnswerExtension.AnswerFromRow("");
             Assert.That(answer,Is.EqualTo(new Answer("")));
         }
         [Test]
         public void EmptyAnswerFromPoint()
         {
-            var answer = Answer.FromRow(".");
+            var answer = AnswerExtension.AnswerFromRow(".");
             Assert.That(answer, Is.EqualTo(new Answer("")));
         }
         [Test]
         public void AnswerWithText()
         {
-            var parsed = Answer.FromRow(".first:5");
+            var parsed = AnswerExtension.AnswerFromRow(".first:5");
             Assert.That(parsed, Is.EqualTo(new Answer("first",5)));
         }
         [Test]
         public void AnswerWithTextWithWrongPoints()
         {
-            var parsed = Answer.FromRow(".first:wrong");
+            var parsed = AnswerExtension.AnswerFromRow(".first:wrong");
             Assert.That(parsed, Is.EqualTo(new Answer("first",5)));
         }
         [Test]
         public void EmptyAnswerWithWithPoints()
         {
-            var parsed = Answer.FromRow(".:5");
+            var parsed = AnswerExtension.AnswerFromRow(".:5");
             Assert.That(parsed, Is.EqualTo(new Answer("",5)));
         }
     }

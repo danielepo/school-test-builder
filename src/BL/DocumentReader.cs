@@ -127,11 +127,11 @@ namespace BL
         private void AppendQuestion(Body body, Question question)
         {
             body.Append(ParagraphFrom(question));
-            var length = question.Choiches.Count;
+            var choises = question.Choiches.ToList();
+            var length = choises.Count;
             for (int i = 0; i < length; i++)
             {
-                var answer = question.Choiches[i];
-                body.Append(ParagraphFrom(answer, i != length - 1));
+                body.Append(ParagraphFrom(choises[i], i != length - 1));
             }
         }
 

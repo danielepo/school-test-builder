@@ -41,12 +41,13 @@ namespace QuizH
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            var connectionString = Configuration.GetConnectionString("MyConnection");
+            
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(connectionString)
+                options.UseSqlServer(Configuration.GetConnectionString("MyConnection"))
             );
+            // TODO Guardare come allReady applica le migrazioni in dev
             services.AddDbContext<EntitiesDbContext>(options =>
-                options.UseSqlite(connectionString)
+                options.UseSqlServer(Configuration.GetConnectionString("EntitiesDb"))
             );
 
             services.AddApplicationInsightsTelemetry(Configuration);

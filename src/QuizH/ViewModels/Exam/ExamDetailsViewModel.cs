@@ -20,7 +20,7 @@ namespace QuizH.ViewModels.Exam
                 Instructions = exam.Instructions,
                 Questions = exam.Questions.Select(x => new QuestionViewModel
                 {
-                    Id = x.Id,
+                    Id = x.QuestionId,
                     Text = x.Text
                 }).ToList(),
             };
