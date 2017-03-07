@@ -34,6 +34,7 @@
                         <tr>
                             <td data-bind="text: id"></td>
                             <td data-bind="text: text"></td>
+                            <td data-bind="text: subjectId  "></td>
                             <td>
                                 <input type="hidden" data-bind="value: id, attr: { name: 'Questions['+$index()+']'}" />
                             </td>
@@ -50,22 +51,30 @@
         </form>
     </div>
     <div class="col-md-6">
-        <!-- ko if: availableQuestions().length > 0-->
+        <select data-bind="options: subjects,
+                       optionsText: 'title',
+                       optionsValue: 'id',
+                       value: selectedSubject,
+                       selectedOptions: [selectedSubject],
+                       optionsCaption: 'Choose...'"></select>
+        
+        <!-- ko if: filteredQuestions().length > 0-->
         <table class="table table-striped">
             <thead>
                 <tr><th>Id</th><th>Question</th></tr>
             </thead>
-            <tbody data-bind="foreach: availableQuestions">
+            <tbody data-bind="foreach: filteredQuestions()">
                 <tr>
                     <td data-bind="text: id"></td>
                     <td data-bind="text: text"></td>
+                    <td data-bind="text: subjectId"></td>
                     <td><a href="#" data-bind="click: function(){$parent.selectQuestion($index);}">Select</a></td>
                 </tr>
             </tbody>
         </table>
         <!-- /ko -->
-        <!-- ko if: availableQuestions().length === 0-->
-        <div class="alert  alert-info">No more available questions</div>
+        <!-- ko if: filteredQuestions().length === 0-->
+        <div class="alert alert-info">Nessuna domanda per il filtro selezionato</div>
         <!-- /ko -->
 
     </div>
@@ -77,9 +86,10 @@
     <script src="~/js/Exam.js" asp-append-version="true"></script>
     <script type="text/javascript">
         //require(["../js/Exam"])
+        var vm ;
         var questions = @Json.Serialize(Model.Questions ?? new List<int>());
         $.getJSON("/Question/Get",function (data) {
-            var vm = new ExamsViewModel(data, questions);
+            vm = new ExamsViewModel(data.questions, questions, data.subjects);
             ko.applyBindings(vm);
         }
 );

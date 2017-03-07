@@ -30,7 +30,7 @@ namespace QuizH.Controllers
         public IActionResult Get()
         {
             var result = mediator.Send(new QuestionListQuery());
-            return Json(result.Questions);
+            return Json(result);
         }
     }
 }

@@ -8,10 +8,12 @@ namespace Entities
     public class Subject
     {
         public string Title { get; set; }
+        public int Id { get; set; }
 
-        public Subject(string subject)
+        public Subject(string subject, int id)
         {
             Title = subject;
+            Id = id;
         }
     }
 }

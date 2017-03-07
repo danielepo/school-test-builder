@@ -11,9 +11,9 @@ namespace DAL
     {
         private List<Subject> Subjects = new List<Subject>
         {
-            new Subject("Educazione alimentare"),
-            new Subject("Sistema scheletrico"),
-            new Subject("La cellula")
+            new Subject("Educazione alimentare",1),
+            new Subject("Sistema scheletrico",2),
+            new Subject("La cellula",3)
         };
 
         public Subject GetByTitle(string title)
