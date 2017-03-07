@@ -47,6 +47,7 @@ namespace BL
 
             return new Document(body);
         }
+
         private Table Table(int type)
         {
             var properties = new TableProperties(
@@ -99,12 +100,14 @@ namespace BL
                 ));
             return table;
         }
+
         private Paragraph Title(string text)
         {
             var paragraphProperties = new ParagraphProperties(new Justification { Val = JustificationValues.Center }, new SpacingBetweenLines { Before = "120", After = "360" });
             var runProperties = new RunProperties(new FontSize { Val = "28" }, new Kern { Val = 28 }, new FontSizeComplexScript { Val = "56" }, new Bold());
             return ParagraphFrom(text, paragraphProperties, runProperties);
         }
+
         private Paragraph Instruction(string text)
         {
             var paragraphProperties = new ParagraphProperties(new ParagraphBorders(new BottomBorder { Val = BorderValues.Single, Size = 4, Space = 3, Color = "auto" }),
@@ -112,18 +115,21 @@ namespace BL
             var runProperties = new RunProperties(new FontSize { Val = "20" }, new Italic());
             return ParagraphFrom(text, paragraphProperties, runProperties);
         }
+
         private Paragraph Label(string text)
         {
             var paragraphProperties = new ParagraphProperties();
             var runProperties = new RunProperties(new FontSize { Val = "20" });
             return ParagraphFrom(text, paragraphProperties, runProperties);
         }
+
         private Paragraph Value(string text)
         {
             var paragraphProperties = new ParagraphProperties(new ParagraphBorders(new BottomBorder { Val = BorderValues.Single, Size = 4, Space = 3, Color = "auto" }));
             var runProperties = new RunProperties(new FontSize { Val = "20" });
             return ParagraphFrom(text, paragraphProperties, runProperties);
         }
+
         private void AppendQuestion(Body body, Question question)
         {
             body.Append(ParagraphFrom(question));
@@ -141,11 +147,11 @@ namespace BL
                 new KeepNext());
             var runProperties = new RunProperties(new FontSize() { Val = "22" });
             var extraSpace = 0;
-            if (question.Space > 2)
-                extraSpace = question.Space - 2;
+            if (question.Space > 1)
+                extraSpace = question.Space - 1;
             return ParagraphFrom(question.Text, paragraphProperties, runProperties, extraSpace);
-
         }
+
         private Paragraph ParagraphFrom(Answer answer, bool keepNext)
         {
             var paragraphProperties = new ParagraphProperties(new NumberingProperties(new NumberingLevelReference() { Val = 1 }, new NumberingId() { Val = 1 }));
@@ -154,6 +160,7 @@ namespace BL
             var runProperties = new RunProperties(new FontSize() { Val = "18" });
             return ParagraphFrom(answer.Text, paragraphProperties, runProperties);
         }
+
         private Paragraph ParagraphFrom(string paragraphText, ParagraphProperties paragraphProperties = null, RunProperties runProperties = null, int? breaks = 0)
         {
             var element =
