@@ -42,7 +42,7 @@ namespace Entities.Test
         public void AnswerWithTextWithWrongPoints()
         {
             var parsed = Answer.FromRow(".first:wrong");
-            Assert.That(parsed, Is.EqualTo(new Answer("first",5)));
+            Assert.AreNotEqual(parsed, Is.EqualTo(new Answer("first",0)));
         }
         [Test]
         public void EmptyAnswerWithWithPoints()

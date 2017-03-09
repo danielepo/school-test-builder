@@ -60,7 +60,8 @@ namespace Entities.Test
         public void CanBeAssignedASubject()
         {
             var question = new Question("Quante calorie ha un grammo di grassi?");
-            question.Subject = new Subject("Alimentazione");
+            question.Subject = new Subject("Alimentazione",1);
+            Assert.That(question.Subject.Id, Is.EqualTo(1));
             Assert.That(question.Subject.Title, Is.EqualTo("Alimentazione"));
         }
     }
