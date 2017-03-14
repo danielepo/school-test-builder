@@ -1,24 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D157FE29-955F-46CB-B864-C78375419186}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{58916F35-D05B-4941-9B0F-BF4ECD5CAACF}"
-	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
-	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "QuizH", "src\QuizH\QuizH.xproj", "{3E787D0E-592C-4A89-8007-E48A77BC1335}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{6CF6A138-E847-473F-954A-A5B6EA113624}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuizH", "src\QuizH\QuizH.csproj", "{3E787D0E-592C-4A89-8007-E48A77BC1335}"
 	ProjectSection(ProjectDependencies) = postProject
 		{0DBC5603-2625-4088-B9E4-EAD51D78485C} = {0DBC5603-2625-4088-B9E4-EAD51D78485C}
 		{D2DBA63F-30A6-4AA1-A3F1-9D39606BFE14} = {D2DBA63F-30A6-4AA1-A3F1-9D39606BFE14}
 		{D9402D7F-7906-439D-8DBA-3E86B2F3CDAE} = {D9402D7F-7906-439D-8DBA-3E86B2F3CDAE}
 		{695F8BF4-1F78-4948-8F3B-F53381289AA5} = {695F8BF4-1F78-4948-8F3B-F53381289AA5}
 	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{6CF6A138-E847-473F-954A-A5B6EA113624}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL.Test", "BL.Test\BL.Test.csproj", "{8EDF4429-251A-416D-BB68-93F227191BCF}"
 EndProject
