@@ -62,5 +62,10 @@ namespace QuizH.Controllers
 
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public IActionResult Download(int id)
+        {
+            return _mediator.Send(new ExamDownloadQuery { Id = id });
+        }
     }
 }
