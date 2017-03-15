@@ -8,20 +8,20 @@
             <div class="form-group">
                 <label asp-for="Title">
                     Titolo
-                    <input class="form-control" asp-for="Title" required />
                 </label>
+                    <input class="form-control" asp-for="Title" required />
             </div>
             <div class="form-group">
                 <label asp-for="Instructions">
                     Istruzioni
+                </label>
                     <input class="form-control" asp-for="Instructions" />
-                </label><br />
             </div>
             <div class="form-group">
                 <label asp-for="Course">
                     Corso
-                    <select class="form-control" asp-for="Course" asp-items="@(new SelectList(Model.AvailableCourses))"></select>
                 </label>
+                    <select class="form-control" asp-for="Course" asp-items="@(new SelectList(Model.AvailableCourses))"></select>
             </div>
             <h3>Domande</h3>
             <div class="form-group">
@@ -51,32 +51,52 @@
         </form>
     </div>
     <div class="col-md-6">
-        <select data-bind="options: subjects,
+        <div class="filters">
+            
+                <div class="form-group">
+                    <label for="subjects">Argomenti:</label>
+                    <select id="subjects" 
+                            class="form-control"
+                            data-bind="options: subjects,
                        optionsText: 'title',
                        optionsValue: 'id',
                        value: selectedSubject,
                        selectedOptions: [selectedSubject],
                        optionsCaption: 'Choose...'"></select>
-        
-        <!-- ko if: filteredQuestions().length > 0-->
-        <table class="table table-striped">
-            <thead>
-                <tr><th>Id</th><th>Question</th></tr>
-            </thead>
-            <tbody data-bind="foreach: filteredQuestions()">
-                <tr>
-                    <td data-bind="text: id"></td>
-                    <td data-bind="text: text"></td>
-                    <td data-bind="text: subjectId"></td>
-                    <td><a href="#" data-bind="click: function(){$parent.selectQuestion($index);}">Select</a></td>
-                </tr>
-            </tbody>
-        </table>
-        <!-- /ko -->
-        <!-- ko if: filteredQuestions().length === 0-->
-        <div class="alert alert-info">Nessuna domanda per il filtro selezionato</div>
-        <!-- /ko -->
-
+                </div>
+                <div class="form-group">
+                    <label for="courses">Materie:</label>
+                    <select id="courses"
+                            class="form-control"
+                            data-bind="options: courses,
+                       optionsText: 'title',
+                       optionsValue: 'id',
+                       value: selectedCourse,
+                       selectedOptions: [selectedCourse],
+                       optionsCaption: 'Choose...'"></select>
+                </div>
+            
+        </div>
+        <div class="row">
+            <!-- ko if: filteredQuestions().length > 0-->
+            <table class="table table-striped">
+                <thead>
+                    <tr><th>Id</th><th>Question</th></tr>
+                </thead>
+                <tbody data-bind="foreach: filteredQuestions()">
+                    <tr>
+                        <td data-bind="text: id"></td>
+                        <td data-bind="text: text"></td>
+                        <td data-bind="text: subjectId"></td>
+                        <td><a href="#" data-bind="click: function(){$parent.selectQuestion($index);}">Select</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- /ko -->
+            <!-- ko if: filteredQuestions().length === 0-->
+            <div class="alert alert-info">Nessuna domanda per il filtro selezionato</div>
+            <!-- /ko -->
+        </div>
     </div>
 </div>
 
@@ -85,11 +105,18 @@
 
     <script src="~/js/Exam.js" asp-append-version="true"></script>
     <script type="text/javascript">
-        //require(["../js/Exam"])
+
         var vm ;
         var questions = @Json.Serialize(Model.Questions ?? new List<int>());
+        debugger;  
         $.getJSON("/Question/Get",function (data) {
-            vm = new ExamsViewModel(data.questions, questions, data.subjects);
+            var model = {
+                availableQuestions: data.questions,
+                alreadySelectedQuestions: questions,
+                subjects: data.subjects,
+                courses: data.courses
+            };
+            vm = new ExamsViewModel(model);
             ko.applyBindings(vm);
         }
 );

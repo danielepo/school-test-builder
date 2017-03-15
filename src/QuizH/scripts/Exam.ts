@@ -5,10 +5,21 @@ interface IQuestion {
     id: number;
     text: string;
     subjectId: number;
+    courses: number[];
 }
 interface ISubject {
     id: number;
     title: string;
+}
+interface ICourse {
+    id: number;
+    title: string;
+}
+interface IExamViewModel{
+    availableQuestions: IQuestion[];
+    alreadySelectedQuestions: number[];
+    subjects: ISubject[];
+    courses: ICourse[];
 }
 
 class ExamsViewModel {
@@ -17,22 +28,27 @@ class ExamsViewModel {
     //filteredQuestions: KnockoutComputed<IQuestion[]>;
 
     subjects: ISubject[];
-    selectedSubject: KnockoutObservable<number>;
+    courses: ICourse[];
 
-    constructor(available: IQuestion[], inModel: number[], subjects: ISubject[]) {
-        this.subjects = subjects;
+    selectedSubject: KnockoutObservable<number>;
+    selectedCourse: KnockoutObservable<number>;
+
+    constructor(model: IExamViewModel) {
+        this.subjects = model.subjects;
+        this.courses = model.courses;
         
-        var availableQuestions = available.filter(function (value: IQuestion, index: number, array: IQuestion[]) {
-            return inModel.indexOf(value.id) < 0;
+        var availableQuestions = model.availableQuestions.filter(function (value: IQuestion, index: number, array: IQuestion[]) {
+            return model.alreadySelectedQuestions.indexOf(value.id) < 0;
         });
 
         this.availableQuestions = ko.observableArray<IQuestion>(availableQuestions);
 
-        var questionsInModel = available.filter(function (value: IQuestion, index: number, array: IQuestion[]) {
-            return inModel.indexOf(value.id) >= 0;
+        var questionsInModel = model.availableQuestions.filter(function (value: IQuestion, index: number, array: IQuestion[]) {
+            return model.alreadySelectedQuestions.indexOf(value.id) >= 0;
         });
         this.selectedQuestions = ko.observableArray<IQuestion>(questionsInModel);
         this.selectedSubject = ko.observable<number>(0);
+        this.selectedCourse = ko.observable<number>(0);
     }
 
     selectQuestion(id: KnockoutObservable<number>) {
@@ -44,9 +60,12 @@ class ExamsViewModel {
         read: function () {
             debugger;
             var subject = typeof this.selectedSubject() == "undefined" ? 0 : this.selectedSubject() ;
+            var course = typeof this.selectedCourse() == "undefined" ? 0 : this.selectedCourse() ;
             return this.availableQuestions().filter(
                 function (value: IQuestion, index: number, array: IQuestion[]) {
-                    return subject == 0 || value.subjectId == subject;
+                    var hasSubject = subject == 0 || value.subjectId == subject;
+                    var hasCourse = course == 0 || value.courses.indexOf(course) != -1;
+                    return hasSubject && hasCourse;
                 });
         }
     })();

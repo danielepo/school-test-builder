@@ -11,9 +11,9 @@ namespace DAL
     {
         private List<Course> Courses = new List<Course>
         {
-            new Course("Matematica","Matematica"),
-            new Course("Fisica","Fisica"),
-            new Course("Italiano","Italiano")
+            new Course(1, "Matematica","Matematica"),
+            new Course(2, "Fisica","Fisica"),
+            new Course(3, "Italiano","Italiano")
         };
         public Course GetByTitle(string title)
         {

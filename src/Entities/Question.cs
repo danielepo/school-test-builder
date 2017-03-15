@@ -54,5 +54,6 @@ namespace Entities
                 Space = Space
             };
         }
+        public IEnumerable<Course> Courses{get;set;}
     }
 }

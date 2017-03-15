@@ -8,5 +8,6 @@ namespace QuizH.ViewModels.Question
     {
         public List<QuestionViewModel> Questions { get; set; }
         public IEnumerable<Subject> Subjects { get; internal set; }
+        public IEnumerable<Course> Courses { get; internal set; }
     }
 }

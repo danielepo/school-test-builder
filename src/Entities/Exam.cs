@@ -21,7 +21,7 @@ namespace Entities
         public Exam()
         {
             _questions = new List<Question>();
-            Course = new Course("irrilevant","irrilevant");
+            Course = new Course(1, "irrilevant","irrilevant");
         }
         
         public Exam Clone(Random random)

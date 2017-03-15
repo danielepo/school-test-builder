@@ -9,7 +9,7 @@ namespace Entities.Test
         [Test]
         public void CourseGetsCreatedWithTitleAndDescription()
         {
-            var course = new Course("title", "description");
+            var course = new Course(0, "title", "description");
             Assert.That(course.Title, Is.EqualTo("title"));
             Assert.That(course.Description, Is.EqualTo("description"));
         }
@@ -17,23 +17,23 @@ namespace Entities.Test
         [Test]
         public void CourseCannotHaveNullTitle()
         {
-            Assert.Throws<ArgumentException>(() => new Course(null, null));
+            Assert.Throws<ArgumentException>(() => new Course(0, null, null));
         }
         [Test]
         public void CourseCannotHaveEmptyTitle()
         {
-            Assert.Throws<ArgumentException>(() => new Course("", null));
+            Assert.Throws<ArgumentException>(() => new Course(0, "", null));
         }
 
         [Test]
         public void CourseCannotHaveNullDescription()
         {
-            Assert.Throws<ArgumentException>(() => new Course("title", null));
+            Assert.Throws<ArgumentException>(() => new Course(0, "title", null));
         }
         [Test]
         public void CourseCannotHaveEmptyDescription()
         {
-            Assert.Throws<ArgumentException>(() => new Course("title", ""));
+            Assert.Throws<ArgumentException>(() => new Course(0, "title", ""));
         }
     }
 }
