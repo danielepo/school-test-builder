@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ClosedXML" Version="0.86.0" />
+    <PackageReference Include="ClosedXML" Version="0.85.0" />
     <PackageReference Include="MediatR" Version="2.1.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="1.0.1" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="1.0.0" />

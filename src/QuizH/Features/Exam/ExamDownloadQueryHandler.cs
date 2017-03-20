@@ -27,7 +27,7 @@ namespace QuizH.Features.Exam
             var files = new List<FileData>();
             foreach (var e in exams)
                 files.Add(CreateExamFile(e));
-            //files.Add(CreateAnswersFile(exams));
+            files.Add(CreateAnswersFile(exams));
             return new ExamDownloadViewModel()
             {
                 Stream = zipper.Zip(files),
@@ -39,7 +39,7 @@ namespace QuizH.Features.Exam
         {
             var answers = extractor.Extract(exams);
             var stream = writer.GetStream(answers);
-            return new FileData("answers.xslx", stream);
+            return new FileData("risposte.xlsx", stream);
         }
 
         private FileData CreateExamFile(Entities.Exam e)
