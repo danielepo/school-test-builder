@@ -65,7 +65,8 @@ namespace QuizH.Controllers
         [HttpPost]
         public IActionResult Download(int id)
         {
-            return _mediator.Send(new ExamDownloadQuery { Id = id });
+            var vm = _mediator.Send(new ExamDownloadQuery { Id = id });
+            return new OkResult();
         }
     }
 }

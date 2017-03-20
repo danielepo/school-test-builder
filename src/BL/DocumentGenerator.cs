@@ -4,6 +4,7 @@ using DocumentFormat.OpenXml.Wordprocessing;
 using Entities;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace BL
@@ -20,7 +21,17 @@ namespace BL
                 CreateDocument(exam).Save(mainDocumentPart);
             }
         }
+        public Stream GetStream(Exam exam)
+        {
+            var stream = new MemoryStream();
+            using (var package = WordprocessingDocument.Create(stream, WordprocessingDocumentType.Document))
+            {
+                var mainDocumentPart = package.AddMainDocumentPart();
 
+                CreateDocument(exam).Save(mainDocumentPart);
+            }
+            return stream;
+        }
         private Document CreateDocument(Exam exam)
         {
             var body = new Body(Title(exam.Title),
@@ -85,6 +96,8 @@ namespace BL
                 ));
             return table;
         }
+
+        
 
         private Paragraph Title(string text)
         {

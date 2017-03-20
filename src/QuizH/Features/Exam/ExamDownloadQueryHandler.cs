@@ -1,11 +1,11 @@
+using System;
 using DAL;
 using MediatR;
-using QuizH.ViewModels;
 using QuizH.ViewModels.Exam;
 
 namespace QuizH.Features.Exam
 {
-    public class ExamDownloadQueryHandler : IRequestHandler<ExamDownloadQuery, object>
+    public class ExamDownloadQueryHandler : IRequestHandler<ExamDownloadQuery, ExamDownloadViewModel>
     {
         private readonly IExamRepository exams;
         
@@ -14,9 +14,9 @@ namespace QuizH.Features.Exam
             this.exams = exams;
         }
 
-        public object Handle(ExamDownloadQuery message)
+        public ExamDownloadViewModel Handle(ExamDownloadQuery message)
         {
-            return null;
+            return new ExamDownloadViewModel();
         }
     }
 }
