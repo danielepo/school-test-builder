@@ -5,6 +5,7 @@ using Entities;
 using MediatR;
 using QuizH.Features.Exam;
 using QuizH.ViewModels.Exam;
+using System.IO;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -61,6 +62,12 @@ namespace QuizH.Controllers
                 _mediator.Send(new ExamUpdateCommand { Exam = exam });
 
             return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public IActionResult Download(int id)
+        {
+            var vm = _mediator.Send(new ExamDownloadQuery { Id = id });
+            return File(vm.Stream, "application/zip", vm.FileName);
         }
     }
 }

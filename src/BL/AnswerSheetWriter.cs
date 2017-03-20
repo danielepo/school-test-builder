@@ -6,6 +6,7 @@ using Entities;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,15 @@ namespace BL
             AddContent(1, 1, worksheet, answers);
             var location = $"{AppDomain.CurrentDomain.BaseDirectory}/risposte.xlsx";
             workbook.SaveAs(location);
+        }
+        public Stream GetStream(IEnumerable<IEnumerable<string>> answers)
+        {
+            var stream = new MemoryStream();
+            var workbook = new XLWorkbook();
+            var worksheet = workbook.Worksheets.Add("Sheet 1");
+            AddContent(1, 1, worksheet, answers);
+            workbook.SaveAs(stream);
+            return stream;
         }
         protected void AddContent(int startRow, int startColumn, IXLWorksheet worksheet, IEnumerable<IEnumerable<string>> data)
         {

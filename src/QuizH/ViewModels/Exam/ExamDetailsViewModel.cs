@@ -7,6 +7,7 @@ namespace QuizH.ViewModels.Exam
     public class ExamDetailsViewModel
     {
         public string Title { get; set; }
+        public int Id{ get; set; }
         public string Instructions { get; set; }
         public string Course { get; set; }
         public List<QuestionViewModel> Questions { get; set; }
@@ -15,6 +16,7 @@ namespace QuizH.ViewModels.Exam
         {
             return new ExamDetailsViewModel
             {
+                Id = exam.Id,
                 Title = exam.Title,
                 Course = exam.Course.Title,
                 Instructions = exam.Instructions,
