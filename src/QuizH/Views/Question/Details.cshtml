@@ -1,19 +1,17 @@
-﻿@model QuizH.ViewModels.Exam.ExamDetailsViewModel
-<div class="row">
-    <div class="col-md-9"><h1>@Model.Title</h1></div>
-</div>
-<div class="row">
-    <div class="col-md-3"><h3>@Model.Course</h3></div>
-</div>
-
-<div class="row">
-    <div class="col-md-12"><h2>Instructions</h2></div>
-    <div class="col-md-12">@Model.Instructions</div>
-</div>
-<div class="row">
-    <div class="col-md-12"><h2>Questions</h2></div>
-    @foreach (var question in Model.Questions)
+﻿@model QuizH.ViewModels.Question.QuestionDetailsViewModel
+<div>
+    <h4>Domanda</h4>
+    <p>@Model.Text</p>
+    <h4>Risposte</h4>
+    @foreach(var option in Model.Options)
     {
-        <div class="col-md-12">@question</div>
+        <p>@option</p>
+    }
+    <h4>Argomento</h4>
+    <p>@Model.Subject</p>
+    <h4>Corsi</h4>
+    @foreach (var course in Model.Courses)
+    {
+        <p>@course</p>
     }
 </div>

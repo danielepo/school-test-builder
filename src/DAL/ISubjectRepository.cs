@@ -8,5 +8,6 @@ namespace DAL
         IEnumerable<Subject> GetAll();
 
         Subject GetByTitle(string title);
+        Subject GetById(int subjectId);
     }
 }

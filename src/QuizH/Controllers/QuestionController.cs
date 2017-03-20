@@ -5,7 +5,7 @@ using QuizH.ViewModels.Question;
 
 namespace QuizH.Controllers
 {
-    public class QuestionController:Controller
+    public class QuestionController : Controller
     {
         private readonly IMediator mediator;
 
@@ -15,7 +15,8 @@ namespace QuizH.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            var result = mediator.Send(new QuestionListQuery());
+            return View(result);
         }
         public IActionResult Import()
         {
@@ -31,6 +32,37 @@ namespace QuizH.Controllers
         {
             var result = mediator.Send(new QuestionListQuery());
             return Json(result);
+        }
+
+        public IActionResult Details(int id)
+        {
+            var result = mediator.Send(new QuestionDetailsQuery() { QuestionId = id });
+            return View(result);
+        }
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var vm = mediator.Send(new QuestionUpdateQuery { Id = id });
+
+            return View("Insert", vm);
+        }
+
+        [HttpGet]
+        public IActionResult Insert()
+        {
+            var vm = mediator.Send(new QuestionInsertQuery());
+
+            return View(vm);
+        }
+        [HttpPost]
+        public IActionResult Insert(QuestionCreationViewModel question)
+        {
+            var responce =
+                question.OldId == 0 ?
+                mediator.Send(new QuestionInsertCommand { Question = question }) :
+                mediator.Send(new QuestionUpdateCommand { Question = question });
+
+            return RedirectToAction("Index");
         }
     }
 }

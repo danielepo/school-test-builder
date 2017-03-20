@@ -7,5 +7,7 @@ namespace DAL
     {
         IEnumerable<Question> GetAll();
         void Add(Question q);
+        Question GetById(int questionId);
+        void Update(Question oldQuestion, Question newQuestion);
     }
 }

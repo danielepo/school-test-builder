@@ -1,6 +1,7 @@
-using System;
+using System.Linq;
 using System.Collections.Generic;
 using Entities;
+using System;
 
 namespace DAL
 {
@@ -17,6 +18,18 @@ namespace DAL
         public IEnumerable<Question> GetAll()
         {
             return questions;
+        }
+
+        public Question GetById(int questionId)
+        {
+            return questions.FirstOrDefault(q => q.Id == questionId);
+        }
+
+        public void Update(Question oldQuestion, Question newQuestion)
+        {
+            questions.Remove(oldQuestion);
+            newQuestion.Id = oldQuestion.Id;
+            questions.Add(newQuestion);
         }
     }
 

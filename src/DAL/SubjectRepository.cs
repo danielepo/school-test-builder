@@ -25,5 +25,10 @@ namespace DAL
         {
             return Subjects;
         }
+
+        public Subject GetById(int subjectId)
+        {
+            return Subjects.FirstOrDefault(x => x.Id == subjectId);
+        }
     }
 }

@@ -8,8 +8,9 @@
         "typeRoots": [ "./typings" ]
     },
     "files": [
-        "./require-config.ts",
-        "./Exam.ts"
+      "./require-config.ts",
+      "./Exam.ts",
+      "./Question.ts"
 
     ],
     "compileOnSave": true

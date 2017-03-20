@@ -30,8 +30,8 @@ namespace QuizH.Features.Question
                 {
                     Text = x.Text,
                     Id = x.Id,
-                    SubjectId = x.Subject.Id,
-                    Courses = x.Courses?.Select(c => c.Id) ?? new List<int>() { 0 },
+                    SubjectId = x.Subject?.Id ?? 0,
+                    Courses = x.Courses?.Select(c => c.Id) ?? new List<int>() ,
                 }).ToList(),
                 Subjects = subjects.GetAll(),
                 Courses = courses.GetAll()

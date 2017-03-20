@@ -1,1 +1,20 @@
-﻿@Html.ActionLink("Import questions", "Import")
+﻿@model QuizH.ViewModels.Question.QuestionListViewModel
+
+<table class="table table-striped">
+    <thead><tr><td>Id</td><td>Domanda</td><td>Edita</td><td>Dettagli</td></tr></thead>
+    <tbody>
+
+        @foreach (var question in Model.Questions)
+        {
+            <tr>
+                <td>@question.Id</td>
+                <td>@question.Text</td>
+                <td>@Html.ActionLink("Edit", "Edit", new { id = question.Id})</td>
+                <td>@Html.ActionLink("Details", "Details", new { id = question.Id})</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@Html.ActionLink("Importa domande", "Import")<br />
+@Html.ActionLink("Aggiungi una nuova domanda", "Insert")
