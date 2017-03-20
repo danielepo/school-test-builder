@@ -26,6 +26,7 @@ namespace BL
                     }
                 }
             }
+            zipStream.Seek(0, SeekOrigin.Begin);
             return zipStream;
         }
     }
