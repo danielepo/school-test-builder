@@ -64,8 +64,7 @@ namespace Entities
                 return false;
 
             var that = obj as Answer;
-            return Points == that.Points &&
-                   Text == that.Text;
+            return this.Equals(that);
         }
 
         public override int GetHashCode()

@@ -57,13 +57,25 @@ namespace Entities.Test
             Assert.That(question.Creator, Is.EqualTo(prof));
         }
         [Test]
-        [Ignore("Non compila")]
         public void CanBeAssignedASubject()
         {
             var question = new Question("Quante calorie ha un grammo di grassi?");
-            question.Subject = new Subject("Alimentazione",1);
-            Assert.That(question.Subject.Id, Is.EqualTo(1));
+            question.Subject = new Subject("Alimentazione",0);
             Assert.That(question.Subject.Title, Is.EqualTo("Alimentazione"));
+        }
+
+        [Test]
+        public void PrintsAnswersInToString()
+        {
+            var question = new Question("Quante calorie ha un grammo di grassi?")
+            {
+                Choiches = new List<Answer>()
+                {
+                    new Answer("20"), new Answer("30"), new Answer("60",1)
+                }
+            };
+            question.Subject = new Subject("Alimentazione", 0);
+            Assert.That(question.ToString(), Is.EqualTo("Quante calorie ha un grammo di grassi? [20: 0, 30: 0, 60: 1]"));
         }
     }
 }

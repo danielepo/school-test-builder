@@ -40,6 +40,8 @@
   <ItemGroup>
     <Compile Include="AnswerTests.cs" />
     <Compile Include="CourseTests.cs" />
+    <Compile Include="SubjectTests.cs" />
+    <Compile Include="ProfessorTests.cs" />
     <Compile Include="ExamTests.cs" />
     <Compile Include="QuestionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

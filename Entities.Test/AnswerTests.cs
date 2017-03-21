@@ -50,5 +50,57 @@ namespace Entities.Test
             var parsed = Answer.FromRow(".:5");
             Assert.That(parsed, Is.EqualTo(new Answer("",5)));
         }
+        [Test]
+        public void AnswerDoesntEqualsAnswerWithDiferentPoints()
+        {
+            var answer = new Answer("Test", 1);
+            var different = new Answer("Test", 2);
+
+            Assert.That(answer, Is.Not.EqualTo(different));
+        }
+
+        [Test]
+        public void AnswerDoesntEqualsAnswerWithDiferentText()
+        {
+            var answer = new Answer("Text1", 2);
+            var different = new Answer("Text2", 2);
+
+            Assert.That(answer, Is.Not.EqualTo(different));
+        }
+
+
+        [Test]
+        public void AnswerEqualsAnswerSameTextAndPoints()
+        {
+            var answer = new Answer("Text", 2);
+            var same = new Answer("Text", 2);
+
+            Assert.That(answer, Is.EqualTo(same));
+        }
+
+
+        [Test]
+        public void AnswerDoesntEqualsNotAnswer()
+        {
+            var answer = new Answer("Text1", 2);
+
+            Assert.That(answer, Is.Not.EqualTo("NotAnswer"));
+        }
+
+        [Test]
+        public void AnswerEqualsAnswerSameTextAndPointsAsObject()
+        {
+            var answer = new Answer("Text", 2);
+            var same = new Answer("Text", 2);
+
+            Assert.That(answer.Equals((object)same));
+        }
+
+        [Test]
+        public void AnswerToString()
+        {
+            var answer = new Answer("Text", 2);
+            Assert.That(answer.ToString(), Is.EqualTo("Text: 2"));
+        }
     }
 }

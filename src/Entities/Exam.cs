@@ -9,14 +9,12 @@ namespace Entities
     public class Exam
     {
         private IList<Question> _questions;
+        public int Id { get; set; }
         public string Instructions { get; set; }
-
         public IEnumerable<Question> Questions => _questions;
-
         public string Title { get; set; }
         public int Type { get; set; }
         public Course Course { get; set; }
-        public int Id { get; set; }
 
         public Exam()
         {

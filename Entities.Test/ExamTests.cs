@@ -16,10 +16,30 @@ namespace Entities.Test
             Assert.That(exam.Type.GetType(), Is.EqualTo(typeof(int)));
         }
         [Test]
-        public void HasAMateria()
+        public void HasACourse()
         {
             var exam = new Exam();
             Assert.That(exam.Course.GetType(), Is.EqualTo(typeof(Course)));
+        }
+
+        [Test]
+        public void HasAnId()
+        {
+            var exam = new Exam();
+            Assert.That(exam.Id.GetType(), Is.EqualTo(typeof(int)));
+        }
+
+
+        [Test]
+        public void CanGetBasicProperties()
+        {
+            var exam = new Exam()
+            {
+                Id = 2,
+                Title = "irrelevant"
+            };
+            Assert.That(exam.Id, Is.EqualTo(2));
+            Assert.That(exam.Title, Is.EqualTo("irrelevant"));
         }
         [Test]
         public void AnNewExamHasNoQuestions()
