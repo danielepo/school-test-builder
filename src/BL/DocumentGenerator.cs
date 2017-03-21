@@ -11,14 +11,14 @@ namespace BL
 {
     public class DocumentGenerator
     {
-        public void Create(Exam exam)
+        public void Create(int type, Exam exam)
         {
-            var location = $"{AppDomain.CurrentDomain.BaseDirectory}/{exam.Title} - {exam.Type}.docx";
+            var location = $"{AppDomain.CurrentDomain.BaseDirectory}/{exam.Title} - {type}.docx";
             using (var package = WordprocessingDocument.Create(location, WordprocessingDocumentType.Document))
             {
                 var mainDocumentPart = package.AddMainDocumentPart();
 
-                CreateDocument(exam).Save(mainDocumentPart);
+                CreateDocument(type, exam).Save(mainDocumentPart);
             }
         }
         public Stream GetStream(Exam exam)
@@ -28,14 +28,18 @@ namespace BL
             {
                 var mainDocumentPart = package.AddMainDocumentPart();
 
+<<<<<<< 806877b2605bd15271b7d902e3ceb994341b85b2
                 CreateDocument(exam).Save(mainDocumentPart);
             }
             return stream;
         }
         private Document CreateDocument(Exam exam)
+=======
+        private Document CreateDocument(int type, Exam exam)
+>>>>>>> Remove Type from exam
         {
             var body = new Body(Title(exam.Title),
-                Table(exam.Type),
+                Table(type),
                 Instruction(exam.Instructions));
 
             foreach (var question in exam.Questions)
@@ -133,10 +137,10 @@ namespace BL
         private void AppendQuestion(Body body, Question question)
         {
             body.Append(ParagraphFrom(question));
-            var length = question.Choices.Count;
+            var length = question.Choiches.Count;
             for (int i = 0; i < length; i++)
             {
-                var answer = question.Choices[i];
+                var answer = question.Choiches[i];
                 body.Append(ParagraphFrom(answer,i, i != length - 1));
             }
         }

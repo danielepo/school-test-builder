@@ -34,7 +34,6 @@ namespace DAL
             exam.Course = newExam.Course;
             exam.Instructions = newExam.Instructions;
             exam.Title = newExam.Title;
-            exam.Type = newExam.Type;
         }
 
         public Exam GetById(int id)

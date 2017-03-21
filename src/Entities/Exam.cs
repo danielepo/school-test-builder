@@ -13,7 +13,6 @@ namespace Entities
         public string Instructions { get; set; }
         public IEnumerable<Question> Questions => _questions;
         public string Title { get; set; }
-        public int Type { get; set; }
         public Course Course { get; set; }
 
         public Exam()

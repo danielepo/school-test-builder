@@ -12,15 +12,14 @@ namespace BL
 {
     public class ExamGenerator
     {
-        public ICollection<Exam> Create(Exam exam, int size)
+        public IDictionary<int, Exam> Create(Exam exam, int size)
         {
-            var exams = new List<Exam>();
+            var exams = new Dictionary<int, Exam>();
             var random = new Random();
             for (int i = 0; i < size; i++)
             {
                 var clone = exam.Clone(random);
-                clone.Type = i + 1;
-                exams.Add(clone);
+                exams.Add(i + 1, clone);
             }
             return exams;
         }

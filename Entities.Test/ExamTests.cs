@@ -8,13 +8,6 @@ namespace Entities.Test
     [TestFixture]
     public class ExamTests
     {
-
-        [Test]
-        public void HasANumericType()
-        {
-            var exam = new Exam();
-            Assert.That(exam.Type.GetType(), Is.EqualTo(typeof(int)));
-        }
         [Test]
         public void HasACourse()
         {
