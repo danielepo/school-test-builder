@@ -41,7 +41,7 @@ namespace BL.Test
             var questions = parse.Parse("question\n1. answer");
             Assert.That(questions.Count(), Is.EqualTo(1));
             var first = questions.First();
-            Assert.That(first.Choiches.First().Text, Is.EqualTo("answer"));
+            Assert.That(first.Choices.First().Text, Is.EqualTo("answer"));
         }
         [Test]
         public void AnswerWithPointsParsesCorrectlyPoints()
@@ -49,10 +49,10 @@ namespace BL.Test
             var questions = parse.Parse("question\n1. answer:1\n2. wrong:0");
             Assert.That(questions.Count(), Is.EqualTo(1));
             var question = questions.First();
-            var answer = question.Choiches.First();
+            var answer = question.Choices.First();
             Assert.That(answer.Text, Is.EqualTo("answer"));
             Assert.That(answer.Points, Is.EqualTo(1));
-            answer = question.Choiches.Skip(1).First();
+            answer = question.Choices.Skip(1).First();
             Assert.That(answer.Text, Is.EqualTo("wrong"));
             Assert.That(answer.Points, Is.EqualTo(0));
         }

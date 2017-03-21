@@ -11,7 +11,7 @@ namespace Entities.Test
         {
             var question = new Question("Text")
             {
-                Choiches = new List<Answer>
+                Choices = new List<Answer>
                 {
                     new Answer("text",1),
                     new Answer("text",0),
@@ -24,7 +24,7 @@ namespace Entities.Test
         {
             var question = new Question("Text")
             {
-                Choiches = new List<Answer>
+                Choices = new List<Answer>
                 {
                     new Answer("text",0),
                     new Answer("text",1),
@@ -37,7 +37,7 @@ namespace Entities.Test
         {
             var question = new Question("Text")
             {
-                Choiches = new List<Answer>
+                Choices = new List<Answer>
                 {
                     new Answer("text",0),
                     new Answer("text",1),
@@ -69,7 +69,7 @@ namespace Entities.Test
         {
             var question = new Question("Quante calorie ha un grammo di grassi?")
             {
-                Choiches = new List<Answer>()
+                Choices = new List<Answer>()
                 {
                     new Answer("20"), new Answer("30"), new Answer("60",1)
                 }

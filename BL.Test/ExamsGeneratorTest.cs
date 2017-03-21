@@ -19,35 +19,35 @@ namespace BL.Test
         {
             exam = new Exam();
             exam.Insert(new Question("Domanda 1"){
-                Choiches = new List<Answer>{
+                Choices = new List<Answer>{
                     new Answer("risposta 1"),
                     new Answer("risposta 2"),
                     new Answer("risposta 3"),
                 }
             });
             exam.Insert(new Question("Domanda 2"){
-                Choiches = new List<Answer>{
+                Choices = new List<Answer>{
                     new Answer("risposta 4"),
                     new Answer("risposta 5"),
                     new Answer("risposta 6"),
                 }
             });
             exam.Insert(new Question("Domanda 3"){
-                Choiches = new List<Answer>{
+                Choices = new List<Answer>{
                     new Answer("risposta 7"),
                     new Answer("risposta 8"),
                     new Answer("risposta 9"),
                 }
             });
             exam.Insert(new Question("Domanda 4"){
-                Choiches = new List<Answer>{
+                Choices = new List<Answer>{
                     new Answer("risposta 10"),
                     new Answer("risposta 11"),
                     new Answer("risposta 12"),
                 }
             });
             exam.Insert(new Question("Domanda 5"){
-                Choiches = new List<Answer>{
+                Choices = new List<Answer>{
                     new Answer("risposta 13"),
                     new Answer("risposta 14"),
                     new Answer("risposta 15"),

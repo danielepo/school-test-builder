@@ -23,7 +23,7 @@ namespace BL.Test
             };
             exam.Insert(new Question("Domanda 1")
             {
-                Choiches = new List<Answer>
+                Choices = new List<Answer>
                 {
                     new Answer("risposta 1", 1),
                     new Answer("risposta 2"),
@@ -32,7 +32,7 @@ namespace BL.Test
             });
             exam.Insert(new Question("Domanda 2")
             {
-                Choiches = new List<Answer>
+                Choices = new List<Answer>
                 {
                     new Answer("risposta 4"),
                     new Answer("risposta 5", 1),
@@ -47,7 +47,7 @@ namespace BL.Test
             };
             exam2.Insert(new Question("Domanda 2")
             {
-                Choiches = new List<Answer>
+                Choices = new List<Answer>
                 {
                     new Answer("risposta 4"),
                     new Answer("risposta 5", 1),
@@ -56,7 +56,7 @@ namespace BL.Test
             });
             exam2.Insert(new Question("Domanda 1")
             {
-                Choiches = new List<Answer>
+                Choices = new List<Answer>
                 {
                     new Answer("risposta 2"),
                     new Answer("risposta 3"),
@@ -73,7 +73,7 @@ namespace BL.Test
             };
             exam3.Insert(new Question("Domanda 1")
             {
-                Choiches = new List<Answer>
+                Choices = new List<Answer>
                 {
                     new Answer("risposta 2"),
                     new Answer("risposta 3"),
@@ -82,7 +82,7 @@ namespace BL.Test
             });
             exam3.Insert(new Question("Domanda 2")
             {
-                Choiches = new List<Answer>
+                Choices = new List<Answer>
                 {
                     new Answer("risposta 5", 1),
                     new Answer("risposta 4"),
