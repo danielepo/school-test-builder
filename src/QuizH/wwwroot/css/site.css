@@ -1,6 +1,8 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color: hsl(206, 28%, 95%);
+    color: hsl(28, 43%, 17%);
 }
 
 
@@ -19,13 +21,14 @@ textarea {
 }
 
 a {
-    color: #7daed8;
+    color: hsl(28, 42%, 50%);
     text-decoration: none;
 }
-a:hover, a:focus {
-    color: #67a1d4;
-    text-decoration: none;
-}
+
+    a:hover, a:focus {
+        color: hsl(28, 70%, 65%);
+        text-decoration: none;
+    }
 /* Carousel */
 .carousel-caption p {
     font-size: 20px;
@@ -33,39 +36,51 @@ a:hover, a:focus {
 }
 
 /* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"]
-{
+.carousel-inner .item img[src$=".svg"] {
     width: 100%;
 }
 
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
-  /* Hide captions */
-  .carousel-caption {
-    display: none
-  }
+    /* Hide captions */
+    .carousel-caption {
+        display: none
+    }
 }
 
 
 .navbar-inverse {
-    background-color: #78daff;
-    border-color: #3236b3;
+    background-color: hsl(208, 25%, 50%);
+    border-color: hsl(208, 25%, 50%);
 }
-.navbar-inverse .navbar-brand {
-    color: #000db7;
-}
-.navbar-inverse .navbar-nav > li > a {
-    color: #000db7;
-}
-.navbar-inverse .btn-link {
-    color: #000db7;
-    text-decoration: none;
-}
-/*.navbar-inverse .navbar-nav > li > a:hover,
+
+    .navbar-inverse .navbar-brand {
+        color: hsl(207, 26%, 83%)
+    }
+
+    .navbar-inverse .navbar-nav > li > a {
+        color: hsl(207, 26%, 83%)
+    }
+        .navbar-inverse .navbar-nav > li > a:hover,
+        .navbar-inverse .navbar-nav > li > a:focus {
+            color: #fff;
+            background-color: #7ba8d0;
+        }
+
+    .navbar-inverse .btn-link {
+        color: hsl(28, 43%, 83%);
+        text-decoration: none;
+    }
+    .navbar-inverse .navbar-brand:hover,
+    .navbar-inverse .navbar-brand:focus {
+        color: #fff;
+        background-color: #7ba8d0;
+    }
+    /*.navbar-inverse .navbar-nav > li > a:hover,
 .navbar-inverse .navbar-nav > li > a:focus {
         color: #b8daff;
         background-color: #a2e1f9;
       }*/
-.carousel {
-    display:none;
-}
+    .carousel {
+        display: none;
+    }
