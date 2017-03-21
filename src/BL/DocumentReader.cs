@@ -133,10 +133,10 @@ namespace BL
         private void AppendQuestion(Body body, Question question)
         {
             body.Append(ParagraphFrom(question));
-            var length = question.Choices.Count;
+            var length = question.Choiches.Count;
             for (int i = 0; i < length; i++)
             {
-                var answer = question.Choices[i];
+                var answer = question.Choiches[i];
                 body.Append(ParagraphFrom(answer, i != length - 1));
             }
         }

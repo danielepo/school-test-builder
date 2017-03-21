@@ -9,8 +9,8 @@ namespace Entities
     {
         public static string Answer(this Question question)
         {
-            return question.Choices.Any(x => x.Points == 1)
-                      ? string.Join(",", question.Choices.Select((c, i) => new { Index = i, Choiche = c })
+            return question.Choiches.Any(x => x.Points == 1)
+                      ? string.Join(",", question.Choiches.Select((c, i) => new { Index = i, Choiche = c })
                                                  .Where(x => x.Choiche.Points == 1)
                                                  .Select(x => x.Index + 1))
                       : "";
@@ -22,7 +22,7 @@ namespace Entities
         public int Id;
         public Professor Creator { get; set; }
 
-        public IList<Answer> Choices { get; set; }
+        public IList<Answer> Choiches { get; set; }
 
         public int Space { get; set; }
 
@@ -33,24 +33,24 @@ namespace Entities
         public Question(string question)
         {
             Text = question;
-            Choices = new List<Answer>();
+            Choiches = new List<Answer>();
         }
 
         public void Add(Answer answer)
         {
-            Choices.Add(answer);
+            Choiches.Add(answer);
         }
 
         public override string ToString()
         {
-            return $"{Text} [{string.Join(", ", Choices)}]";
+            return $"{Text} [{string.Join(", ", Choiches)}]";
         }
 
         internal Question Clone(Random random)
         {
             return new Question(Text)
             {
-                Choices = Choices.Shuffle(random).ToList(),
+                Choiches = Choiches.Shuffle(random).ToList(),
                 Space = Space
             };
         }

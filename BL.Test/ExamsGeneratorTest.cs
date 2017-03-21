@@ -19,35 +19,35 @@ namespace BL.Test
         {
             exam = new Exam();
             exam.Insert(new Question("Domanda 1"){
-                Choices = new List<Answer>{
+                Choiches = new List<Answer>{
                     new Answer("risposta 1"),
                     new Answer("risposta 2"),
                     new Answer("risposta 3"),
                 }
             });
             exam.Insert(new Question("Domanda 2"){
-                Choices = new List<Answer>{
+                Choiches = new List<Answer>{
                     new Answer("risposta 4"),
                     new Answer("risposta 5"),
                     new Answer("risposta 6"),
                 }
             });
             exam.Insert(new Question("Domanda 3"){
-                Choices = new List<Answer>{
+                Choiches = new List<Answer>{
                     new Answer("risposta 7"),
                     new Answer("risposta 8"),
                     new Answer("risposta 9"),
                 }
             });
             exam.Insert(new Question("Domanda 4"){
-                Choices = new List<Answer>{
+                Choiches = new List<Answer>{
                     new Answer("risposta 10"),
                     new Answer("risposta 11"),
                     new Answer("risposta 12"),
                 }
             });
             exam.Insert(new Question("Domanda 5"){
-                Choices = new List<Answer>{
+                Choiches = new List<Answer>{
                     new Answer("risposta 13"),
                     new Answer("risposta 14"),
                     new Answer("risposta 15"),
@@ -71,14 +71,14 @@ namespace BL.Test
         public void ChangeTitle()
         {
             var exams = generator.Create(exam, 3);
-            Assert.That(exams.ElementAt(0).Type, Is.EqualTo(1));
-            Assert.That(exams.ElementAt(1).Type, Is.EqualTo(2));
-            Assert.That(exams.ElementAt(2).Type, Is.EqualTo(3));
+            Assert.That(exams.ElementAt(0).Key, Is.EqualTo(1));
+            Assert.That(exams.ElementAt(1).Key, Is.EqualTo(2));
+            Assert.That(exams.ElementAt(2).Key, Is.EqualTo(3));
         }
 
-        private bool IsRandomAt(int index, ICollection<Exam> exams)
+        private bool IsRandomAt(int index, IDictionary<int, Exam> exams)
         {
-            return exams.Select(x => x.Questions.ElementAt(index)).Any(x => !x.Text.EndsWith((index + 1).ToString()));
+            return exams.Select(x => x.Value.Questions.ElementAt(index)).Any(x => !x.Text.EndsWith((index + 1).ToString()));
         }
     }
 }

@@ -14,7 +14,7 @@ namespace BL.Test
         {
             new Question("Domanda 1")
             {
-                Choices = new List<Answer>
+                Choiches = new List<Answer>
                 {
                     new Answer("risposta 1"),
                     new Answer("risposta 2"),
@@ -23,7 +23,7 @@ namespace BL.Test
             },
             new Question("Domanda 2")
             {
-                Choices = new List<Answer>
+                Choiches = new List<Answer>
                 {
                     new Answer("risposta 4"),
                     new Answer("risposta 5"),
@@ -32,7 +32,7 @@ namespace BL.Test
             },
             new Question("Domanda 3")
             {
-                Choices = new List<Answer>
+                Choiches = new List<Answer>
                 {
                     new Answer("risposta 7"),
                     new Answer("risposta 8"),
@@ -41,7 +41,7 @@ namespace BL.Test
             },
             new Question("Domanda 4")
             {
-                Choices = new List<Answer>
+                Choiches = new List<Answer>
                 {
                     new Answer("risposta 10"),
                     new Answer("risposta 11"),
@@ -50,7 +50,7 @@ namespace BL.Test
             },
             new Question("Domanda 5")
             {
-                Choices = new List<Answer>
+                Choiches = new List<Answer>
                 {
                     new Answer("risposta 13"),
                     new Answer("risposta 14"),
