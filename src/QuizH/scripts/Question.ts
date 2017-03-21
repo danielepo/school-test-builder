@@ -15,30 +15,32 @@ interface ICourse {
     id: number;
     title: string;
 }
-interface IQuestionViewModel{
-    answers: string[];
-}
 interface IAnswer {
-    text: string
+    text: string;
+    isCorrect: boolean;
+}
+interface IQuestionViewModel {
+    answers: IAnswer[];
 }
 class Answer implements IAnswer {
     text: string;
-    constructor(value: string) {
+    isCorrect: boolean;
+    constructor(value: string, isCorrect: boolean) {
         this.text = value;
+        this.isCorrect = isCorrect;
     }
 }
 class QuestionViewModel {
     answers: KnockoutObservableArray<IAnswer>;
     newAnswer: KnockoutObservable<string>;
     constructor(model: IQuestionViewModel) {
-        var temp = model.answers.map(function (value) { return new Answer(value); });
-        this.answers = ko.observableArray(temp);
+        this.answers = ko.observableArray(model.answers);
         this.newAnswer = ko.observable("");
     }
 
 
     addAnswer() {
-        this.answers.push(new Answer(this.newAnswer()));
+        this.answers.push(new Answer(this.newAnswer(), false));
         this.newAnswer("");
     }
 }
