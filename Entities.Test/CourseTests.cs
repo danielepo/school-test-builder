@@ -17,7 +17,7 @@ namespace Entities.Test
         [Test]
         public void CourseToString()
         {
-            var course = new Course("title", "description");
+            var course = new Course(0, "title", "description");
             Assert.That(course.ToString(), Is.EqualTo("title - description"));
         }
 

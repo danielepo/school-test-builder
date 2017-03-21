@@ -23,7 +23,7 @@ namespace BL.Test
             var zipper = new Zipper();
             var files = new List<FileData>()
             {
-                new FileData("titolo.docx", new DocumentGenerator().GetStream(new Exam{ Title = "Titolo", Instructions = "ins"}))
+                new FileData("titolo.docx", new DocumentGenerator().GetStream(1, new Exam{ Title = "Titolo", Instructions = "ins"}))
             };
             var stream = zipper.Zip(files);
             var zip = new ZipArchive(stream, ZipArchiveMode.Read);

@@ -48,7 +48,6 @@
     <Compile Include="AnswerExtractorTest.cs" />
     <Compile Include="ZipperTest.cs" />
     <Compile Include="ExamsGeneratorTest.cs" />
-    <Compile Include="DocumentGeneratorTest.cs" />
     <Compile Include="QuestionParserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

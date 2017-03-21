@@ -21,22 +21,18 @@ namespace BL
                 CreateDocument(type, exam).Save(mainDocumentPart);
             }
         }
-        public Stream GetStream(Exam exam)
+        public Stream GetStream(int type, Exam exam)
         {
             var stream = new MemoryStream();
             using (var package = WordprocessingDocument.Create(stream, WordprocessingDocumentType.Document))
             {
                 var mainDocumentPart = package.AddMainDocumentPart();
 
-<<<<<<< 806877b2605bd15271b7d902e3ceb994341b85b2
-                CreateDocument(exam).Save(mainDocumentPart);
+                CreateDocument(type, exam).Save(mainDocumentPart);
             }
             return stream;
         }
-        private Document CreateDocument(Exam exam)
-=======
         private Document CreateDocument(int type, Exam exam)
->>>>>>> Remove Type from exam
         {
             var body = new Body(Title(exam.Title),
                 Table(type),
