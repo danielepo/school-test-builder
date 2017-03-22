@@ -14,7 +14,7 @@
                 <textarea id="text-editor"></textarea>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="closing()">Close</button>
                 <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
@@ -22,5 +22,12 @@
 </div>
    
 <script>
-    $('#myModal').modal()
+    $('#myModal').modal("show")
+    tinymce.init({ selector: '#text-editor' });
+    function closing(){
+        console.debug("html");
+        console.debug(tinyMCE.activeEditor.getContent());
+        console.debug("raw");
+        console.debug(tinyMCE.activeEditor.getContent({format: 'raw'}));
+    }
 </script>

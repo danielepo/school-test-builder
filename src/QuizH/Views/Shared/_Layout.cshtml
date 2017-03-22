@@ -62,7 +62,7 @@
                 asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
                 asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
         </script>
-
+        @await Html.PartialAsync("_TextEditor")
 
     </environment>
     <script src="~/lib/knockout/dist/knockout.js"></script>
