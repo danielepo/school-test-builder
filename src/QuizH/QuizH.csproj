@@ -9,6 +9,11 @@
     <UserSecretsId>aspnet-quizh-053ff11b-fd32-4c63-b35d-651f334ae285</UserSecretsId>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>full</DebugType>
+    <DebugSymbols>True</DebugSymbols>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Include="App.config" />
     <None Update="wwwroot\**\*">

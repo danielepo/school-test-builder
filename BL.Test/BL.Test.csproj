@@ -60,6 +60,10 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\src\BL.Interfaces\BL.Interfaces.csproj">
+      <Project>{0dbc5603-2625-4088-b9e4-ead51d78485c}</Project>
+      <Name>BL.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\src\BL\BL.csproj">
       <Project>{D9402D7F-7906-439D-8DBA-3E86B2F3CDAE}</Project>
       <Name>BL</Name>
