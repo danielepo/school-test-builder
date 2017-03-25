@@ -11,31 +11,31 @@ namespace BL
 {
     public class DocumentGenerator
     {
-        public void Create(Exam exam)
+        public void Create(int type, Exam exam)
         {
-            var location = $"{AppDomain.CurrentDomain.BaseDirectory}/{exam.Title} - {exam.Type}.docx";
+            var location = $"{AppDomain.CurrentDomain.BaseDirectory}/{exam.Title} - {type}.docx";
             using (var package = WordprocessingDocument.Create(location, WordprocessingDocumentType.Document))
             {
                 var mainDocumentPart = package.AddMainDocumentPart();
 
-                CreateDocument(exam).Save(mainDocumentPart);
+                CreateDocument(type, exam).Save(mainDocumentPart);
             }
         }
-        public Stream GetStream(Exam exam)
+        public Stream GetStream(int type, Exam exam)
         {
             var stream = new MemoryStream();
             using (var package = WordprocessingDocument.Create(stream, WordprocessingDocumentType.Document))
             {
                 var mainDocumentPart = package.AddMainDocumentPart();
 
-                CreateDocument(exam).Save(mainDocumentPart);
+                CreateDocument(type, exam).Save(mainDocumentPart);
             }
             return stream;
         }
-        private Document CreateDocument(Exam exam)
+        private Document CreateDocument(int type, Exam exam)
         {
             var body = new Body(Title(exam.Title),
-                Table(exam.Type),
+                Table(type),
                 Instruction(exam.Instructions));
 
             foreach (var question in exam.Questions)

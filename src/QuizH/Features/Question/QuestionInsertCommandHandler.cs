@@ -9,7 +9,7 @@ namespace QuizH.Features.Question
         private readonly ISubjectRepository subjects;
         private readonly ICourseRepository courses;
         private readonly IQuestionRepository questions;
-        
+
 
         public QuestionInsertCommandHandler(IQuestionRepository questions, ICourseRepository courses, ISubjectRepository subjects)
         {
@@ -25,7 +25,7 @@ namespace QuizH.Features.Question
             var question = new Entities.Question(questionVm.Text);
             question.Subject = subjects.GetById(questionVm.SubjectId);
             question.Courses = courses.GetAll().Where(x => questionVm.Courses.Contains(x.Id));
-            question.Choiches = questionVm.Answers.Select(x => new Entities.Answer(x)).ToList();
+            question.Choiches = questionVm.Answers.Select(x => new Entities.Answer(x.Text, x.IsCorrect ? 1 : 0)).ToList();
 
             questions.Add(question);
         }

@@ -5,22 +5,22 @@ using System.Linq;
 
 namespace Entities
 {
+    public static class QuestionExtensions
+    {
+        public static string Answer(this Question question)
+        {
+            return question.Choiches.Any(x => x.Points == 1)
+                      ? string.Join(",", question.Choiches.Select((c, i) => new { Index = i, Choiche = c })
+                                                 .Where(x => x.Choiche.Points == 1)
+                                                 .Select(x => x.Index + 1))
+                      : "";
+
+        }
+    }
     public class Question
     {
-        public int Id; 
+        public int Id;
         public Professor Creator { get; set; }
-
-        public string Answer
-        {
-            get
-            {
-                return Choiches.Any(x => x.Points == 1)
-                          ? string.Join(",", Choiches.Select((c, i) => new { Index = i, Choiche = c })
-                                                     .Where(x => x.Choiche.Points == 1)
-                                                     .Select(x => x.Index + 1))
-                          : "";
-            }
-        }
 
         public IList<Answer> Choiches { get; set; }
 

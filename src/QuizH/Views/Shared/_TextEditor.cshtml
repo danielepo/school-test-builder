@@ -1,0 +1,33 @@
+
+<script src="//cloud.tinymce.com/stable/tinymce.min.js"></script>
+<script>tinymce.init({ selector: '#text-editor' });</script>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <textarea id="text-editor"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="closing()">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+   
+<script>
+    $('#myModal').modal("show")
+    tinymce.init({ selector: '#text-editor' });
+    function closing(){
+        console.debug("html");
+        console.debug(tinyMCE.activeEditor.getContent());
+        console.debug("raw");
+        console.debug(tinyMCE.activeEditor.getContent({format: 'raw'}));
+    }
+</script>

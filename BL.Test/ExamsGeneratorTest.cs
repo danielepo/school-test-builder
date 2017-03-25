@@ -71,14 +71,14 @@ namespace BL.Test
         public void ChangeTitle()
         {
             var exams = generator.Create(exam, 3);
-            Assert.That(exams.ElementAt(0).Type, Is.EqualTo(1));
-            Assert.That(exams.ElementAt(1).Type, Is.EqualTo(2));
-            Assert.That(exams.ElementAt(2).Type, Is.EqualTo(3));
+            Assert.That(exams.ElementAt(0).Key, Is.EqualTo(1));
+            Assert.That(exams.ElementAt(1).Key, Is.EqualTo(2));
+            Assert.That(exams.ElementAt(2).Key, Is.EqualTo(3));
         }
 
-        private bool IsRandomAt(int index, ICollection<Exam> exams)
+        private bool IsRandomAt(int index, IDictionary<int, Exam> exams)
         {
-            return exams.Select(x => x.Questions.ElementAt(index)).Any(x => !x.Text.EndsWith((index + 1).ToString()));
+            return exams.Select(x => x.Value.Questions.ElementAt(index)).Any(x => !x.Text.EndsWith((index + 1).ToString()));
         }
     }
 }

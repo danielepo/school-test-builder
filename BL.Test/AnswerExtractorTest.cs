@@ -103,5 +103,25 @@ namespace BL.Test
                 new List<string> {"3", "1"},
             }));
         }
+
+
+        [Test]
+        public void ExtractAnswersFromQuestions()
+        {
+            var questions = new List<Exam> { exam, exam2, exam3 }.SelectMany(x => x.Questions);
+            var answers = extractor.Extract(questions).First();
+            Assert.That(answers.Count, Is.EqualTo(6));
+            Assert.That(answers, Is.EquivalentTo(new List<string>
+            {
+                 "1",
+                 "2",
+                 "2",
+                 "3",
+                 "3",
+                 "1",
+            }));
+        }
+
+
     }
 }

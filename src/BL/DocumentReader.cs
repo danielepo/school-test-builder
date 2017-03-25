@@ -39,7 +39,7 @@ namespace BL
         private Document CreateDocument(Exam exam)
         {
             var body = new Body(Title(exam.Title),
-                Table(exam.Type),
+                Table(0),
                 Instruction(exam.Instructions));
 
             foreach (var question in exam.Questions)

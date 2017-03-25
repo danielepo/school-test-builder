@@ -8,7 +8,7 @@ namespace QuizH.ViewModels.Question
     public class QuestionDetailsViewModel
     {
         public string Text { get; set; }
-        public IEnumerable<string> Options { get; set; }
+        public IEnumerable<AnswerViewModel> Options { get; set; }
         public IEnumerable<string> Courses { get; private set; }
         public string Subject { get; private set; }
 
@@ -18,7 +18,7 @@ namespace QuizH.ViewModels.Question
             {
                 Text = question.Text,
                 Courses = question.Courses?.Select(c=> c.Title) ?? new List<string>(),
-                Options = question.Choiches?.Select(c=> c.Text)?? new List<string>(),
+                Options = question.Choiches?.Select(c=> new AnswerViewModel(c))?? new List<AnswerViewModel>(),
                 Subject = question.Subject?.Title
             };
         }

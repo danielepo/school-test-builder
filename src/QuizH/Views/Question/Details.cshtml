@@ -3,9 +3,21 @@
     <h4>Domanda</h4>
     <p>@Model.Text</p>
     <h4>Risposte</h4>
-    @foreach(var option in Model.Options)
+    @foreach (var option in Model.Options)
     {
-        <p>@option</p>
+            @if (option.IsCorrect)
+        {
+            <span class="glyphicon glyphicon-ok" ></span>
+        }
+        else
+        {
+            <span class="glyphicon glyphicon-remove" ></span>
+        }
+        <span>
+        @option.Text
+    </span>
+    <br />
+
     }
     <h4>Argomento</h4>
     <p>@Model.Subject</p>

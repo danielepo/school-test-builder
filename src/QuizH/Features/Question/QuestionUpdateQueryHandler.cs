@@ -25,8 +25,8 @@ namespace QuizH.Features.Question
             {
                 Id = exam.Id,
                 OldId = exam.Id,
-                Answers = exam.Choiches.Select(x => x.Text).ToList(),
-                Courses = exam.Courses?.Select(x=> x.Id).ToList(),
+                Answers = exam.Choiches.Select(x => new AnswerViewModel(x)).ToList(),
+                Courses = exam.Courses?.Select(x => x.Id).ToList(),
                 Text = exam.Text,
                 SubjectId = exam.Subject.Id,
                 AvailableCourses = courses.GetAll().Select(x => new CourseViewModel { Id = x.Id, Title = x.Title }).ToList(),
