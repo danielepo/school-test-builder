@@ -21,14 +21,14 @@
                     Risposte
                 </label>
                 <!-- ko if: answers().length > 0-->
-                <table class="">
+                <table class="table table-striped">
                     <tbody data-bind="foreach: answers">
                         <tr>
                             <td>
-                                <span data-bind="text: text"></span>
-                                <input type="checkbox" data-bind="checked: isCorrect, value: true, attr: { name: 'Answers['+$index()+'].IsCorrect'}" />
+                                <span data-bind="html: text"></span>
                             </td>
                             <td>
+                                <input type="checkbox" data-bind="checked: isCorrect, value: true, attr: { name: 'Answers['+$index()+'].IsCorrect'}" />
                                 <input type="hidden" data-bind="value: text, attr: { name: 'Answers['+$index()+'].Text'}" />
                             </td>
                         </tr>
@@ -39,8 +39,7 @@
                 <div class="alert  alert-warning">Non ci sono risposte</div>
                 <!-- /ko -->
                 <input type="button" class="btn btn-default" value="Aggiungi Risposta" data-bind="click: addAnswer" />
-                <input type="text" data-bind="value: newAnswer" />
-                <input type="button" class="btn btn-default" value="OpenDialog" onclick="OpenNewAnswer()" />
+               @* <input type="text" data-bind="value: newAnswer" />*@
             </div>
             <div class="form-group">
                 <label for="subjectId">
@@ -75,10 +74,7 @@
         var vm ;
         var answers = @Json.Serialize(Model.Answers ?? new List<QuizH.ViewModels.Question.AnswerViewModel>());
         var courses = @Json.Serialize(Model.Courses ?? new List<int>());
-        debugger;
-        function OpenNewAnswer() {
-            //ModalEditor.openModal(console.debug);
-        }
+
         var model = {
             answers: answers
         };

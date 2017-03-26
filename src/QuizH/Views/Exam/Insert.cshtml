@@ -107,7 +107,6 @@
 
         var vm ;
         var questions = @Json.Serialize(Model.Questions ?? new List<int>());
-        debugger;  
         $.getJSON("/Question/Get",function (data) {
             var model = {
                 availableQuestions: data.questions,

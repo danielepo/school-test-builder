@@ -15,7 +15,10 @@ class ModalEditor implements IModal {
         $('#myModal').modal("show");
     }
     saving(callback: myCallbackType) {
-        if (tinyMCE.activeEditor != null)
-            callback(tinyMCE.activeEditor.getContent({ format: 'raw' }));
+        if (tinyMCE.activeEditor != null) {
+
+            callback(tinyMCE.activeEditor.getContent());
+            tinyMCE.activeEditor.setContent("");
+        }
     }
 }
