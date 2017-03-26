@@ -1,5 +1,6 @@
 ﻿/// <reference path="../typings/modules/knockout/index.d.ts" />
 /// <reference path="../typings/modules/jquery/index.d.ts" />
+/// <reference path="modaleditor.ts" />
 //import ko = require('knockout')
 interface IQuestion {
     id: number;
@@ -33,14 +34,19 @@ class Answer implements IAnswer {
 class QuestionViewModel {
     answers: KnockoutObservableArray<IAnswer>;
     newAnswer: KnockoutObservable<string>;
+    editor: IModal;;
+
     constructor(model: IQuestionViewModel) {
         this.answers = ko.observableArray(model.answers);
         this.newAnswer = ko.observable("");
+        this.editor = new ModalEditor();
     }
 
 
     addAnswer() {
-        this.answers.push(new Answer(this.newAnswer(), false));
-        this.newAnswer("");
+        this.editor.openModal();
+    }
+    saveText() {
+        this.editor.saving(x => this.answers.push(new Answer(x, false)));
     }
 }

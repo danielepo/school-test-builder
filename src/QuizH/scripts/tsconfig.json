@@ -3,15 +3,16 @@
         "noImplicitAny": true,
         "noEmitOnError": true,
         "sourceMap": true,
-        "target": "es5",
+        "target": "es2016",
         "module": "amd",
         "typeRoots": [ "./typings" ]
     },
-    "files": [
-      "./require-config.ts",
-      "./Exam.ts",
-      "./Question.ts"
+  "files": [
+    "./require-config.ts",
+    "./Exam.ts",
+    "./Question.ts",
+    "./ModalEditor.ts"
 
-    ],
+  ],
     "compileOnSave": true
 }

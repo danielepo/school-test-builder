@@ -15,27 +15,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="ModalEditor.saving()" data-dismiss="modal">Save changes</button>
+                <button type="button" class="btn btn-primary" data-bind="click: saveText()" data-dismiss="modal">Save changes</button>
             </div>
         </div>
     </div>
 </div>
 
-<script>
-    (function (ModalEditor, $, undefined) {
-        //Private Property
-        var callback;
-
-        //Public Method
-        ModalEditor.openModal = function (call) {
-            $('#myModal').modal("show");
-            callback = call;
-        }
-        ModalEditor.saving = function () {
-            debugger;
-            callback(tinyMCE.activeEditor.getContent({ format: 'raw' }));
-        }
-
-    }(window.ModalEditor = window.ModalEditor || {}, jQuery));
-
-</script>
+<script src="~/js/ModalEditor.js" asp-append-version="true"></script>
