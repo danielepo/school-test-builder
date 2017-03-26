@@ -57,7 +57,13 @@ namespace BL.Test
             Assert.That(answer.Points, Is.EqualTo(0));
         }
         [Test]
-        public void MultipleReturnsMultiple()
+        public void QuestionsWithExtraSpaceBehind_FillSpaceProperty()
+        {
+            var questions = parse.Parse("question\n\n\n");
+            Assert.That(questions.First().Space, Is.EqualTo(3)); 
+        }
+        [Test]
+        public void MultipleQuestions_ReturnsMultiple()
         {
             var questions = parse.Parse("question\n1. answer\n2. secondo\nquestion2\n1. answer2\n2. secondo2\nquestion3\n1. answer3\n2. secondo3");
             Assert.That(questions.Count(), Is.EqualTo(3));
