@@ -44,9 +44,18 @@ class QuestionViewModel {
 
 
     addAnswer() {
-        this.editor.openModal();
+        this.editor.openModal(x => this.answers.push(new Answer(x, false)));
     }
     saveText() {
-        this.editor.saving(x => this.answers.push(new Answer(x, false)));
+        //debugger;
+        this.editor.saving();
+    }
+    edit(id: number) {
+        this.editor.edit = this.answers()[id].text;
+        this.editor.openModal(x => {
+            //console.log(id);
+            this.answers.splice(id);
+            this.answers.push(new Answer(x, false))
+        });
     }
 }

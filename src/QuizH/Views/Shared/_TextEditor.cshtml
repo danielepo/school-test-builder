@@ -1,5 +1,12 @@
 
+<environment names="Development">
+    <script src="~/lib/tinymce/tinymce.min.js"></script>
+   
+</environment>
+<environment names="Staging,Production">
 <script src="//cloud.tinymce.com/stable/tinymce.min.js"></script>
+</environment>
+
 <script>tinymce.init({ selector: '#text-editor' });</script>
 
 <!-- Modal -->
