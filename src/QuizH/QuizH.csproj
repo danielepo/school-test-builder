@@ -16,18 +16,13 @@
 
   <ItemGroup>
     <Compile Remove="node_modules\**" />
+    <Compile Remove="wwwroot\Controllers\**" />
     <Content Remove="node_modules\**" />
+    <Content Remove="wwwroot\Controllers\**" />
     <EmbeddedResource Remove="node_modules\**" />
+    <EmbeddedResource Remove="wwwroot\Controllers\**" />
     <None Remove="node_modules\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="wwwroot\Controllers\AccountController.cs" />
-    <Compile Include="wwwroot\Controllers\ExamController.cs" />
-    <Compile Include="wwwroot\Controllers\HomeController.cs" />
-    <Compile Include="wwwroot\Controllers\ManageController.cs" />
-    <Compile Include="wwwroot\Controllers\ProfessorController.cs" />
-    <Compile Include="wwwroot\Controllers\QuestionController.cs" />
+    <None Remove="wwwroot\Controllers\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -87,6 +82,10 @@
     <ProjectReference Include="..\BL\BL.csproj" />
     <ProjectReference Include="..\DAL\DAL.csproj" />
     <ProjectReference Include="..\Entities\Entities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Question\Features\" />
   </ItemGroup>
 
 </Project>

@@ -54,7 +54,7 @@ class QuestionViewModel {
         this.editor.edit = this.answers()[id].text;
         this.editor.openModal(x => {
             //console.log(id);
-            this.answers.splice(id);
+            this.answers.splice(id, 1);
             this.answers.push(new Answer(x, false))
         });
     }

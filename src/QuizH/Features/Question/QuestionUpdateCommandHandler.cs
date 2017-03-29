@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Collections.Generic;
 using DAL;
 using MediatR;
 
@@ -24,8 +25,8 @@ namespace QuizH.Features.Question
             var newQuestion = new Entities.Question(qVm.Text)
             {
                 Subject = subjects.GetById(qVm.SubjectId),
-                Choiches = qVm.Answers.Select(x => new Entities.Answer(x.Text, x.IsCorrect ? 1 : 0)).ToList(),
-                Courses = courses.GetAll().Where(x => qVm.Courses.Contains(x.Id))
+                Choiches = qVm.Answers?.Select(x => new Entities.Answer(x.Text, x.IsCorrect ? 1 : 0))?.ToList() ?? new List<Entities.Answer>(),
+                Courses = courses.GetAll().Where(x => qVm.Courses?.Contains(x.Id) ?? false)
             };
 
             var oldQuestion = questions.GetById(qVm.OldId);

@@ -3,7 +3,7 @@ using MediatR;
 using QuizH.Features.Question;
 using QuizH.ViewModels.Question;
 
-namespace QuizH.Features.Exam
+namespace QuizH.Features.Question
 {
     public class QuestionDetailsQueryHandler : IRequestHandler<QuestionDetailsQuery, QuestionDetailsViewModel>
     {

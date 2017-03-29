@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Collections.Generic;
 using DAL;
 using MediatR;
 using QuizH.ViewModels.Question;
@@ -20,15 +21,19 @@ namespace QuizH.Features.Question
 
         public QuestionCreationViewModel Handle(QuestionUpdateQuery message)
         {
-            var exam = questions.GetById(message.Id);
+            var question = questions.GetById(message.Id);
+            if (question == null)
+            {
+                throw new QuestionNotFoundException();
+            }
             return new QuestionCreationViewModel
             {
-                Id = exam.Id,
-                OldId = exam.Id,
-                Answers = exam.Choiches.Select(x => new AnswerViewModel(x)).ToList(),
-                Courses = exam.Courses?.Select(x => x.Id).ToList(),
-                Text = exam.Text,
-                SubjectId = exam.Subject.Id,
+                Id = question.Id,
+                OldId = question.Id,
+                Answers = question.Choiches?.Select(x => new AnswerViewModel(x))?.ToList() ?? new List<AnswerViewModel>(),
+                Courses = question.Courses?.Select(x => x.Id)?.ToList() ?? new List<int>(),
+                Text = question.Text ?? string.Empty,
+                SubjectId = question.Subject?.Id ?? 0,
                 AvailableCourses = courses.GetAll().Select(x => new CourseViewModel { Id = x.Id, Title = x.Title }).ToList(),
                 AvailableSubjects = subjects.GetAll().Select(x => new SubjectViewModel { Id = x.Id, Title = x.Title }).ToList()
             };
