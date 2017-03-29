@@ -5,20 +5,25 @@
 interface myCallbackType { (text: string): void }
 
 interface IModal {
-    openModal: { (): void };
-    saving: { (callback: myCallbackType): void };
+    openModal: { (callback: myCallbackType): void };
+    saving: { (): void };
+    edit: string;
 }
 class ModalEditor implements IModal {
-
+    callback: myCallbackType;
+    edit: string;
     //Public Method
-    openModal() {
+    openModal(callback: myCallbackType) {
         $('#myModal').modal("show");
+        this.callback = callback;
+        tinyMCE.activeEditor.setContent(this.edit);
     }
-    saving(callback: myCallbackType) {
+    saving() {
         if (tinyMCE.activeEditor != null) {
-
-            callback(tinyMCE.activeEditor.getContent());
+            this.callback(tinyMCE.activeEditor.getContent());
             tinyMCE.activeEditor.setContent("");
+            this.edit = "";
         }
     }
+
 }

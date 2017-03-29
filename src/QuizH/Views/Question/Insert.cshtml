@@ -14,7 +14,7 @@
                 <label asp-for="Text">
                     Titolo
                 </label>
-                <input class="form-control" asp-for="Text" required />
+                <input class="form-control" asp-for="Text"  required />
             </div>
             <div class="form-group">
                 <label>
@@ -26,6 +26,9 @@
                         <tr>
                             <td>
                                 <span data-bind="html: text"></span>
+                            </td>
+                            <td>
+                                <a href="#" data-bind="click: function(){$parent.edit($index())}" >Edit</a>
                             </td>
                             <td>
                                 <input type="checkbox" data-bind="checked: isCorrect, value: true, attr: { name: 'Answers['+$index()+'].IsCorrect'}" />
