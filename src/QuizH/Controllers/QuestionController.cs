@@ -1,7 +1,11 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Net.Http.Headers;
 using QuizH.Features.Question;
 using QuizH.ViewModels.Question;
+using System.Collections.Generic;
+using System.IO;
 
 namespace QuizH.Controllers
 {
@@ -63,6 +67,36 @@ namespace QuizH.Controllers
                 mediator.Send(new QuestionUpdateCommand { Question = question });
 
             return RedirectToAction("Index");
+        }
+
+
+        //[HttpPost]
+        //public IActionResult UploadFiles(IFormFile file)
+        //{
+        //    file.SaveAs("<give it a name>");
+        //    return Json(new { location = "<url to that file>" });
+        //}
+        [HttpPost]
+        public IActionResult UploadFiles(IList<IFormFile> files)
+        {
+            long size = 0;
+            foreach (var file in files)
+            {
+                var filename = ContentDispositionHeaderValue
+                                .Parse(file.ContentDisposition)
+                                .FileName
+                                .Trim('"');
+                filename = $"Images\\{filename}";
+
+                size += file.Length;
+                using (FileStream fs = System.IO.File.Create(filename))
+                {
+                    file.CopyTo(fs);
+                    fs.Flush();
+                }
+            }
+            ViewBag.Message = $"{files.Count} file(s) / { size} bytes uploaded successfully!";
+            return View();
         }
     }
 }

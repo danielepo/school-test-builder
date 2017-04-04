@@ -7,7 +7,16 @@
 <script src="//cloud.tinymce.com/stable/tinymce.min.js"></script>
 </environment>
 
-<script>tinymce.init({ selector: '#text-editor' });</script>
+<script>tinymce.init({
+    selector: '#text-editor',
+    images_upload_url: 'Question/UploadFiles',
+    plugins: [
+        'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
+        'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+        'save table contextmenu directionality emoticons template paste textcolor'
+    ],
+    file_picker_types: 'file image media'
+    });</script>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
