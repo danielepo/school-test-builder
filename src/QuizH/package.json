@@ -3,8 +3,6 @@
   "name": "asp.net",
   "private": true,
   "dependencies": {
-    "@types/jquery": "^2.0.39",
-    "@types/knockout": "^3.4.40",
     "requirejs": "^2.3.2"
   },
   "devDependencies": {
