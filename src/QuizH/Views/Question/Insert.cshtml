@@ -14,7 +14,14 @@
                 <label asp-for="Text">
                     Titolo
                 </label>
-                <input class="form-control" asp-for="Text"  required />
+                <div>
+
+                    <span data-bind="html: title"></span>
+                    <a href="#" data-bind="click: editTitle">Edit</a>
+
+                </div>
+
+                <input class="form-control" asp-for="Text" type="hidden" data-bind="value: title" />
             </div>
             <div class="form-group">
                 <label>
@@ -28,7 +35,7 @@
                                 <span data-bind="html: text"></span>
                             </td>
                             <td>
-                                <a href="#" data-bind="click: function(){$parent.edit($index())}" >Edit</a>
+                                <a href="#" data-bind="click: function(){$parent.editAnswer($index())}">Edit</a>
                             </td>
                             <td>
                                 <input type="checkbox" data-bind="checked: isCorrect, value: true, attr: { name: 'Answers['+$index()+'].IsCorrect'}" />
@@ -42,7 +49,7 @@
                 <div class="alert  alert-warning">Non ci sono risposte</div>
                 <!-- /ko -->
                 <input type="button" class="btn btn-default" value="Aggiungi Risposta" data-bind="click: addAnswer" />
-               @* <input type="text" data-bind="value: newAnswer" />*@
+                @* <input type="text" data-bind="value: newAnswer" />*@
             </div>
             <div class="form-group">
                 <label for="subjectId">
@@ -79,7 +86,8 @@
         var courses = @Json.Serialize(Model.Courses ?? new List<int>());
 
         var model = {
-            answers: answers
+            answers: answers,
+            title: '@Model.Text'
         };
         vm = new QuestionViewModel(model);
         ko.applyBindings(vm);

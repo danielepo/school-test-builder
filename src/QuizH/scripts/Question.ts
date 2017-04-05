@@ -22,6 +22,7 @@ interface IAnswer {
 }
 interface IQuestionViewModel {
     answers: IAnswer[];
+    title: string;
 }
 class Answer implements IAnswer {
     text: string;
@@ -34,12 +35,15 @@ class Answer implements IAnswer {
 class QuestionViewModel {
     answers: KnockoutObservableArray<IAnswer>;
     newAnswer: KnockoutObservable<string>;
-    editor: IModal;;
+    editor: IModal;
+    title: KnockoutObservable<string>;
 
     constructor(model: IQuestionViewModel) {
         this.answers = ko.observableArray(model.answers);
         this.newAnswer = ko.observable("");
         this.editor = new ModalEditor();
+        this.title = ko.observable(model.title);
+
     }
 
 
@@ -50,12 +54,18 @@ class QuestionViewModel {
         //debugger;
         this.editor.saving();
     }
-    edit(id: number) {
+    editAnswer(id: number) {
         this.editor.edit = this.answers()[id].text;
         this.editor.openModal(x => {
             //console.log(id);
             this.answers.splice(id, 1);
             this.answers.push(new Answer(x, false))
+        });
+    }
+    editTitle() {
+        this.editor.edit = this.title();
+        this.editor.openModal(x => {
+            this.title(x)
         });
     }
 }
