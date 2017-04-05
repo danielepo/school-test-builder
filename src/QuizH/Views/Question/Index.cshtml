@@ -8,7 +8,7 @@
         {
             <tr>
                 <td>@question.Id</td>
-                <td>@question.Text</td>
+                <td>@Html.Raw(question.Text)</td>
                 <td>@Html.ActionLink("Edit", "Edit", new { id = question.Id})</td>
                 <td>@Html.ActionLink("Details", "Details", new { id = question.Id})</td>
             </tr>

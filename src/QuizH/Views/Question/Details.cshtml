@@ -1,7 +1,7 @@
 ﻿@model QuizH.ViewModels.Question.QuestionDetailsViewModel
 <div>
     <h4>Domanda</h4>
-    <p>@Model.Text</p>
+    <p>@Html.Raw(Model.Text)</p>
     <h4>Risposte</h4>
     @foreach (var option in Model.Options)
     {
@@ -14,7 +14,7 @@
             <span class="glyphicon glyphicon-remove" ></span>
         }
         <span>
-        @option.Text
+        @Html.Raw(option.Text)
     </span>
     <br />
 
