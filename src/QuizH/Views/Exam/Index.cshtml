@@ -8,7 +8,7 @@
         @foreach (var exam in Model.Exams)
         {
             <tr>
-                <td>@exam.Title</td>
+                <td>@Html.Raw(exam.Title)</td>
                 <td>@exam.Course</td>
                 <td>@Html.ActionLink("Edit", "Edit", new { title = exam.Title })</td>
                 <td>@Html.ActionLink("Details", "Details", new { title = exam.Title })</td>

@@ -22,6 +22,7 @@ interface IExamViewModel{
     subjects: ISubject[];
     courses: ICourse[];
     title: string;
+    instructions: string;
 }
 
 class ExamsViewModel {
@@ -36,6 +37,7 @@ class ExamsViewModel {
     selectedCourse: KnockoutObservable<number>;
     editor: IModal;
     title: KnockoutObservable<string>;
+    instructions: KnockoutObservable<string>;
 
     constructor(model: IExamViewModel) {
         this.subjects = model.subjects;
@@ -55,6 +57,7 @@ class ExamsViewModel {
         this.selectedCourse = ko.observable<number>(0);
         this.editor = new ModalEditor();
         this.title = ko.observable(model.title);
+        this.instructions = ko.observable(model.instructions);
 
     }
 
@@ -81,6 +84,12 @@ class ExamsViewModel {
         this.editor.edit = this.title();
         this.editor.openModal(x => {
             this.title(x)
+        });
+    }
+    editInstructions() {
+        this.editor.edit = this.instructions();
+        this.editor.openModal(x => {
+            this.instructions(x)
         });
     }
     saveText() {

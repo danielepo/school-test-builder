@@ -22,7 +22,11 @@
                 <label asp-for="Instructions">
                     Istruzioni
                 </label>
-                <input class="form-control" asp-for="Instructions" />
+                <div>
+                    <span data-bind="html: instructions"></span>
+                    <a href="#" data-bind="click: editInstructions">Edit</a>
+                    <input class="form-control" asp-for="Instructions" type="hidden" data-bind="value: instructions" />
+                </div>
             </div>
             <div class="form-group">
                 <label asp-for="Course">
@@ -120,7 +124,8 @@
                 alreadySelectedQuestions: questions,
                 subjects: data.subjects,
                 courses: data.courses,
-                title: '@Model.Title'
+                title: '@Html.Raw(Model.Title)',
+                instructions: '@Html.Raw(Model.Instructions)'
             };
             vm = new ExamsViewModel(model);
             ko.applyBindings(vm);
