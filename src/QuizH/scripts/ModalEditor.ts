@@ -12,6 +12,9 @@ interface IModal {
 class ModalEditor implements IModal {
     callback: myCallbackType;
     edit: string;
+    constructor() {
+        this.edit = "";
+    }
     //Public Method
     openModal(callback: myCallbackType) {
         $('#myModal').modal("show");
@@ -19,7 +22,7 @@ class ModalEditor implements IModal {
         tinyMCE.activeEditor.setContent(this.edit);
     }
     saving() {
-        if (tinyMCE.activeEditor != null) {
+        if (tinyMCE.activeEditor != null && this.callback != null) {
             this.callback(tinyMCE.activeEditor.getContent());
             tinyMCE.activeEditor.setContent("");
             this.edit = "";

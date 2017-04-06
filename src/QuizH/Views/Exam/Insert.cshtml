@@ -1,4 +1,6 @@
 ﻿@model QuizH.ViewModels.Exam.ExamCreationViewModel
+@await Html.PartialAsync("_TextEditor")
+
 <div class="row">
     <h2>Creazione Esami</h2>
     <div class="col-md-6">
@@ -9,19 +11,24 @@
                 <label asp-for="Title">
                     Titolo
                 </label>
-                    <input class="form-control" asp-for="Title" required />
+                <div>
+                    <span data-bind="html: title"></span>
+                    <a href="#" data-bind="click: editTitle">Edit</a>
+                    <input class="form-control" asp-for="Title" type="hidden" data-bind="value: title" />
+                </div>
+
             </div>
             <div class="form-group">
                 <label asp-for="Instructions">
                     Istruzioni
                 </label>
-                    <input class="form-control" asp-for="Instructions" />
+                <input class="form-control" asp-for="Instructions" />
             </div>
             <div class="form-group">
                 <label asp-for="Course">
                     Corso
                 </label>
-                    <select class="form-control" asp-for="Course" asp-items="@(new SelectList(Model.AvailableCourses))"></select>
+                <select class="form-control" asp-for="Course" asp-items="@(new SelectList(Model.AvailableCourses))"></select>
             </div>
             <h3>Domande</h3>
             <div class="form-group">
@@ -51,30 +58,30 @@
     </div>
     <div class="col-md-6">
         <div class="filters">
-            
-                <div class="form-group">
-                    <label for="subjects">Argomenti:</label>
-                    <select id="subjects" 
-                            class="form-control"
-                            data-bind="options: subjects,
+
+            <div class="form-group">
+                <label for="subjects">Argomenti:</label>
+                <select id="subjects"
+                        class="form-control"
+                        data-bind="options: subjects,
                        optionsText: 'title',
                        optionsValue: 'id',
                        value: selectedSubject,
                        selectedOptions: [selectedSubject],
                        optionsCaption: 'Choose...'"></select>
-                </div>
-                <div class="form-group">
-                    <label for="courses">Materie:</label>
-                    <select id="courses"
-                            class="form-control"
-                            data-bind="options: courses,
+            </div>
+            <div class="form-group">
+                <label for="courses">Materie:</label>
+                <select id="courses"
+                        class="form-control"
+                        data-bind="options: courses,
                        optionsText: 'title',
                        optionsValue: 'id',
                        value: selectedCourse,
                        selectedOptions: [selectedCourse],
                        optionsCaption: 'Choose...'"></select>
-                </div>
-            
+            </div>
+
         </div>
         <div class="row">
             <!-- ko if: filteredQuestions().length > 0-->
@@ -105,14 +112,15 @@
     <script src="~/js/Exam.js" asp-append-version="true"></script>
     <script type="text/javascript">
 
-        var vm ;
+        var vm;
         var questions = @Json.Serialize(Model.Questions ?? new List<int>());
         $.getJSON("/Question/Get",function (data) {
             var model = {
                 availableQuestions: data.questions,
                 alreadySelectedQuestions: questions,
                 subjects: data.subjects,
-                courses: data.courses
+                courses: data.courses,
+                title: '@Model.Title'
             };
             vm = new ExamsViewModel(model);
             ko.applyBindings(vm);

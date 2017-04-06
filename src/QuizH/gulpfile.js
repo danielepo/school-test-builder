@@ -1,4 +1,4 @@
-﻿/// <binding AfterBuild='default' Clean='clean' ProjectOpened='move-types' />
+﻿/// <binding BeforeBuild='clean-scripts' AfterBuild='default' Clean='clean' ProjectOpened='move-types' />
 /*
 This file is the main entry point for defining Gulp tasks and using Gulp plugins.
 Click here to learn more. http://go.microsoft.com/fwlink/?LinkId=518007
@@ -14,6 +14,10 @@ var paths = {
 
 gulp.task('move-types', function () {
     gulp.src(paths.types).pipe(gulp.dest('typings/modules'));
+});
+
+gulp.task('clean-scripts', function () {
+    return del(['scripts/**/*.js']);
 });
 
 gulp.task('clean', function () {

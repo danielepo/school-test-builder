@@ -1,5 +1,6 @@
 ﻿/// <reference path="../typings/modules/knockout/index.d.ts" />
 /// <reference path="../typings/modules/jquery/index.d.ts" />
+/// <reference path="modaleditor.ts" />
 //import ko = require('knockout')
 interface IQuestion {
     id: number;
@@ -20,6 +21,7 @@ interface IExamViewModel{
     alreadySelectedQuestions: number[];
     subjects: ISubject[];
     courses: ICourse[];
+    title: string;
 }
 
 class ExamsViewModel {
@@ -32,6 +34,8 @@ class ExamsViewModel {
 
     selectedSubject: KnockoutObservable<number>;
     selectedCourse: KnockoutObservable<number>;
+    editor: IModal;
+    title: KnockoutObservable<string>;
 
     constructor(model: IExamViewModel) {
         this.subjects = model.subjects;
@@ -49,6 +53,9 @@ class ExamsViewModel {
         this.selectedQuestions = ko.observableArray<IQuestion>(questionsInModel);
         this.selectedSubject = ko.observable<number>(0);
         this.selectedCourse = ko.observable<number>(0);
+        this.editor = new ModalEditor();
+        this.title = ko.observable(model.title);
+
     }
 
     selectQuestion(id: KnockoutObservable<number>) {
@@ -70,4 +77,14 @@ class ExamsViewModel {
         }
     })();
 
+    editTitle() {
+        this.editor.edit = this.title();
+        this.editor.openModal(x => {
+            this.title(x)
+        });
+    }
+    saveText() {
+        //debugger;
+        this.editor.saving();
+    }
 }
