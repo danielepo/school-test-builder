@@ -8,7 +8,6 @@ namespace QuizH.Controllers
     public class QuestionController : Controller
     {
         private readonly IMediator mediator;
-
         public QuestionController(IMediator mediator)
         {
             this.mediator = mediator;
@@ -64,5 +63,6 @@ namespace QuizH.Controllers
 
             return RedirectToAction("Index");
         }
+        
     }
 }
