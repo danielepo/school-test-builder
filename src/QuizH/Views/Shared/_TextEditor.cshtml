@@ -1,21 +1,38 @@
 
 <environment names="Development">
     <script src="~/lib/tinymce/tinymce.min.js"></script>
-   
+
 </environment>
 <environment names="Staging,Production">
-<script src="//cloud.tinymce.com/stable/tinymce.min.js"></script>
+    <script src="//cloud.tinymce.com/stable/tinymce.min.js"></script>
 </environment>
 
-<script>tinymce.init({
-    selector: '#text-editor',
-    images_upload_url: 'Question/UploadFiles',
-    plugins: [
-        'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
-        'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
-        'save table contextmenu directionality emoticons template paste textcolor'
-    ],
-    file_picker_types: 'file image media'
+<script>
+tinymce.init({
+        selector: '#text-editor',
+        images_upload_url: '/Image/UploadFiles',
+        plugins: [
+            'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
+            'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+            'save table contextmenu directionality emoticons template paste textcolor'
+        ],
+        file_picker_types: 'file image media',
+        automatic_uploads: true,
+        file_picker_callback: function (callback, value, meta) {
+            if (meta.filetype == 'image') {
+                $('#upload').trigger('click');
+                $('#upload').on('change', function () {
+                    var file = this.files[0];
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        callback(e.target.result, {
+                            alt: ''
+                        });
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+        }
     });</script>
 
 <!-- Modal -->
@@ -28,6 +45,7 @@
             </div>
             <div class="modal-body">
                 <textarea id="text-editor"></textarea>
+                <input name="image" type="file" id="upload" class="hidden" onchange="">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
