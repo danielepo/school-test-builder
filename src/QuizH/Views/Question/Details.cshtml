@@ -3,22 +3,33 @@
     <h4>Domanda</h4>
     <p>@Html.Raw(Model.Text)</p>
     <h4>Risposte</h4>
-    @foreach (var option in Model.Options)
-    {
-        if (option.IsCorrect)
+    <ul>
+
+        @foreach (var option in Model.Options)
         {
-            <span class="glyphicon glyphicon-ok" ></span>
+            <li>
+
+                @if (option.IsCorrect)
+                {
+                    <span class="glyphicon glyphicon-ok"></span>
+                }
+                else
+                {
+                    <span class="glyphicon glyphicon-remove"></span>
+                }
+                <span>
+                    @Html.Raw(option.Text)
+                </span>
+            </li>
+
         }
-        else
-        {
-            <span class="glyphicon glyphicon-remove" ></span>
-        }
-        <span>
-        @Html.Raw(option.Text)
+    </ul>
+    <h4>Spazi per risposta libera</h4>
+
+    <span>
+        @Model.FreeTextLines
     </span>
     <br />
-
-    }
     <h4>Argomento</h4>
     <p>@Model.Subject</p>
     <h4>Corsi</h4>

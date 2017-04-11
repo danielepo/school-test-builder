@@ -26,7 +26,8 @@ namespace QuizH.Features.Question
             {
                 Subject = subjects.GetById(qVm.SubjectId),
                 Choiches = qVm.Answers?.Select(x => new Entities.Answer(x.Text, x.IsCorrect ? 1 : 0))?.ToList() ?? new List<Entities.Answer>(),
-                Courses = courses.GetAll().Where(x => qVm.Courses?.Contains(x.Id) ?? false)
+                Courses = courses.GetAll().Where(x => qVm.Courses?.Contains(x.Id) ?? false),
+                Space = qVm.FreeTextLines
             };
 
             var oldQuestion = questions.GetById(qVm.OldId);

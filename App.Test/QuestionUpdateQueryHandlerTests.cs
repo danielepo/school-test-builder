@@ -6,7 +6,7 @@ using NUnit.Framework;
 using QuizH.Features.Question;
 using QuizH.ViewModels.Question;
 using System.Collections.Generic;
-
+using System.Linq;
 namespace App.Test
 {
     [TestFixture]
@@ -66,7 +66,8 @@ namespace App.Test
                 {
                     new Answer("Vero"),
                     new Answer("Falso",1)
-                }
+                },
+                Space = 5
             };
             questions.Setup(x => x.GetById(It.IsAny<int>())).Returns(question);
             var courses = new Mock<ICourseRepository>();
@@ -80,6 +81,8 @@ namespace App.Test
             Assert.That(result.SubjectId, Is.EqualTo(2));
             Assert.That(result.OldId, Is.EqualTo(1));
             Assert.That(result.Text, Is.EqualTo("question"));
+
+            Assert.That(result.FreeTextLines, Is.EqualTo(5));
 
             Assert.That(result.Answers[0].Text, Is.EqualTo("Vero"));
             Assert.That(result.Answers[0].IsCorrect, Is.EqualTo(false));

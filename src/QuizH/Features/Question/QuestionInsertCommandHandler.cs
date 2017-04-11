@@ -1,6 +1,7 @@
 ﻿using DAL;
 using MediatR;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace QuizH.Features.Question
 {
@@ -25,8 +26,8 @@ namespace QuizH.Features.Question
             var question = new Entities.Question(questionVm.Text);
             question.Subject = subjects.GetById(questionVm.SubjectId);
             question.Courses = courses.GetAll().Where(x => questionVm.Courses.Contains(x.Id));
-            question.Choiches = questionVm.Answers.Select(x => new Entities.Answer(x.Text, x.IsCorrect ? 1 : 0)).ToList();
-
+            question.Choiches = questionVm.Answers?.Select(x => new Entities.Answer(x.Text, x.IsCorrect ? 1 : 0)).ToList() ?? new List<Entities.Answer>();
+            question.Space = questionVm.FreeTextLines;
             questions.Add(question);
         }
     }

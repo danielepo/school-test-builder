@@ -24,6 +24,7 @@ namespace QuizH.ViewModels.Question
         public List<CourseViewModel> AvailableCourses { get; set; }
         public int SubjectId { get; set; }
         public int OldId { get; set; }
+        public int FreeTextLines { get; set; }
     }
     public class SubjectViewModel
     {

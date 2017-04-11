@@ -53,7 +53,9 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="QuestionInsertCommandHandlerTests.cs" />
     <Compile Include="QuestionUpdateCommandHandlerTests.cs" />
+    <Compile Include="QuestionDetailsQueryHandlerTests.cs" />
     <Compile Include="QuestionUpdateQueryHandlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

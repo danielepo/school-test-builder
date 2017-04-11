@@ -52,6 +52,12 @@
                 @* <input type="text" data-bind="value: newAnswer" />*@
             </div>
             <div class="form-group">
+                <label>
+                    Numero di linee per rispondere con testo libero
+                </label>
+                <input asp-for="FreeTextLines" data-bind="value: freeTextLines"/>
+            </div>
+            <div class="form-group">
                 <label for="subjectId">
                     Argomenti
                 </label>
@@ -87,7 +93,8 @@
 
         var model = {
             answers: answers,
-            title: '@Model.Text'
+            title: '@Html.Raw(Model.Text)',
+            freeTextLines: '@Model.FreeTextLines'
         };
         vm = new QuestionViewModel(model);
         ko.applyBindings(vm);

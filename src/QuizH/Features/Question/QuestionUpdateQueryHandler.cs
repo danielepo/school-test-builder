@@ -35,7 +35,8 @@ namespace QuizH.Features.Question
                 Text = question.Text ?? string.Empty,
                 SubjectId = question.Subject?.Id ?? 0,
                 AvailableCourses = courses.GetAll().Select(x => new CourseViewModel { Id = x.Id, Title = x.Title }).ToList(),
-                AvailableSubjects = subjects.GetAll().Select(x => new SubjectViewModel { Id = x.Id, Title = x.Title }).ToList()
+                AvailableSubjects = subjects.GetAll().Select(x => new SubjectViewModel { Id = x.Id, Title = x.Title }).ToList(),
+                FreeTextLines = question.Space
             };
         }
     }
