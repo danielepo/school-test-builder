@@ -19,7 +19,7 @@ namespace Entities
     }
     public class Question
     {
-        public int Id;
+        public int QuestionId;
         public Professor Creator { get; set; }
 
         public IList<Answer> Choiches { get; set; }
@@ -29,6 +29,11 @@ namespace Entities
         public string Text { get; set; }
 
         public virtual Subject Subject { get; set; }
+        public Question()
+        {
+            Text = "";
+            Choiches = new List<Answer>();
+        }
 
         public Question(string question)
         {
@@ -54,6 +59,6 @@ namespace Entities
                 Space = Space
             };
         }
-        public IEnumerable<Course> Courses{get;set;}
+        public IList<Course> Courses { get; set; }
     }
 }
