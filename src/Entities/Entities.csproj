@@ -43,7 +43,10 @@
   <ItemGroup>
     <Compile Include="Answer.cs" />
     <Compile Include="Course.cs" />
-    <Compile Include="Extensions.cs" />
+    <Compile Include="Extensions\QuestionExtensions.cs" />
+    <Compile Include="Extensions\AnswerExtensions.cs" />
+    <Compile Include="Extensions\ExamExtensions.cs" />
+    <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Exam.cs" />
     <Compile Include="Subject.cs" />
     <Compile Include="Professor.cs" />

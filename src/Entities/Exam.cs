@@ -22,33 +22,6 @@ namespace Entities
             Course = new Course();
         }
 
-        public Exam Clone(Random random)
-        {
-            return new Exam
-            {
-                Title = Title,
-                Instructions = Instructions,
-                Questions = Questions.Select(q => q.Clone(random)).Shuffle(random).ToList()
-            };
-        }
-
-        public void Insert(Question question)
-        {
-            Questions.Add(question);
-        }
-
-        public void Insert(IEnumerable<Question> questions)
-        {
-            foreach (var question in questions)
-            {
-                Questions.Add(question);
-            }
-        }
-
-        public void Remove(Question question)
-        {
-            Questions.Remove(question);
-        }
     }
 
 }
