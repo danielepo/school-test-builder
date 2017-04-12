@@ -33,9 +33,9 @@ namespace QuizH.Features.Question
                 Answers = question.Choiches?.Select(x => new AnswerViewModel(x))?.ToList() ?? new List<AnswerViewModel>(),
                 Courses = question.Courses?.Select(x => x.Id)?.ToList() ?? new List<int>(),
                 Text = question.Text ?? string.Empty,
-                SubjectId = question.Subject?.Id ?? 0,
+                SubjectId = question.Subject?.SubjectId ?? 0,
                 AvailableCourses = courses.GetAll().Select(x => new CourseViewModel { Id = x.Id, Title = x.Title }).ToList(),
-                AvailableSubjects = subjects.GetAll().Select(x => new SubjectViewModel { Id = x.Id, Title = x.Title }).ToList(),
+                AvailableSubjects = subjects.GetAll().Select(x => new SubjectViewModel { Id = x.SubjectId, Title = x.Title }).ToList(),
                 FreeTextLines = question.Space
             };
         }

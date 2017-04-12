@@ -14,7 +14,7 @@ namespace Entities.Test
         public void HasAIntId()
         {
             var sut = new Subject("",1);
-            Assert.That(sut.Id.GetType(), Is.EqualTo(typeof(int)));
+            Assert.That(sut.SubjectId.GetType(), Is.EqualTo(typeof(int)));
         }
         [Test]
         public void HasAIntTitle()
@@ -26,7 +26,7 @@ namespace Entities.Test
         public void CanReadTitleAndId()
         {
             var sut = new Subject("title", 1);
-            Assert.That(sut.Id, Is.EqualTo(1));
+            Assert.That(sut.SubjectId, Is.EqualTo(1));
             Assert.That(sut.Title, Is.EqualTo("title"));
         }
     }

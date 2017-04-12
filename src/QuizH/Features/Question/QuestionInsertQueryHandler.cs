@@ -25,7 +25,7 @@ namespace QuizH.Features.Question
             return new QuestionCreationViewModel
             {
                 AvailableCourses = courses.GetAll().Select(x => new CourseViewModel { Id = x.Id, Title = x.Title }).ToList(),
-                AvailableSubjects = subjects.GetAll().Select(x => new SubjectViewModel { Id = x.Id, Title = x.Title }).ToList(),
+                AvailableSubjects = subjects.GetAll().Select(x => new SubjectViewModel { Id = x.SubjectId, Title = x.Title }).ToList(),
             };
         }
     }

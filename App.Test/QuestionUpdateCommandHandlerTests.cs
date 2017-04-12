@@ -98,7 +98,7 @@ namespace App.Test
             Assert.That(oldObj.Space, Is.EqualTo(3));
 
             Assert.That(newObj.Space, Is.EqualTo(5));
-            Assert.That(newObj.Subject.Id, Is.EqualTo(2));
+            Assert.That(newObj.Subject.SubjectId, Is.EqualTo(2));
             Assert.That(newObj.Courses.Count, Is.EqualTo(1));
             Assert.That(newObj.Courses.First().Id, Is.EqualTo(1));
             Assert.That(newObj.Text, Is.EqualTo("question"));

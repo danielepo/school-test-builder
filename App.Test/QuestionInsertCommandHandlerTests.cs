@@ -83,7 +83,7 @@ namespace App.Test
 
             questions.Verify(x => x.Add(It.IsAny<Question>()), Times.Once);
             Assert.That(saveObj.Space, Is.EqualTo(5));
-            Assert.That(saveObj.Subject.Id, Is.EqualTo(2));
+            Assert.That(saveObj.Subject.SubjectId, Is.EqualTo(2));
             Assert.That(saveObj.Courses.Count, Is.EqualTo(1));
             Assert.That(saveObj.Courses.First().Id, Is.EqualTo(1));
             Assert.That(saveObj.Text, Is.EqualTo("question"));

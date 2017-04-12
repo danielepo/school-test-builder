@@ -28,7 +28,7 @@ namespace DAL
 
         public Subject GetById(int subjectId)
         {
-            return Subjects.FirstOrDefault(x => x.Id == subjectId);
+            return Subjects.FirstOrDefault(x => x.SubjectId == subjectId);
         }
     }
 }

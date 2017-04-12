@@ -9,23 +9,26 @@ namespace Entities
 {
     public class Answer
     {
-        private readonly string _text;
-        private readonly int _points;
-        public string Text => _text;
+        public int AnswerId { get; set; }
+        public string Text { get; set; }
 
-        public int Points => _points;
-
+        public int Points { get; set; }
+        public Answer()
+        {
+            Text = "";
+            Points = 0;
+        }
         //why not use a constructor that also have the points?
         public Answer(string value)
         {
-            _text = value;
-            _points = 0;
+            Text = value;
+            Points = 0;
         }
 
         public Answer(string value, int points)
         {
-            _text = value;
-            _points = points;
+            Text = value;
+            Points = points;
         }
 
         // should be part of the answer or part of a validator/parser

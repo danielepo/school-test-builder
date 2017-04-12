@@ -7,13 +7,18 @@ namespace Entities
 {
     public class Subject
     {
+        public int SubjectId { get; set; }
         public string Title { get; set; }
-        public int Id { get; set; }
 
+        public Subject()
+        {
+            SubjectId = 0;
+            Title = "";
+        }
         public Subject(string subject, int id)
         {
             Title = subject;
-            Id = id;
+            SubjectId = id;
         }
     }
 }
