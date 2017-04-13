@@ -26,11 +26,11 @@ namespace QuizH.Features.Exam
             var exam = exams.GetByTitle(message.Title);
             return new ExamCreationViewModel
             {
-                Id = exam.Id,
+                Id = exam.ExamId,
                 Title = exam.Title,
                 Course = exam.Course.Title,
                 Instructions = exam.Instructions,
-                Questions = exam.Questions.Select(x => x.Id).ToList(),
+                Questions = exam.Questions.Select(x => x.QuestionId).ToList(),
                 AvailableCourses = courses.GetAll().Select(x => x.Title).ToList()
             };
         }

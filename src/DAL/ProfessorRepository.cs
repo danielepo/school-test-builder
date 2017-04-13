@@ -11,7 +11,7 @@ namespace DAL
 
         public Professor GetById(string id)
         {
-            return professors.First(x => x.Id.Equals(new Guid(id)));
+            return professors.First(x => x.ProfessorId.Equals(new Guid(id)));
         }
 
         public IEnumerable<Professor> GetAll()

@@ -69,7 +69,7 @@ namespace App.Test
             var questions = new Mock<IQuestionRepository>();
             var oldQuestion = new Question("oldQuestion")
             {
-                Id = 2,
+                QuestionId = 2,
                 Space = 3
             };
             questions.Setup(x => x.GetById(It.IsAny<int>())).Returns(oldQuestion);
@@ -94,13 +94,13 @@ namespace App.Test
 
             questions.Verify(x => x.Update(It.IsAny<Question>(), It.IsAny<Question>()), Times.Once);
 
-            Assert.That(oldObj.Id, Is.EqualTo(2));
+            Assert.That(oldObj.QuestionId, Is.EqualTo(2));
             Assert.That(oldObj.Space, Is.EqualTo(3));
 
             Assert.That(newObj.Space, Is.EqualTo(5));
             Assert.That(newObj.Subject.SubjectId, Is.EqualTo(2));
             Assert.That(newObj.Courses.Count, Is.EqualTo(1));
-            Assert.That(newObj.Courses.First().Id, Is.EqualTo(1));
+            Assert.That(newObj.Courses.First().CourseId, Is.EqualTo(1));
             Assert.That(newObj.Text, Is.EqualTo("question"));
             Assert.That(newObj.Choiches.Count, Is.EqualTo(2));
             Assert.That(newObj.Choiches.First().Text, Is.EqualTo("Falso"));

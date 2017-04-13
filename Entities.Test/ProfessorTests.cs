@@ -14,7 +14,7 @@ namespace Entities.Test
         public void HasAGuidId()
         {
             var professor = new Professor();
-            Assert.That(professor.Id.GetType(), Is.EqualTo(typeof(Guid)));
+            Assert.That(professor.ProfessorId.GetType(), Is.EqualTo(typeof(Guid)));
         }
         [Test]
         public void CanGetGuid()
@@ -22,9 +22,9 @@ namespace Entities.Test
             var guid = new Guid();
             var prof = new Professor()
             {
-                Id = guid
+                ProfessorId = guid
             };
-            Assert.That(prof.Id, Is.EqualTo(guid));
+            Assert.That(prof.ProfessorId, Is.EqualTo(guid));
         }
     }
 }

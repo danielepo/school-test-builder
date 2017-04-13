@@ -45,6 +45,10 @@ namespace QuizH
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(connectionString)
             );
+            var connectionString2 = Configuration.GetConnectionString("MyConnectionEntity");
+            services.AddDbContext<EntityDbContext>(options =>
+                options.UseSqlite(connectionString2)
+            );
 
             services.AddApplicationInsightsTelemetry(Configuration);
 
@@ -70,7 +74,7 @@ namespace QuizH
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, EntityDbContext context)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -86,6 +90,11 @@ namespace QuizH
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+            }
+
+            if (!env.IsProduction())
+            {
+                context.Database.EnsureCreated();
             }
 
             app.UseApplicationInsightsExceptionTelemetry();

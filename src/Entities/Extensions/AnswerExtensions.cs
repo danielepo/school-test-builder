@@ -12,8 +12,7 @@ namespace Entities.Extensions
             if (start < 0)
                 return false;
             var prefix = row.Substring(0, start);
-            int ignored;
-            return int.TryParse(prefix, out ignored);
+            return int.TryParse(prefix, out int ignored);
         }
 
         // why return always a good answer?

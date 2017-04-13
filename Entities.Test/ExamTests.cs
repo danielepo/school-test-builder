@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
+using Entities.Extensions;
 
 namespace Entities.Test
 {
@@ -19,7 +20,7 @@ namespace Entities.Test
         public void HasAnId()
         {
             var exam = new Exam();
-            Assert.That(exam.Id.GetType(), Is.EqualTo(typeof(int)));
+            Assert.That(exam.ExamId.GetType(), Is.EqualTo(typeof(int)));
         }
 
 
@@ -28,10 +29,10 @@ namespace Entities.Test
         {
             var exam = new Exam()
             {
-                Id = 2,
+                ExamId = 2,
                 Title = "irrelevant"
             };
-            Assert.That(exam.Id, Is.EqualTo(2));
+            Assert.That(exam.ExamId, Is.EqualTo(2));
             Assert.That(exam.Title, Is.EqualTo("irrelevant"));
         }
         [Test]

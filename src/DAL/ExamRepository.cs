@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Entities;
+using Entities.Extensions;
 
 namespace DAL
 {
@@ -18,7 +19,7 @@ namespace DAL
         }
         public void Insert(Exam exam)
         {
-            exam.Id = Exams.Count() + 1;
+            exam.ExamId = Exams.Count() + 1;
             Exams.Add(exam);
         }
 
@@ -38,7 +39,7 @@ namespace DAL
 
         public Exam GetById(int id)
         {
-            return Exams.First(x => x.Id == id);
+            return Exams.First(x => x.ExamId == id);
         }
     }
 }

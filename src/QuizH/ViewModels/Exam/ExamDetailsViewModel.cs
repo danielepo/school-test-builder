@@ -16,13 +16,13 @@ namespace QuizH.ViewModels.Exam
         {
             return new ExamDetailsViewModel
             {
-                Id = exam.Id,
+                Id = exam.ExamId,
                 Title = exam.Title,
                 Course = exam.Course.Title,
                 Instructions = exam.Instructions,
                 Questions = exam.Questions.Select(x => new QuestionViewModel
                 {
-                    Id = x.Id,
+                    Id = x.QuestionId,
                     Text = x.Text
                 }).ToList(),
             };

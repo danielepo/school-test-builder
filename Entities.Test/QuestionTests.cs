@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
+using Entities.Extensions;
 
 namespace Entities.Test
 {
@@ -17,7 +18,7 @@ namespace Entities.Test
                     new Answer("text",0),
                 },
             };
-            Assert.That(question.Answer, Is.EqualTo("1"));
+            Assert.That(question.Answer(), Is.EqualTo("1"));
         }
         [Test]
         public void SecondAnswerIsCorrectReturns2()
@@ -30,7 +31,7 @@ namespace Entities.Test
                     new Answer("text",1),
                 },
             };
-            Assert.That(question.Answer, Is.EqualTo("2"));
+            Assert.That(question.Answer(), Is.EqualTo("2"));
         }
         [Test]
         public void TwoCorrectAnswersReturns2Comma3()
@@ -44,7 +45,7 @@ namespace Entities.Test
                     new Answer("text",1),
                 },
             };
-            Assert.That(question.Answer, Is.EqualTo("2,3"));
+            Assert.That(question.Answer(), Is.EqualTo("2,3"));
         }
         [Test]
         public void QuestionCanHaveAProfessor()
@@ -52,15 +53,17 @@ namespace Entities.Test
             var prof = new Professor();
             var question = new Question("Test")
             {
-                Creator = prof
+                Professor = prof
             };
-            Assert.That(question.Creator, Is.EqualTo(prof));
+            Assert.That(question.Professor, Is.EqualTo(prof));
         }
         [Test]
         public void CanBeAssignedASubject()
         {
-            var question = new Question("Quante calorie ha un grammo di grassi?");
-            question.Subject = new Subject("Alimentazione",0);
+            var question = new Question("Quante calorie ha un grammo di grassi?")
+            {
+                Subject = new Subject("Alimentazione", 0)
+            };
             Assert.That(question.Subject.Title, Is.EqualTo("Alimentazione"));
         }
 

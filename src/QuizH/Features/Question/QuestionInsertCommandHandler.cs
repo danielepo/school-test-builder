@@ -23,11 +23,13 @@ namespace QuizH.Features.Question
         {
             var questionVm = message.Question;
 
-            var question = new Entities.Question(questionVm.Text);
-            question.Subject = subjects.GetById(questionVm.SubjectId);
-            question.Courses = courses.GetAll().Where(x => questionVm.Courses.Contains(x.Id));
-            question.Choiches = questionVm.Answers?.Select(x => new Entities.Answer(x.Text, x.IsCorrect ? 1 : 0)).ToList() ?? new List<Entities.Answer>();
-            question.Space = questionVm.FreeTextLines;
+            var question = new Entities.Question(questionVm.Text)
+            {
+                Subject = subjects.GetById(questionVm.SubjectId),
+                Courses = courses.GetAll().Where(x => questionVm.Courses.Contains(x.CourseId)).ToList(),
+                Choiches = questionVm.Answers?.Select(x => new Entities.Answer(x.Text, x.IsCorrect ? 1 : 0)).ToList() ?? new List<Entities.Answer>(),
+                Space = questionVm.FreeTextLines
+            };
             questions.Add(question);
         }
     }

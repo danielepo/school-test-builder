@@ -12,15 +12,10 @@ namespace Entities
 
         public string Instructions { get; set; }
 
-        public IList<Question> Questions { get; set; }
+        public List<Question> Questions { get; set; } = new List<Question>();
         public string Title { get; set; }
-        public Course Course { get; set; }
-
-        public Exam()
-        {
-            Questions = new List<Question>();
-            Course = new Course();
-        }
+        public int? CourseId { get; set; }
+        public Course Course { get; set; } = new Course();
 
     }
 

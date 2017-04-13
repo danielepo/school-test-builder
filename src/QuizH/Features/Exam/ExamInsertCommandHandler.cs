@@ -1,4 +1,5 @@
 ﻿using DAL;
+using Entities.Extensions;
 using MediatR;
 using System.Linq;
 
@@ -29,7 +30,7 @@ namespace QuizH.Features.Exam
                 Course = courses.GetByTitle(examVM.Course),
             };
 
-            exam.Insert(questions.GetAll().Where(x => examVM.Questions.Contains(x.Id)));
+            exam.Insert(questions.GetAll().Where(x => examVM.Questions.Contains(x.QuestionId)));
 
             exams.Insert(exam);
         }

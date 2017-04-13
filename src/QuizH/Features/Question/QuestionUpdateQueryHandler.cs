@@ -28,13 +28,13 @@ namespace QuizH.Features.Question
             }
             return new QuestionCreationViewModel
             {
-                Id = question.Id,
-                OldId = question.Id,
+                Id = question.QuestionId,
+                OldId = question.QuestionId,
                 Answers = question.Choiches?.Select(x => new AnswerViewModel(x))?.ToList() ?? new List<AnswerViewModel>(),
-                Courses = question.Courses?.Select(x => x.Id)?.ToList() ?? new List<int>(),
+                Courses = question.Courses?.Select(x => x.CourseId)?.ToList() ?? new List<int>(),
                 Text = question.Text ?? string.Empty,
                 SubjectId = question.Subject?.SubjectId ?? 0,
-                AvailableCourses = courses.GetAll().Select(x => new CourseViewModel { Id = x.Id, Title = x.Title }).ToList(),
+                AvailableCourses = courses.GetAll().Select(x => new CourseViewModel { Id = x.CourseId, Title = x.Title }).ToList(),
                 AvailableSubjects = subjects.GetAll().Select(x => new SubjectViewModel { Id = x.SubjectId, Title = x.Title }).ToList(),
                 FreeTextLines = question.Space
             };

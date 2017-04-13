@@ -1,5 +1,6 @@
 ﻿using BL.Interfaces;
 using Entities;
+using Entities.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,9 +35,9 @@ namespace BL
                 questions.Last().Space++;
                 return;
             }
-            if (Answer.IsValid(row))
+            if (AnswerExtensions.IsValid(row))
             {
-                questions.Last().Add(Answer.FromRow(row));
+                questions.Last().Add(AnswerExtensions.FromRow(row));
             }
             else
             {

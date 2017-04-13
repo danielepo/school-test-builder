@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Entities.Extensions;
 
 namespace Entities.Test
 {
@@ -23,31 +24,31 @@ namespace Entities.Test
         [Test]
         public void EmptyAnswerFromEmptyString()
         {
-            var answer = Answer.FromRow("");
+            var answer = AnswerExtensions.FromRow("");
             Assert.That(answer,Is.EqualTo(new Answer("")));
         }
         [Test]
         public void EmptyAnswerFromPoint()
         {
-            var answer = Answer.FromRow(".");
+            var answer = AnswerExtensions.FromRow(".");
             Assert.That(answer, Is.EqualTo(new Answer("")));
         }
         [Test]
         public void AnswerWithText()
         {
-            var parsed = Answer.FromRow(".first:5");
+            var parsed = AnswerExtensions.FromRow(".first:5");
             Assert.That(parsed, Is.EqualTo(new Answer("first",5)));
         }
         [Test]
         public void AnswerWithTextWithWrongPoints()
         {
-            var parsed = Answer.FromRow(".first:wrong");
+            var parsed = AnswerExtensions.FromRow(".first:wrong");
             Assert.AreNotEqual(parsed, Is.EqualTo(new Answer("first",0)));
         }
         [Test]
         public void EmptyAnswerWithWithPoints()
         {
-            var parsed = Answer.FromRow(".:5");
+            var parsed = AnswerExtensions.FromRow(".:5");
             Assert.That(parsed, Is.EqualTo(new Answer("",5)));
         }
         [Test]

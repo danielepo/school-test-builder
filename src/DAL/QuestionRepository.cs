@@ -11,7 +11,7 @@ namespace DAL
         
         public void Add(Question q)
         {
-            q.Id = questions.Count;
+            q.QuestionId = questions.Count;
             questions.Add(q);
         }
 
@@ -22,13 +22,13 @@ namespace DAL
 
         public Question GetById(int questionId)
         {
-            return questions.FirstOrDefault(q => q.Id == questionId);
+            return questions.FirstOrDefault(q => q.QuestionId == questionId);
         }
 
         public void Update(Question oldQuestion, Question newQuestion)
         {
             questions.Remove(oldQuestion);
-            newQuestion.Id = oldQuestion.Id;
+            newQuestion.QuestionId = oldQuestion.QuestionId;
             questions.Add(newQuestion);
         }
     }

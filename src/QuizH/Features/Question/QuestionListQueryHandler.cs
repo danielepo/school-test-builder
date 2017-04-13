@@ -29,9 +29,9 @@ namespace QuizH.Features.Question
                 Questions = questions.GetAll().Select(x => new QuestionViewModel
                 {
                     Text = x.Text,
-                    Id = x.Id,
+                    Id = x.QuestionId,
                     SubjectId = x.Subject?.SubjectId ?? 0,
-                    Courses = x.Courses?.Select(c => c.Id) ?? new List<int>() ,
+                    Courses = x.Courses?.Select(c => c.CourseId) ?? new List<int>() ,
                 }).ToList(),
                 Subjects = subjects.GetAll(),
                 Courses = courses.GetAll()

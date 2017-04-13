@@ -55,7 +55,7 @@ namespace App.Test
             var questions = new Mock<IQuestionRepository>();
             var question = new Question("question")
             {
-                Id = 1,
+                QuestionId = 1,
                 Subject = new Subject("subject", 2),
                 Courses = new List<Course>
                 {

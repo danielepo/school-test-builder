@@ -7,15 +7,16 @@ namespace Entities
 {
     public class Question
     {
-        public int QuestionId;
-        public Professor Creator { get; set; }
-
-        public IList<Answer> Choiches { get; set; }
-
+        public int QuestionId { get; set; }
+        public int? ProfessorId { get; set; }
+        public Professor Professor { get; set; }
+        public List<Answer> Choiches { get; set; }
+        public List<Course> Courses { get; set; }
         public int Space { get; set; }
 
         public string Text { get; set; }
 
+        public virtual int? SubjectId { get; set; }
         public virtual Subject Subject { get; set; }
         public Question()
         {
@@ -34,6 +35,5 @@ namespace Entities
             return $"{Text} [{string.Join(", ", Choiches)}]";
         }
 
-        public IList<Course> Courses { get; set; }
     }
 }
