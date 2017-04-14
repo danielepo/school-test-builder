@@ -1,6 +1,7 @@
 ﻿using BL;
 using BL.Interfaces;
 using DAL;
+using Entities;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
