@@ -9,6 +9,16 @@ namespace DAL
 {
     public class CourseRepository : ICourseRepository
     {
+        private EntityDbContext context;
+        public CourseRepository(EntityDbContext context)
+        {
+            this.context = context;
+            if (!context.Courses.Any())
+            {
+                context.Courses.AddRange(Courses);
+                context.SaveChanges();
+            }
+        }
         private List<Course> Courses = new List<Course>
         {
             new Course(1, "Matematica","Matematica"),
@@ -17,11 +27,11 @@ namespace DAL
         };
         public Course GetByTitle(string title)
         {
-            return Courses.First(x => x.Title == title);
+            return context.Courses.First(x => x.Title == title);
         }
         public IEnumerable<Course> GetAll()
         {
-            return Courses;
+            return context.Courses;
         }
     }
 }

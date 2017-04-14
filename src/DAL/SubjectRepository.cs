@@ -8,7 +8,16 @@ using System.Threading.Tasks;
 namespace DAL
 {
     public class SubjectRepository : ISubjectRepository
-    {
+    { private EntityDbContext context;
+        public SubjectRepository(EntityDbContext context)
+        {
+            this.context = context;
+            if (!context.Subjects.Any())
+            {
+                context.Subjects.AddRange(Subjects);
+            context.SaveChanges();
+            }
+        }
         private List<Subject> Subjects = new List<Subject>
         {
             new Subject("Educazione alimentare",1),
@@ -18,17 +27,17 @@ namespace DAL
 
         public Subject GetByTitle(string title)
         {
-            return Subjects.FirstOrDefault(x => x.Title == title);
+            return context.Subjects.FirstOrDefault(x => x.Title == title);
         }
 
         public IEnumerable<Subject> GetAll()
         {
-            return Subjects;
+            return context.Subjects;
         }
 
         public Subject GetById(int subjectId)
         {
-            return Subjects.FirstOrDefault(x => x.SubjectId == subjectId);
+            return context.Subjects.FirstOrDefault(x => x.SubjectId == subjectId);
         }
     }
 }
