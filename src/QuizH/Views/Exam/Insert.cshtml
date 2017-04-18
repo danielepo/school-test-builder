@@ -96,7 +96,7 @@
                 <tbody data-bind="foreach: filteredQuestions()">
                     <tr>
                         <td data-bind="text: id"></td>
-                        <td data-bind="text: text"></td>
+                        <td data-bind="html: text"></td>
                         <td data-bind="text: subjectId"></td>
                         <td><a href="#" data-bind="click: function(){$parent.selectQuestion($index);}">Select</a></td>
                     </tr>
