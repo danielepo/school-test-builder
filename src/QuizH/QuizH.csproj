@@ -69,7 +69,7 @@
   </ItemGroup>
 
   <Target Name="PrepublishScript" BeforeTargets="PrepareForPublish">
-    <Exec Command="bower install" />
+    <Exec Command="bower install --force --verbose" />
     <!--<Exec Command="dotnet bundle quizh.csproj" />-->
   </Target>
 
