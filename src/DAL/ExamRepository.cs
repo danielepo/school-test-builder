@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Entities;
 using Entities.Extensions;
-
+using Microsoft.EntityFrameworkCore;
 namespace DAL
 {
     public class ExamRepository : IExamRepository
@@ -16,11 +16,12 @@ namespace DAL
         private static List<Exam> Exams = new List<Exam>();
         public Exam GetByTitle(string title)
         {
-            return context.Exams.First(x => x.Title == title);
+            return context.Exams
+                .Include(x => x.Questions).First(x => x.Title == title);
         }
         public IEnumerable<Exam> GetAll()
         {
-            return context.Exams;
+            return context.Exams.Include(x=> x.Questions);
         }
         public void Insert(Exam exam)
         {
