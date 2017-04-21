@@ -11,5 +11,15 @@
     "bower_components",
     "node_modules",
     "wwwroot"
+  ],
+  "files": [
+    "typings/modules/bootstrap/index.d.ts",
+    "typings/modules/jquery/index.d.ts", 
+    "typings/modules/knockout/index.d.ts" ,
+    "typings/modules/tinymce/tinymce.d.ts",
+    "scripts/Exam.ts",
+    "scripts/ModalEditor.ts",
+    "scripts/Question.ts",
+    "scripts/require-config.ts"
   ]
 }
