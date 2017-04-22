@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DocumentFormat.OpenXml;
-using DocumentFormat.OpenXml.Wordprocessing;
-using HtmlAgilityPack;
 using NUnit.Framework;
-
+using BL;
 namespace BL.Test
 {
     class HtmlParserTest
@@ -30,28 +27,5 @@ namespace BL.Test
             Assert.That(p.OuterXml, Is.EqualTo(expected));
         }
     }
-
-    internal class HtmlOpenXmlParser
-    {
-        public OpenXmlElement Parse(string html)
-        {
-            var document = new HtmlDocument();
-            document.LoadHtml(html);
-
-            var node = document.DocumentNode.FirstChild;
-            if (node.Name == "p")
-                return new Paragraph(new Text(node.InnerText));
-            return new Text(node.InnerText);
-        }
-    }
-
-    internal class HtmlStringParser
-    {
-        public string Parse(string html)
-        {
-            var document = new HtmlDocument();
-            document.LoadHtml(html);
-            return document.DocumentNode.InnerText;
-        }
-    }
 }
+

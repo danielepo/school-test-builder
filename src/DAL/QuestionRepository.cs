@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 
 namespace DAL
@@ -21,12 +22,17 @@ namespace DAL
 
         public IEnumerable<Question> GetAll()
         {
-            return context.Questions;
+            return context.Questions
+                .Include(questions => questions.Choiches)
+                .Include(x=>x.Courses);
         }
 
         public Question GetById(int questionId)
         {
-            return context.Questions.FirstOrDefault(q => q.QuestionId == questionId);
+            return context.Questions
+                .Include(questions => questions.Choiches)
+                .Include(x => x.Courses)
+                .FirstOrDefault(q => q.QuestionId == questionId);
         }
 
         public void Update(Question oldQuestion, Question newQuestion)

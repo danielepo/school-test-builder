@@ -786,15 +786,6 @@ interface JQueryStatic {
      */
     ajaxPrefilter(handler: (opts: any, originalOpts: JQueryAjaxSettings, jqXHR: JQueryXHR) => any): void;
 
-     /**
-     * Creates an object that handles the actual transmission of Ajax data.
-     *
-     * @param dataType A string identifying the data type to use.
-     * @param handler A handler to return the new transport object to use with the data type provided in the first argument.
-     * @see {@link https://api.jquery.com/jQuery.ajaxTransport/}
-     */
-    ajaxTransport(dataType: string, handler: (opts: any, originalOpts: JQueryAjaxSettings, jqXHR: JQueryXHR) => any): void;
-    
     ajaxSettings: JQueryAjaxSettings;
 
      /**
@@ -1166,28 +1157,25 @@ interface JQueryStatic {
      * A generic iterator function, which can be used to seamlessly iterate over both objects and arrays. Arrays and array-like objects with a length property (such as a function's arguments object) are iterated by numeric index, from 0 to length-1. Other objects are iterated via their named properties.
      *
      * @param collection The object or array to iterate over.
-     * @param callback The function that will be executed on every object. Will break the loop by returning false.
-     * @returns the first argument, the object that is iterated.
+     * @param callback The function that will be executed on every object.
      * @see {@link https://api.jquery.com/jQuery.each/#jQuery-each-array-callback}
      */
     each<T>(
         collection: T[],
-        callback: (indexInArray: number, valueOfElement: T) => boolean | void
-        ): T[];
+        callback: (indexInArray: number, valueOfElement: T) => any
+        ): any;
 
     /**
      * A generic iterator function, which can be used to seamlessly iterate over both objects and arrays. Arrays and array-like objects with a length property (such as a function's arguments object) are iterated by numeric index, from 0 to length-1. Other objects are iterated via their named properties.
      *
      * @param collection The object or array to iterate over.
-     * @param callback The function that will be executed on every object. Will break the loop by returning false.
-     * @returns the first argument, the object that is iterated.
+     * @param callback The function that will be executed on every object.
      * @see {@link https://api.jquery.com/jQuery.each/#jQuery-each-object-callback}
      */
-    each<T extends Object>(
-        collection: T,
-        // TODO: `(keyInObject: keyof T, valueOfElement: T[keyof T])`, when TypeScript 2.1 allowed in repository
-        callback: (keyInObject: string, valueOfElement: any) => boolean | void
-        ): T;
+    each(
+        collection: any,
+        callback: (indexInArray: any, valueOfElement: any) => any
+        ): any;
 
     /**
      * Merge the contents of two or more objects together into the first object.
@@ -1243,7 +1231,7 @@ interface JQueryStatic {
      * @param obj Object to test whether or not it is an array.
      * @see {@link https://api.jquery.com/jQuery.isArray/}
      */
-    isArray(obj: any): obj is Array<any>;
+    isArray(obj: any): boolean;
     /**
      * Check to see if an object is empty (contains no enumerable properties).
      *
@@ -1257,7 +1245,7 @@ interface JQueryStatic {
      * @param obj Object to test whether or not it is a function.
      * @see {@link https://api.jquery.com/jQuery.isFunction/}
      */
-    isFunction(obj: any): obj is Function;
+    isFunction(obj: any): boolean;
     /**
      * Determines whether its argument is a number.
      *
@@ -1278,7 +1266,7 @@ interface JQueryStatic {
      * @param obj Object to test whether or not it is a window.
      * @see {@link https://api.jquery.com/jQuery.isWindow/}
      */
-    isWindow(obj: any): obj is Window;
+    isWindow(obj: any): boolean;
     /**
      * Check to see if a DOM node is within an XML document (or is an XML document).
      *
@@ -1363,7 +1351,7 @@ interface JQueryStatic {
      * @param obj Object to get the internal JavaScript [[Class]] of.
      * @see {@link https://api.jquery.com/jQuery.type/}
      */
-    type(obj: any): "array" | "boolean" | "date" | "error" | "function" | "null" | "number" | "object" | "regexp" | "string" | "symbol" | "undefined";
+    type(obj: any): string;
 
     /**
      * Sorts an array of DOM elements, in place, with the duplicates removed. Note that this only works on arrays of DOM elements, not strings or numbers.
@@ -1371,7 +1359,7 @@ interface JQueryStatic {
      * @param array The Array of DOM elements.
      * @see {@link https://api.jquery.com/jQuery.unique/}
      */
-    unique<T extends Element>(array: T[]): T[];
+    unique(array: Element[]): Element[];
 
     /**
      * Parses a string into an array of DOM nodes.
@@ -3304,10 +3292,10 @@ interface JQuery {
     /**
      * Iterate over a jQuery object, executing a function for each matched element.
      *
-     * @param func A function to execute for each matched element. Can stop the loop by returning false.
+     * @param func A function to execute for each matched element.
      * @see {@link https://api.jquery.com/each/}
      */
-    each(func: (index: number, elem: Element) => boolean | void): JQuery;
+    each(func: (index: number, elem: Element) => any): JQuery;
 
     /**
      * Retrieve one of the elements matched by the jQuery object.
@@ -3460,7 +3448,7 @@ interface JQuery {
      * @param func A function used as a test for each element in the set. this is the current DOM element.
      * @see {@link https://api.jquery.com/filter/#filter-function}
      */
-    filter(func: (index: number, element: Element) => boolean): JQuery;
+    filter(func: (index: number, element: Element) => any): JQuery;
     /**
      * Reduce the set of matched elements to those that match the selector or pass the function's test.
      *
