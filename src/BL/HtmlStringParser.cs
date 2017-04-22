@@ -1,4 +1,5 @@
-﻿using HtmlAgilityPack;
+﻿using System.Net;
+using HtmlAgilityPack;
 
 namespace BL
 {
@@ -8,7 +9,7 @@ namespace BL
         {
             var document = new HtmlDocument();
             document.LoadHtml(html);
-            return document.DocumentNode.InnerText;
+            return WebUtility.HtmlDecode(document.DocumentNode.InnerText);
         }
     }
 }

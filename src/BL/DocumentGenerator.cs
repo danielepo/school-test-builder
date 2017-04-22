@@ -1,26 +1,19 @@
-﻿using DocumentFormat.OpenXml;
-using DocumentFormat.OpenXml.Packaging;
-using DocumentFormat.OpenXml.Wordprocessing;
-using Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Wordprocessing;
+using Entities;
 
 namespace BL
 {
     public class DocumentGenerator
     {
-        public void Create(int type, Exam exam)
-        {
-            var location = $"{AppDomain.CurrentDomain.BaseDirectory}/{exam.Title} - {type}.docx";
-            using (var package = WordprocessingDocument.Create(location, WordprocessingDocumentType.Document))
-            {
-                var mainDocumentPart = package.AddMainDocumentPart();
+        private readonly HtmlStringParser stringParser = new HtmlStringParser();
+        private readonly HtmlOpenXmlParser oxmlParser = new HtmlOpenXmlParser();
 
-                CreateDocument(type, exam).Save(mainDocumentPart);
-            }
-        }
         public Stream GetStream(int type, Exam exam)
         {
             var stream = new MemoryStream();
@@ -32,6 +25,7 @@ namespace BL
             }
             return stream;
         }
+
         private Document CreateDocument(int type, Exam exam)
         {
             var body = new Body(Title(exam.Title),
@@ -63,7 +57,7 @@ namespace BL
                     LastColumn = new OnOffValue(false),
                     LastRow = new OnOffValue(false),
                     NoHorizontalBand = new OnOffValue(false),
-                    NoVerticalBand = new OnOffValue(false),
+                    NoVerticalBand = new OnOffValue(false)
                 });
             var grid = new TableGrid(
                 new GridColumn { Width = "1256" },
@@ -96,8 +90,6 @@ namespace BL
                 ));
             return table;
         }
-
-        
 
         private Paragraph Title(string text)
         {
@@ -137,86 +129,45 @@ namespace BL
             for (int i = 0; i < length; i++)
             {
                 var answer = question.Choiches[i];
-                body.Append(ParagraphFrom(answer,i, i != length - 1));
+                body.Append(ParagraphFrom(answer, i != length - 1));
             }
-        }
-
-        private Table TableChoiches(ICollection<Answer> choiches)
-        {
-            var properties = new TableProperties(
-                //new TableIndentation { Width = 720, Type = TableWidthUnitValues.Dxa },
-                new TableWidth { Type = TableWidthUnitValues.Pct, Width = "5000" },
-                new TableLayout { Type = TableLayoutValues.Fixed },
-                new TableCellMargin
-                {
-                    TopMargin = new TopMargin { Width = "0", Type = TableWidthUnitValues.Dxa },
-                    LeftMargin = new LeftMargin { Width = "0", Type = TableWidthUnitValues.Dxa },
-                    RightMargin = new RightMargin { Width = "0", Type = TableWidthUnitValues.Dxa }
-                },
-                new TableLook
-                {
-                    Val = "0000",
-                    FirstColumn = new OnOffValue(false),
-                    FirstRow = new OnOffValue(false),
-                    LastColumn = new OnOffValue(false),
-                    LastRow = new OnOffValue(false),
-                    NoHorizontalBand = new OnOffValue(false),
-                    NoVerticalBand = new OnOffValue(false),
-                });
-            var grid = new TableGrid(
-                new GridColumn { Width = "4096" },
-                new GridColumn { Width = "4096" }
-                );
-            var table = new Table(properties, grid);
-            TableRow row = null;
-            for (int i = 0; i < choiches.Count; i++)
-            {
-                if (i % 2 == 0)
-                {
-                    if (row != null)
-                        table.Append(row);
-                    row = new TableRow();
-                }
-                row.Append(new TableCell(ParagraphFrom(choiches.ElementAt(i), i, i < choiches.Count - 2)));
-                //row.Append(new TableCell(Label("    " + (i + 1) + ". " + choiches.ElementAt(i).Text, i < choiches.Count - 2)));
-            }
-            if (row != null)
-                table.Append(row);
-            return table;
         }
 
         private Paragraph ParagraphFrom(Question question)
         {
-            var paragraphProperties = new ParagraphProperties(new NumberingProperties(new NumberingLevelReference() { Val = 0 }, new NumberingId() { Val = 1 }),
+            var paragraphProperties = new ParagraphProperties(new NumberingProperties(new NumberingLevelReference { Val = 0 }, new NumberingId { Val = 1 }),
                 new SpacingBetweenLines { Before = "75", After = "0", LineRule = LineSpacingRuleValues.Auto },
                 new KeepNext());
-            var runProperties = new RunProperties(new FontSize() { Val = "22" });
+            var runProperties = new RunProperties(new FontSize { Val = "22" });
             var extraSpace = 0;
             if (question.Space > 1)
                 extraSpace = question.Space - 1;
             return ParagraphFrom(question.Text, paragraphProperties, runProperties, extraSpace);
         }
 
-        private Paragraph ParagraphFrom(Answer answer, int index, bool keepNext)
+        private Paragraph ParagraphFrom(Answer answer, bool keepNext)
         {
-            var paragraphProperties = new ParagraphProperties(new NumberingProperties(new NumberingLevelReference() { Val = 1 }, new NumberingId() { Val = 1 }),
+            var paragraphProperties = new ParagraphProperties(new NumberingProperties(new NumberingLevelReference { Val = 1 }, new NumberingId { Val = 1 }),
                 new SpacingBetweenLines { Before = "0", After = "0", LineRule = LineSpacingRuleValues.Auto });
             if (keepNext)
                 paragraphProperties.Append(new KeepNext());
-            var runProperties = new RunProperties(new FontSize() { Val = "22" });
+            var runProperties = new RunProperties(new FontSize { Val = "22" });
             return ParagraphFrom(answer.Text, paragraphProperties, runProperties);
         }
 
         private Paragraph ParagraphFrom(string paragraphText, ParagraphProperties paragraphProperties = null, RunProperties runProperties = null, int? breaks = 0)
         {
-            var element =
-                new Paragraph(paragraphProperties,
-                    new Run(runProperties,
-                        new Text(paragraphText))
-                );
+            //var text = stringParser.Parse(paragraphText);
+            //var element =
+            //    new Paragraph(paragraphProperties,
+            //        new Run(runProperties,
+            //            new Text(text))
+            //    );
+            var element = oxmlParser.Parse(paragraphText, runProperties);
+            element.PrependChild(paragraphProperties);
             for (int i = 0; i < breaks; i++)
                 element.Append(new Break());
-            return element;
+            return (Paragraph)element;
         }
     }
 }

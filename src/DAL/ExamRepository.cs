@@ -4,25 +4,39 @@ using System.Linq;
 using Entities;
 using Entities.Extensions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
+
 namespace DAL
 {
     public class ExamRepository : IExamRepository
     {
-        private EntityDbContext context;
+        private readonly EntityDbContext context;
+
+        private IQueryable<Exam> AllExams
+        {
+            get
+            {
+                return context.Exams
+                    .Include(e => e.Questions)
+                    .ThenInclude(q => q.Choiches);
+            }
+        }
+
         public ExamRepository(EntityDbContext context)
         {
             this.context = context;
         }
-        private static List<Exam> Exams = new List<Exam>();
+
         public Exam GetByTitle(string title)
         {
-            return context.Exams
-                .Include(x => x.Questions).First(x => x.Title == title);
+            return AllExams.First(x => x.Title == title);
         }
+
         public IEnumerable<Exam> GetAll()
         {
-            return context.Exams.Include(x=> x.Questions);
+            return AllExams;
         }
+
         public void Insert(Exam exam)
         {
             context.Exams.Add(exam);
@@ -48,7 +62,7 @@ namespace DAL
 
         public Exam GetById(int id)
         {
-            return context.Exams.First(x => x.ExamId == id);
+            return AllExams.First(x => x.ExamId == id);
         }
     }
 }
