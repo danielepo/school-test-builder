@@ -10,11 +10,11 @@ namespace QuizH.Features.Exam
     public class ExamDownloadQueryHandler : IRequestHandler<ExamDownloadQuery, ExamDownloadViewModel>
     {
         private readonly IExamRepository repository;
-        ExamGenerator generator = new ExamGenerator();
-        DocumentGenerator documenter = new DocumentGenerator();
-        AnswerExtractor extractor = new AnswerExtractor();
-        AnswerSheetWriter writer = new AnswerSheetWriter();
-        Zipper zipper = new Zipper();
+        readonly ExamGenerator generator = new ExamGenerator();
+        readonly DocumentGenerator documenter = new DocumentGenerator();
+        readonly AnswerExtractor extractor = new AnswerExtractor();
+        readonly AnswerSheetWriter writer = new AnswerSheetWriter();
+        readonly Zipper zipper = new Zipper();
         public ExamDownloadQueryHandler(IExamRepository exams)
         {
             this.repository = exams;
