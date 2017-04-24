@@ -61,9 +61,10 @@ class ExamsViewModel {
 
     }
 
-    selectQuestion(id: KnockoutObservable<number>) {
-        this.selectedQuestions.push(this.availableQuestions()[id()]);
-        this.availableQuestions.splice(id(), 1);
+    selectQuestion(id: IQuestion) {
+        var index = this.availableQuestions().indexOf(id);
+        this.selectedQuestions.push(id);
+        this.availableQuestions.splice(index, 1);
     }
     filteredQuestions = () => ko.computed({
         owner: this,

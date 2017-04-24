@@ -62,18 +62,6 @@
     </div>
     <div class="col-md-6">
         <div class="filters">
-
-            <div class="form-group">
-                <label for="subjects">Argomenti:</label>
-                <select id="subjects"
-                        class="form-control"
-                        data-bind="options: subjects,
-                       optionsText: 'title',
-                       optionsValue: 'subjectId',
-                       value: selectedSubject,
-                       selectedOptions: [selectedSubject],
-                       optionsCaption: 'Choose...'"></select>
-            </div>
             <div class="form-group">
                 <label for="courses">Materie:</label>
                 <select id="courses"
@@ -85,7 +73,17 @@
                        selectedOptions: [selectedCourse],
                        optionsCaption: 'Choose...'"></select>
             </div>
-
+            <div class="form-group">
+                <label for="subjects">Argomenti:</label>
+                <select id="subjects"
+                        class="form-control"
+                        data-bind="options: subjects,
+                       optionsText: 'title',
+                       optionsValue: 'subjectId',
+                       value: selectedSubject,
+                       selectedOptions: [selectedSubject],
+                       optionsCaption: 'Choose...'"></select>
+            </div>
         </div>
         <div class="row">
             <!-- ko if: filteredQuestions().length > 0-->
@@ -98,7 +96,7 @@
                         <td data-bind="text: id"></td>
                         <td data-bind="html: text"></td>
                         <td data-bind="text: subjectId"></td>
-                        <td><a href="#" data-bind="click: function(){$parent.selectQuestion($index);}">Select</a></td>
+                        <td><a href="#" data-bind="click: function() { $parent.selectQuestion($data); }">Select</a></td>
                     </tr>
                 </tbody>
             </table>
