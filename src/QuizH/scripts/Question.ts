@@ -23,6 +23,7 @@ interface IAnswer {
 interface IQuestionViewModel {
     answers: IAnswer[];
     title: string;
+    freeTextLines: number;
 }
 class Answer implements IAnswer {
     text: string;
@@ -37,13 +38,14 @@ class QuestionViewModel {
     newAnswer: KnockoutObservable<string>;
     editor: IModal;
     title: KnockoutObservable<string>;
+    freeTextLines: KnockoutObservable<number>;
 
     constructor(model: IQuestionViewModel) {
         this.answers = ko.observableArray(model.answers);
         this.newAnswer = ko.observable("");
         this.editor = new ModalEditor();
         this.title = ko.observable(model.title);
-
+        this.freeTextLines = ko.observable(model.freeTextLines)
     }
 
 
