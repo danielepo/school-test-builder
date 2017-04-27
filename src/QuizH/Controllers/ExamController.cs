@@ -1,20 +1,14 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using QuizH.ViewModels;
-using Entities;
+﻿using Microsoft.AspNetCore.Mvc;
 using MediatR;
 using QuizH.Features.Exam;
 using QuizH.ViewModels.Exam;
-using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace QuizH.Controllers
 {
-    public class InMemoryExams
-    {
-        public static List<Exam> Exams = new List<Exam>();
-    }
+    [Authorize(Policy = "Professor")]
     public class ExamController : Controller
     {
         private readonly IMediator _mediator;

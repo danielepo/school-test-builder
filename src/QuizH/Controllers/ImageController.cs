@@ -1,4 +1,4 @@
-﻿using MediatR;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +8,8 @@ using System.IO;
 
 namespace QuizH.Controllers
 {
+
+    [Authorize(Policy = "Professor")]
     public class ImageController : Controller
     {
         private readonly IHostingEnvironment hostingEnvironment;

@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using DAL;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using QuizH.Features.Question;
 using QuizH.ViewModels.Question;
+using Microsoft.AspNetCore.Authorization;
 
 namespace QuizH.Controllers
 {
+    [Authorize(Policy = "Professor")]
     public class HomeController : Controller
     {
         private readonly IQuestionRepository questions;

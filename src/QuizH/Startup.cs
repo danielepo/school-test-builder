@@ -60,6 +60,9 @@ namespace QuizH
             services.AddMvc();
             services.AddMediatR();
 
+            services.AddAuthorization(options =>
+                options.AddPolicy("Professor", policy => policy.RequireClaim("IsProfessor")));
+
             // Add application services.
             //DAL
             services.AddSingleton<ICourseRepository, CourseRepository>();

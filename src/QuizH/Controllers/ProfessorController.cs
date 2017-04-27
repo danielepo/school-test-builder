@@ -26,7 +26,7 @@ namespace QuizH.Controllers
         // GET: /<controller>/
         public async Task<IActionResult> Index()
         {
-            var professors = await _userManager.GetUsersForClaimAsync(new System.Security.Claims.Claim("IsProfessor", "true"));
+            var professors = await _userManager.GetUsersForClaimAsync(new Claim("IsProfessor", "true"));
             var users = _userManager.Users
                 .Where(x => !professors.Any(y => y.Id == x.Id))
                 .Select(x => new UserViewModel { Id = x.Id, UserName = x.UserName })
@@ -52,7 +52,7 @@ namespace QuizH.Controllers
         }
         private async Task<IActionResult> Setup(ApplicationUser user)
         {
-            await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("IsProfessor", "true"));
+            await _userManager.AddClaimAsync(user, new Claim("IsProfessor", "true"));
             professorRepository.Insert(new Entities.Professor
             {
                 ProfessorId = new Guid(user.Id)

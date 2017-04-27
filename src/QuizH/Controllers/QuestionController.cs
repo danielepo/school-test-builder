@@ -1,10 +1,12 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using QuizH.Features.Question;
 using QuizH.ViewModels.Question;
 
 namespace QuizH.Controllers
 {
+    [Authorize(Policy = "Professor")]
     public class QuestionController : Controller
     {
         private readonly IMediator mediator;
@@ -63,6 +65,6 @@ namespace QuizH.Controllers
 
             return RedirectToAction("Index");
         }
-        
+
     }
 }
