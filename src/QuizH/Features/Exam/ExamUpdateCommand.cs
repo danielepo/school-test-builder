@@ -4,7 +4,7 @@ using QuizH.ViewModels.Exam;
 
 namespace QuizH.Features.Exam
 {
-    public class ExamUpdateCommand : IRequest
+    public class ExamUpdateCommand : IAsyncRequest
     {
         public ExamCreationViewModel Exam { get; set; }
 

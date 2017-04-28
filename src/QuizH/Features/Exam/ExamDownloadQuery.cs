@@ -4,7 +4,7 @@ using QuizH.ViewModels.Exam;
 
 namespace QuizH.Features.Exam
 {
-    public class ExamDownloadQuery : IRequest<ExamDownloadViewModel>
+    public class ExamDownloadQuery : IAsyncRequest<ExamDownloadViewModel>
     {
         public int Id { get; set; }
     }
