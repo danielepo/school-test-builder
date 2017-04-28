@@ -3,7 +3,7 @@ using QuizH.ViewModels.Question;
 
 namespace QuizH.Features.Question
 {
-    public class QuestionDetailsQuery : IRequest<QuestionDetailsViewModel>
+    public class QuestionDetailsQuery : IAsyncRequest<QuestionDetailsViewModel>
     {
         public int QuestionId;
     }

@@ -5,7 +5,7 @@ using QuizH.ViewModels.Question;
 
 namespace QuizH.Features.Question
 {
-    public class QuestionImportCommand : IRequest
+    public class QuestionImportCommand : IAsyncRequest
     {
         public QuestionImportViewModel Questions { get; set; }
     }

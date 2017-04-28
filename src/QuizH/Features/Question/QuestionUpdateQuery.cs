@@ -4,7 +4,7 @@ using QuizH.ViewModels.Question;
 
 namespace QuizH.Features.Question
 {
-    public class QuestionUpdateQuery : IRequest<QuestionCreationViewModel>
+    public class QuestionUpdateQuery : IAsyncRequest<QuestionCreationViewModel>
     {
         public int Id;
     }

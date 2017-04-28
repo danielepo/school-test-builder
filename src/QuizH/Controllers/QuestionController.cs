@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using QuizH.Features.Question;
 using QuizH.ViewModels.Question;
+using System.Threading.Tasks;
 
 namespace QuizH.Controllers
 {
@@ -14,54 +15,54 @@ namespace QuizH.Controllers
         {
             this.mediator = mediator;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var result = mediator.Send(new QuestionListQuery());
+            var result = await mediator.SendAsync(new QuestionListQuery());
             return View(result);
         }
-        public IActionResult Import()
+        public async Task<IActionResult> Import()
         {
-            return View(mediator.Send(new QuestionImportQuery()));
+            return View(await mediator.SendAsync(new QuestionImportQuery()));
         }
         [HttpPost]
-        public IActionResult Import(QuestionImportViewModel vm)
+        public async Task<IActionResult> Import(QuestionImportViewModel vm)
         {
-            var result = mediator.Send(new QuestionImportCommand() { Questions = vm });
+            var result = await mediator.SendAsync(new QuestionImportCommand() { Questions = vm });
             return RedirectToAction("Index");
         }
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            var result = mediator.Send(new QuestionListQuery());
+            var result = await mediator.SendAsync(new QuestionListQuery());
             return Json(result);
         }
 
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            var result = mediator.Send(new QuestionDetailsQuery() { QuestionId = id });
+            var result = await mediator.SendAsync(new QuestionDetailsQuery() { QuestionId = id });
             return View(result);
         }
         [HttpGet]
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            var vm = mediator.Send(new QuestionUpdateQuery { Id = id });
+            var vm = await mediator.SendAsync(new QuestionUpdateQuery { Id = id });
 
             return View("Insert", vm);
         }
 
         [HttpGet]
-        public IActionResult Insert()
+        public async Task<IActionResult> Insert()
         {
-            var vm = mediator.Send(new QuestionInsertQuery());
+            var vm = await mediator.SendAsync(new QuestionInsertQuery());
 
             return View(vm);
         }
         [HttpPost]
-        public IActionResult Insert(QuestionCreationViewModel question)
+        public async Task<IActionResult> Insert(QuestionCreationViewModel question)
         {
             var responce =
-                question.OldId == 0 ?
-                mediator.Send(new QuestionInsertCommand { Question = question }) :
-                mediator.Send(new QuestionUpdateCommand { Question = question });
+                await (question.OldId == 0 ?
+                mediator.SendAsync(new QuestionInsertCommand { Question = question }) :
+                mediator.SendAsync(new QuestionUpdateCommand { Question = question }));
 
             return RedirectToAction("Index");
         }
