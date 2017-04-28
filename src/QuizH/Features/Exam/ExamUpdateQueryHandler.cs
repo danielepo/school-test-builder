@@ -5,10 +5,11 @@ using QuizH.ViewModels;
 using QuizH.ViewModels.Exam;
 using System.Collections.Generic;
 using QuizH.ViewModels.Question;
+using System.Threading.Tasks;
 
 namespace QuizH.Features.Exam
 {
-    public class ExamUpdateQueryHandler : IRequestHandler<ExamUpdateQuery, ExamCreationViewModel>
+    public class ExamUpdateQueryHandler : IAsyncRequestHandler<ExamUpdateQuery, ExamCreationViewModel>
     {
         readonly IExamRepository exams;
         private readonly ICourseRepository courses;
@@ -21,18 +22,21 @@ namespace QuizH.Features.Exam
             this.courses = courses;
         }
 
-        public ExamCreationViewModel Handle(ExamUpdateQuery message)
+        public Task<ExamCreationViewModel> Handle(ExamUpdateQuery message)
         {
-            var exam = exams.GetByTitle(message.Title);
-            return new ExamCreationViewModel
+            return Task.Run(() =>
             {
-                Id = exam.ExamId,
-                Title = exam.Title,
-                Course = exam.Course.Title,
-                Instructions = exam.Instructions,
-                Questions = exam.Questions.Select(x => x.QuestionId).ToList(),
-                AvailableCourses = courses.GetAll().Select(x => x.Title).ToList()
-            };
+                var exam = exams.GetByTitle(message.Title);
+                return new ExamCreationViewModel
+                {
+                    Id = exam.ExamId,
+                    Title = exam.Title,
+                    Course = exam.Course.Title,
+                    Instructions = exam.Instructions,
+                    Questions = exam.Questions.Select(x => x.QuestionId).ToList(),
+                    AvailableCourses = courses.GetAll().Select(x => x.Title).ToList()
+                };
+            });
         }
     }
 }

@@ -5,10 +5,11 @@ using QuizH.ViewModels.Exam;
 using BL;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace QuizH.Features.Exam
 {
-    public class ExamDownloadQueryHandler : IRequestHandler<ExamDownloadQuery, ExamDownloadViewModel>
+    public class ExamDownloadQueryHandler : IAsyncRequestHandler<ExamDownloadQuery, ExamDownloadViewModel>
     {
         private readonly IExamRepository repository;
         private readonly ExamGenerator generator = new ExamGenerator();
@@ -23,19 +24,25 @@ namespace QuizH.Features.Exam
             this.repository = repository;
         }
 
-        public ExamDownloadViewModel Handle(ExamDownloadQuery message)
+        public Task<ExamDownloadViewModel> Handle(ExamDownloadQuery message)
         {
-            var exam = repository.GetById(message.Id);
-            var exams = generator.Create(exam, 4);
-            var files = new List<FileData>();
-            foreach (var e in exams)
-                files.Add(CreateExamFile(e.Key, e.Value));
-            files.Add(CreateAnswersFile(exams));
-            return new ExamDownloadViewModel
+            return Task.Run(() =>
             {
-                Stream = zipper.Zip(files),
-                FileName = parser.Parse(exam.Title) + ".zip"
-            };
+                var exam = repository.GetById(message.Id);
+                var exams = generator.Create(exam, 4);
+
+                var files = new List<FileData>();
+                foreach (var e in exams)
+                {
+                    files.Add(CreateExamFile(e.Key, e.Value));
+                }
+                files.Add(CreateAnswersFile(exams));
+                return new ExamDownloadViewModel
+                {
+                    Stream = zipper.Zip(files),
+                    FileName = parser.Parse(exam.Title) + ".zip"
+                };
+            });
         }
 
         private FileData CreateAnswersFile(IDictionary<int, Entities.Exam> exams)

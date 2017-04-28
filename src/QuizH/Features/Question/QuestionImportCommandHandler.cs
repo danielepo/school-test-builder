@@ -3,10 +3,11 @@ using BL.Interfaces;
 using DAL;
 using MediatR;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace QuizH.Features.Question
 {
-    public class QuestionImportCommandHandler : RequestHandler<QuestionImportCommand>
+    public class QuestionImportCommandHandler : AsyncRequestHandler<QuestionImportCommand>
     {
         private IQuestionParser parser;
         private IQuestionRepository repository;
@@ -19,16 +20,19 @@ namespace QuizH.Features.Question
             this.subjectRepo = subjectRepo;
         }
 
-        protected override void HandleCore(QuestionImportCommand message)
+        protected override Task HandleCore(QuestionImportCommand message)
         {
-            var vm = message.Questions;
-            var questions = parser.Parse(vm.Questions);
-            var subject = subjectRepo.GetByTitle(vm.Subject);
-            foreach (var q in questions)
+            return Task.Run(() =>
             {
-                q.Subject = subject;
-                repository.Add(q);
-            }
+                var vm = message.Questions;
+                var questions = parser.Parse(vm.Questions);
+                var subject = subjectRepo.GetByTitle(vm.Subject);
+                foreach (var q in questions)
+                {
+                    q.Subject = subject;
+                    repository.Add(q);
+                }
+            });
         }
     }
 }

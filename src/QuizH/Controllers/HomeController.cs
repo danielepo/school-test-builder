@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using QuizH.Features.Question;
 using QuizH.ViewModels.Question;
 using Microsoft.AspNetCore.Authorization;
+using System.Threading.Tasks;
 
 namespace QuizH.Controllers
 {
@@ -20,7 +21,7 @@ namespace QuizH.Controllers
             this.mediator = mediator;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             if (!questions.GetAll().Any())
             {
@@ -29,7 +30,7 @@ namespace QuizH.Controllers
                     Subject = "La cellula",
                     Questions = dummyQuestions
                 };
-                var result = mediator.Send(new QuestionImportCommand { Questions = vm });
+                var result = await mediator.SendAsync(new QuestionImportCommand { Questions = vm });
             }
             return View();
         }

@@ -3,10 +3,11 @@ using DAL;
 using MediatR;
 using QuizH.ViewModels;
 using QuizH.ViewModels.Exam;
+using System.Threading.Tasks;
 
 namespace QuizH.Features.Exam
 {
-    public class ExamListQueryHandler : IRequestHandler<ExamListQuery, ExamListViewModel>
+    public class ExamListQueryHandler : IAsyncRequestHandler<ExamListQuery, ExamListViewModel>
     {
         readonly ICourseRepository courses;
         readonly IExamRepository exams;
@@ -18,17 +19,20 @@ namespace QuizH.Features.Exam
         }
 
 
-        public ExamListViewModel Handle(ExamListQuery message)
+        public Task<ExamListViewModel> Handle(ExamListQuery message)
         {
-            return new ExamListViewModel
+            return Task.Run(() =>
             {
-                Exams = exams.GetAll().Select(x => new ExamDetailsViewModel
+                return new ExamListViewModel
                 {
-                    Title = x.Title,
-                    Instructions = x.Instructions,
-                    Course = x.Course.Title
-                })
-            };
+                    Exams = exams.GetAll().Select(x => new ExamDetailsViewModel
+                    {
+                        Title = x.Title,
+                        Instructions = x.Instructions,
+                        Course = x.Course.Title
+                    })
+                };
+            });
         }
     }
 }

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using DAL;
 using MediatR;
 using QuizH.ViewModels.Question;
+using System.Threading.Tasks;
 
 namespace QuizH.Features.Question
 {
-    public class QuestionUpdateQueryHandler : IRequestHandler<QuestionUpdateQuery, QuestionCreationViewModel>
+    public class QuestionUpdateQueryHandler : IAsyncRequestHandler<QuestionUpdateQuery, QuestionCreationViewModel>
     {
         readonly ISubjectRepository subjects;
         private readonly ICourseRepository courses;
@@ -19,25 +20,28 @@ namespace QuizH.Features.Question
             this.courses = courses;
         }
 
-        public QuestionCreationViewModel Handle(QuestionUpdateQuery message)
+        public Task<QuestionCreationViewModel> Handle(QuestionUpdateQuery message)
         {
-            var question = questions.GetById(message.Id);
-            if (question == null)
+            return Task.Run(() =>
             {
-                throw new QuestionNotFoundException();
-            }
-            return new QuestionCreationViewModel
-            {
-                Id = question.QuestionId,
-                OldId = question.QuestionId,
-                Answers = question.Choiches?.Select(x => new AnswerViewModel(x))?.ToList() ?? new List<AnswerViewModel>(),
-                Courses = question.Courses?.Select(x => x.CourseId)?.ToList() ?? new List<int>(),
-                Text = question.Text ?? string.Empty,
-                SubjectId = question.Subject?.SubjectId ?? 0,
-                AvailableCourses = courses.GetAll().Select(x => new CourseViewModel { Id = x.CourseId, Title = x.Title }).ToList(),
-                AvailableSubjects = subjects.GetAll().Select(x => new SubjectViewModel { Id = x.SubjectId, Title = x.Title }).ToList(),
-                FreeTextLines = question.Space
-            };
+                var question = questions.GetById(message.Id);
+                if (question == null)
+                {
+                    throw new QuestionNotFoundException();
+                }
+                return new QuestionCreationViewModel
+                {
+                    Id = question.QuestionId,
+                    OldId = question.QuestionId,
+                    Answers = question.Choiches?.Select(x => new AnswerViewModel(x))?.ToList() ?? new List<AnswerViewModel>(),
+                    Courses = question.Courses?.Select(x => x.CourseId)?.ToList() ?? new List<int>(),
+                    Text = question.Text ?? string.Empty,
+                    SubjectId = question.Subject?.SubjectId ?? 0,
+                    AvailableCourses = courses.GetAll().Select(x => new CourseViewModel { Id = x.CourseId, Title = x.Title }).ToList(),
+                    AvailableSubjects = subjects.GetAll().Select(x => new SubjectViewModel { Id = x.SubjectId, Title = x.Title }).ToList(),
+                    FreeTextLines = question.Space
+                };
+            });
         }
     }
 }

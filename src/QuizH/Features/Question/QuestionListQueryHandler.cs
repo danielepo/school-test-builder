@@ -4,10 +4,11 @@ using MediatR;
 using QuizH.ViewModels.Question;
 using System.Collections.Generic;
 using Entities;
+using System.Threading.Tasks;
 
 namespace QuizH.Features.Question
 {
-    public class QuestionListQueryHandler : IRequestHandler<QuestionListQuery, QuestionListViewModel>
+    public class QuestionListQueryHandler : IAsyncRequestHandler<QuestionListQuery, QuestionListViewModel>
     {
         readonly IQuestionRepository questions;
         readonly ISubjectRepository subjects;
@@ -21,21 +22,20 @@ namespace QuizH.Features.Question
             this.courses = courses;
         }
 
-        public QuestionListViewModel Handle(QuestionListQuery message)
+        public Task<QuestionListViewModel> Handle(QuestionListQuery message)
         {
-            var randomGenerator = new System.Random();
-            return new QuestionListViewModel()
+            return Task.Run(() => new QuestionListViewModel()
             {
                 Questions = questions.GetAll().Select(x => new QuestionViewModel
                 {
                     Text = x.Text,
                     Id = x.QuestionId,
                     SubjectId = x.Subject?.SubjectId ?? 0,
-                    Courses = x.Courses?.Select(c => c.CourseId) ?? new List<int>() ,
+                    Courses = x.Courses?.Select(c => c.CourseId) ?? new List<int>(),
                 }).ToList(),
                 Subjects = subjects.GetAll(),
                 Courses = courses.GetAll()
-            };
+            });
         }
 
     }

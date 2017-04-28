@@ -5,10 +5,11 @@ using QuizH.ViewModels;
 using QuizH.ViewModels.Question;
 using System.Collections.Generic;
 using QuizH.ViewModels.Question;
+using System.Threading.Tasks;
 
 namespace QuizH.Features.Question
 {
-    public class QuestionInsertQueryHandler : IRequestHandler<QuestionInsertQuery, QuestionCreationViewModel>
+    public class QuestionInsertQueryHandler : IAsyncRequestHandler<QuestionInsertQuery, QuestionCreationViewModel>
     {
         readonly ICourseRepository courses;
         readonly ISubjectRepository subjects;
@@ -20,13 +21,13 @@ namespace QuizH.Features.Question
         }
 
 
-        public QuestionCreationViewModel Handle(QuestionInsertQuery message)
+        public Task<QuestionCreationViewModel> Handle(QuestionInsertQuery message)
         {
-            return new QuestionCreationViewModel
+            return Task.Run(() => new QuestionCreationViewModel
             {
                 AvailableCourses = courses.GetAll().Select(x => new CourseViewModel { Id = x.CourseId, Title = x.Title }).ToList(),
                 AvailableSubjects = subjects.GetAll().Select(x => new SubjectViewModel { Id = x.SubjectId, Title = x.Title }).ToList(),
-            };
+            });
         }
     }
 }

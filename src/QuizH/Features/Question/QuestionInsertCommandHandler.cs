@@ -2,10 +2,11 @@
 using MediatR;
 using System.Linq;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace QuizH.Features.Question
 {
-    public class QuestionInsertCommandHandler : RequestHandler<QuestionInsertCommand>
+    public class QuestionInsertCommandHandler : AsyncRequestHandler<QuestionInsertCommand>
     {
         private readonly ISubjectRepository subjects;
         private readonly ICourseRepository courses;
@@ -19,18 +20,21 @@ namespace QuizH.Features.Question
             this.subjects = subjects;
         }
 
-        protected override void HandleCore(QuestionInsertCommand message)
+        protected override Task HandleCore(QuestionInsertCommand message)
         {
-            var questionVm = message.Question;
-
-            var question = new Entities.Question(questionVm.Text)
+            return Task.Run(() =>
             {
-                Subject = subjects.GetById(questionVm.SubjectId),
-                Courses = courses.GetAll().Where(x => questionVm.Courses.Contains(x.CourseId)).ToList(),
-                Choiches = questionVm.Answers?.Select(x => new Entities.Answer(x.Text, x.IsCorrect ? 1 : 0)).ToList() ?? new List<Entities.Answer>(),
-                Space = questionVm.FreeTextLines
-            };
-            questions.Add(question);
+                var questionVm = message.Question;
+
+                var question = new Entities.Question(questionVm.Text)
+                {
+                    Subject = subjects.GetById(questionVm.SubjectId),
+                    Courses = courses.GetAll().Where(x => questionVm.Courses.Contains(x.CourseId)).ToList(),
+                    Choiches = questionVm.Answers?.Select(x => new Entities.Answer(x.Text, x.IsCorrect ? 1 : 0)).ToList() ?? new List<Entities.Answer>(),
+                    Space = questionVm.FreeTextLines
+                };
+                questions.Add(question);
+            });
         }
     }
 }

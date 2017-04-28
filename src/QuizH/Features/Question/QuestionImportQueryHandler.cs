@@ -2,10 +2,11 @@ using DAL;
 using MediatR;
 using QuizH.ViewModels.Question;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace QuizH.Features.Question
 {
-    public class QuestionImportQueryHandler : IRequestHandler<QuestionImportQuery, QuestionImportViewModel>
+    public class QuestionImportQueryHandler : IAsyncRequestHandler<QuestionImportQuery, QuestionImportViewModel>
     {
         private ISubjectRepository repository;
 
@@ -14,12 +15,12 @@ namespace QuizH.Features.Question
             this.repository = repository;
         }
 
-        public QuestionImportViewModel Handle(QuestionImportQuery message)
+        public Task<QuestionImportViewModel> Handle(QuestionImportQuery message)
         {
-            return new QuestionImportViewModel()
+            return Task.Run(() => new QuestionImportViewModel()
             {
                 AvailableSubjects = repository.GetAll().Select(x => x.Title).ToList(),
-            };
+            });
         }
     }
 }

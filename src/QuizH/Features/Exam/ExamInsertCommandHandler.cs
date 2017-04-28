@@ -2,10 +2,11 @@
 using Entities.Extensions;
 using MediatR;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace QuizH.Features.Exam
 {
-    public class ExamInsertCommandHandler : RequestHandler<ExamInsertCommand>
+    public class ExamInsertCommandHandler : AsyncRequestHandler<ExamInsertCommand>
     {
         private readonly ICourseRepository courses;
         private readonly IQuestionRepository questions;
@@ -18,7 +19,7 @@ namespace QuizH.Features.Exam
             this.courses = courses;
         }
 
-        protected override void HandleCore(ExamInsertCommand message)
+        protected override Task HandleCore(ExamInsertCommand message)
         {
             var examVM = message.Exam;
 
@@ -29,10 +30,11 @@ namespace QuizH.Features.Exam
                 Instructions = examVM.Instructions,
                 Course = courses.GetByTitle(examVM.Course),
             };
-
-            exam.Insert(questions.GetAll().Where(x => examVM.Questions.Contains(x.QuestionId)));
-
-            exams.Insert(exam);
+            return Task.Run(() =>
+            {
+                exam.Insert(questions.GetAll().Where(x => examVM.Questions.Contains(x.QuestionId)));
+                exams.Insert(exam);
+            });
         }
     }
 }

@@ -7,13 +7,15 @@ using QuizH.Features.Question;
 using QuizH.ViewModels.Question;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+
 namespace App.Test
 {
     [TestFixture]
     class QuestionDetailsQueryHandlerTests
     {
         [Test]
-        public void QuestionNotFoundThrowsAnException()
+        public async Task QuestionNotFoundThrowsAnException()
         {
             var questions = new Mock<IQuestionRepository>();
             var question = new Question("irrelevant")
@@ -38,7 +40,7 @@ namespace App.Test
             {
                 QuestionId = 1
             };
-            var result = sut.Handle(query);
+            var result = await sut.Handle(query);
 
             Assert.That(result.Text, Is.EqualTo("irrelevant"));
             Assert.That(result.Courses.Count, Is.EqualTo(2));
