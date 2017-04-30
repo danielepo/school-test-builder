@@ -7,6 +7,8 @@ using QuizH.Features.Question;
 using QuizH.ViewModels.Question;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+
 namespace App.Test
 {
     [TestFixture]
@@ -23,10 +25,10 @@ namespace App.Test
             {
                 Id = 0
             };
-            Assert.Throws<QuestionNotFoundException>(() => sut.Handle(query));
+            Assert.ThrowsAsync<QuestionNotFoundException>(async () => await sut.Handle(query));
         }
         [Test]
-        public void ReturnsValidObjectEvenIfLotsOfNulls()
+        public async Task ReturnsValidObjectEvenIfLotsOfNulls()
         {
             var subjects = new Mock<ISubjectRepository>();
             var questions = new Mock<IQuestionRepository>();
@@ -37,7 +39,7 @@ namespace App.Test
             {
                 Id = 0
             };
-            var result = sut.Handle(query);
+            var result = await sut.Handle(query);
             Assert.That(result.Id, Is.EqualTo(0));
             Assert.That(result.SubjectId, Is.EqualTo(0));
             Assert.That(result.OldId, Is.EqualTo(0));
@@ -49,7 +51,7 @@ namespace App.Test
 
         }
         [Test]
-        public void ReturnsCorrectViewModel()
+        public async Task ReturnsCorrectViewModel()
         {
             var subjects = new Mock<ISubjectRepository>();
             var questions = new Mock<IQuestionRepository>();
@@ -76,7 +78,7 @@ namespace App.Test
             {
                 Id = 0
             };
-            var result = sut.Handle(query);
+            var result = await sut.Handle(query);
             Assert.That(result.Id, Is.EqualTo(1));
             Assert.That(result.SubjectId, Is.EqualTo(2));
             Assert.That(result.OldId, Is.EqualTo(1));
