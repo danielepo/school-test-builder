@@ -13,7 +13,8 @@ namespace BL
     {
         private readonly HtmlStringParser stringParser = new HtmlStringParser();
         private readonly HtmlOpenXmlParser oxmlParser = new HtmlOpenXmlParser();
-
+        public Professor professor { get; set; }
+        
         public Stream GetStream(int type, Exam exam)
         {
             var stream = new MemoryStream();
@@ -29,7 +30,7 @@ namespace BL
         private Document CreateDocument(int type, Exam exam)
         {
             var body = new Body(Title(exam.Title),
-                Table(type),
+                Table(type, professor),
                 Instruction(exam.Instructions));
 
             foreach (var question in exam.Questions)
@@ -38,7 +39,7 @@ namespace BL
             return new Document(body);
         }
 
-        private Table Table(int type)
+        protected Table Table(int type, Professor professor)
         {
             var properties = new TableProperties(
                 new TableWidth { Type = TableWidthUnitValues.Pct, Width = "5000" },
@@ -69,7 +70,7 @@ namespace BL
             var table = new Table(properties, grid);
             table.Append(new TableRow(
                 new TableCell(Label("Insegnate:")),
-                new TableCell(Value("Settimi Maria Rosa")),
+                new TableCell(Value($"{professor?.Name} {professor?.Surname}")),
                 new TableCell(Label("")),
                 new TableCell(Label("Nome:")),
                 new TableCell(Value(""))

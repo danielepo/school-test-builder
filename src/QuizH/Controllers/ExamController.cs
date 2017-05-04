@@ -61,7 +61,8 @@ namespace QuizH.Controllers
         [HttpPost]
         public async Task<IActionResult> Download(int id)
         {
-            var vm = await _mediator.SendAsync(new ExamDownloadQuery { Id = id });
+            
+            var vm = await _mediator.SendAsync(new ExamDownloadQuery { Id = id , User = User});
             return File(vm.Stream, "application/zip", vm.FileName);
         }
     }

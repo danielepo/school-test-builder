@@ -203,6 +203,7 @@ namespace QuizH.Controllers
             {
                 // Get the information about the user from the external login provider
                 var info = await _signInManager.GetExternalLoginInfoAsync();
+                
                 if (info == null)
                 {
                     return View("ExternalLoginFailure");

@@ -55,7 +55,9 @@ namespace QuizH.Controllers
             await _userManager.AddClaimAsync(user, new Claim("IsProfessor", "true"));
             professorRepository.Insert(new Entities.Professor
             {
-                ProfessorId = new Guid(user.Id)
+                ProfessorId = new Guid(user.Id),
+                Name = user.Name,
+                Surname = user.Surname
             });
             return Ok();
         }
