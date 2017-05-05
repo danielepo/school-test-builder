@@ -31,7 +31,7 @@ namespace BL
         {
             var body = new Body(Title(exam.Title),
                 Table(type, professor),
-                Instruction(exam.Instructions));
+                Instruction(exam.Instructions ?? ""));
 
             foreach (var question in exam.Questions)
                 AppendQuestion(body, question);
