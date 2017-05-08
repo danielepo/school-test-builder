@@ -29,9 +29,20 @@ namespace DAL
         {
             return context.Courses.First(x => x.Title == title);
         }
-        public IEnumerable<Course> GetAll()
+        public IQueryable<Course> GetAll()
         {
             return context.Courses;
+        }
+
+        public Course GetById(int id)
+        {
+            return context.Courses.First(x => x.CourseId == id);
+        }
+
+        public async Task Insert(Course course)
+        {
+            await context.Courses.AddAsync(course);
+            await context.SaveChangesAsync();
         }
     }
 }

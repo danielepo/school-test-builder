@@ -1,0 +1,32 @@
+﻿@model IEnumerable<QuizH.ViewModels.Question.CourseViewModel>
+
+
+<table class="table table-striped">
+    <thead><tr><td>Title</td><td>Description</td></tr></thead>
+    <tbody>
+
+        @foreach (var course in Model)
+        {
+            <tr>
+                <td>@course.Title</td>
+                <td>@course.Description</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<form asp-controller="Course" asp-action="Insert" method="post">
+    <label for="title">
+        Titolo
+    </label>
+    <div>
+        <input class="form-control" name="title" />
+    </div><label for="description">
+        Description
+    </label>
+    <div>
+        <input class="form-control" name="description" />
+    </div>
+
+    <input class="btn" type="submit" />
+</form>
+@Html.ActionLink("Insert a new Exam", "Insert")
