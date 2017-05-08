@@ -14,7 +14,7 @@ namespace BL
         private readonly HtmlStringParser stringParser = new HtmlStringParser();
         private readonly HtmlOpenXmlParser oxmlParser = new HtmlOpenXmlParser();
         public Professor professor { get; set; }
-        
+
         public Stream GetStream(int type, Exam exam)
         {
             var stream = new MemoryStream();
@@ -166,9 +166,44 @@ namespace BL
             //    );
             var element = oxmlParser.Parse(paragraphText, runProperties);
             element.PrependChild(paragraphProperties);
-            for (int i = 0; i < breaks; i++)
+            if (breaks > 0)
+            {
                 element.Append(new Break());
+                element.Append(TableBreak(breaks));
+            }
             return (Paragraph)element;
+        }
+
+        private Table TableBreak(int? breaks)
+        {
+            var properties = new TableProperties(
+                            new TableWidth { Type = TableWidthUnitValues.Pct, Width = "5000" },
+                            new TableLayout { Type = TableLayoutValues.Fixed },
+                            new TableCellMargin
+                            {
+                                TopMargin = new TopMargin { Width = "115", Type = TableWidthUnitValues.Dxa },
+                                LeftMargin = new LeftMargin { Width = "0", Type = TableWidthUnitValues.Dxa },
+                                RightMargin = new RightMargin { Width = "0", Type = TableWidthUnitValues.Dxa }
+                            },
+                            new TableLook
+                            {
+                                Val = "0000",
+                                FirstColumn = new OnOffValue(false),
+                                FirstRow = new OnOffValue(false),
+                                LastColumn = new OnOffValue(false),
+                                LastRow = new OnOffValue(false),
+                                NoHorizontalBand = new OnOffValue(false),
+                                NoVerticalBand = new OnOffValue(false)
+                            });
+            var grid = new TableGrid(
+                new GridColumn { Width = "1256" });
+            var table = new Table(properties, grid);
+            while (breaks >= 0)
+            {
+                table.Append(new TableRow(new TableCell(Value(""))));
+                breaks--;
+            }
+            return table;
         }
     }
 }
