@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Entities;
+using System.Threading.Tasks;
 
 namespace DAL
 {
@@ -8,5 +9,6 @@ namespace DAL
         IEnumerable<Professor> GetAll();
         Professor GetById(string id);
         void Insert(Professor prof);
+        Task Update(Professor prof);
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using QuizH.Models;
 using QuizH.Services;
 using QuizH.ViewModels.Manage;
+using DAL;
 
 namespace QuizH.Controllers
 {
@@ -18,19 +19,22 @@ namespace QuizH.Controllers
         private readonly IEmailSender _emailSender;
         private readonly ISmsSender _smsSender;
         private readonly ILogger _logger;
+        private readonly IProfessorRepository _professors;
 
         public ManageController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
             ISmsSender smsSender,
-            ILoggerFactory loggerFactory)
+            ILoggerFactory loggerFactory, 
+            IProfessorRepository professors)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _smsSender = smsSender;
             _logger = loggerFactory.CreateLogger<ManageController>();
+            _professors = professors;
         }
 
         //
@@ -75,13 +79,20 @@ namespace QuizH.Controllers
             });
         }
         [HttpPost]
-        public async Task<IActionResult> EditName(ChangeNameViewModel viewModel)
+        public async Task<IActionResult> EditName(ChangeNameViewModel vm)
         {
             var user = await GetCurrentUserAsync();
-            user.Name = viewModel.Name;
-            user.Surname = viewModel.Surname;
+            user.Name = vm.Name;
+            user.Surname = vm.Surname;
 
             await _userManager.UpdateAsync(user);
+
+            var prof = _professors.GetById(user.Id);
+            prof.Name = vm.Name;
+            prof.Surname = vm.Surname;
+
+            await _professors.Update(prof);
+
             return RedirectToAction("Index");
         }
         //
