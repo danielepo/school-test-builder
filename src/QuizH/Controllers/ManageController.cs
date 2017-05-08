@@ -58,11 +58,32 @@ namespace QuizH.Controllers
                 PhoneNumber = await _userManager.GetPhoneNumberAsync(user),
                 TwoFactor = await _userManager.GetTwoFactorEnabledAsync(user),
                 Logins = await _userManager.GetLoginsAsync(user),
+                Name = user.Name,
+                Surname = user.Surname,
                 BrowserRemembered = await _signInManager.IsTwoFactorClientRememberedAsync(user)
             };
             return View(model);
         }
+        [HttpGet]
+        public async Task<IActionResult> EditName()
+        {
+            var user = await GetCurrentUserAsync();
+            return View(new ChangeNameViewModel()
+            {
+                Name = user.Name,
+                Surname = user.Surname
+            });
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditName(ChangeNameViewModel viewModel)
+        {
+            var user = await GetCurrentUserAsync();
+            user.Name = viewModel.Name;
+            user.Surname = viewModel.Surname;
 
+            await _userManager.UpdateAsync(user);
+            return RedirectToAction("Index");
+        }
         //
         // POST: /Manage/RemoveLogin
         [HttpPost]

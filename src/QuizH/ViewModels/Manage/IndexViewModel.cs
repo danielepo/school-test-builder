@@ -14,5 +14,7 @@ namespace QuizH.ViewModels.Manage
         public bool TwoFactor { get; set; }
 
         public bool BrowserRemembered { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
     }
 }

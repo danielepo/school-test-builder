@@ -10,6 +10,18 @@
     <h4>Change your account settings</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>Name:</dt>
+        <dd>
+            @if (string.IsNullOrEmpty(Model.Name) || string.IsNullOrEmpty(Model.Surname))
+            {
+                <a asp-controller="Manage" asp-action="EditName" class="btn-bracketed">Create</a>
+            }
+            else
+            {
+                <span>@Model.Name</span> <span>@Model.Surname</span>
+                <a asp-controller="Manage" asp-action="EditName" class="btn-bracketed">Change</a>
+            }
+        </dd>
         <dt>Password:</dt>
         <dd>
             @if (Model.HasPassword)
