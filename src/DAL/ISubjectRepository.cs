@@ -1,5 +1,6 @@
 ﻿using Entities;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DAL
 {
@@ -9,5 +10,6 @@ namespace DAL
 
         Subject GetByTitle(string title);
         Subject GetById(int subjectId);
+        Task Insert(Subject subject);
     }
 }

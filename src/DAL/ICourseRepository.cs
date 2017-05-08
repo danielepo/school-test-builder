@@ -7,7 +7,7 @@ namespace DAL
 {
     public interface ICourseRepository
     {
-        IQueryable<Course> GetAll();
+        IEnumerable<Course> GetAll();
         Course GetByTitle(string title);
         Course GetById(int id);
         Task Insert(Course course);

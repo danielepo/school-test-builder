@@ -1,8 +1,6 @@
 ﻿using Entities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DAL
@@ -38,6 +36,12 @@ namespace DAL
         public Subject GetById(int subjectId)
         {
             return context.Subjects.FirstOrDefault(x => x.SubjectId == subjectId);
+        }
+
+        public async Task Insert(Subject subject)
+        {
+            await context.Subjects.AddAsync(subject);
+            await context.SaveChangesAsync();
         }
     }
 }

@@ -29,7 +29,7 @@ namespace DAL
         {
             return context.Courses.First(x => x.Title == title);
         }
-        public IQueryable<Course> GetAll()
+        public IEnumerable<Course> GetAll()
         {
             return context.Courses;
         }
