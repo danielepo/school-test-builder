@@ -10,8 +10,8 @@
             <tr>
                 <td>@Html.Raw(exam.Title)</td>
                 <td>@exam.Course</td>
-                <td>@Html.ActionLink("Edit", "Edit", new { title = exam.Title })</td>
-                <td>@Html.ActionLink("Details", "Details", new { title = exam.Title })</td>
+                <td>@Html.ActionLink("Edit", "Edit", new { id = exam.Id })</td>
+                <td>@Html.ActionLink("Details", "Details", new { id = exam.Id })</td>
             </tr>
         }
     </tbody>

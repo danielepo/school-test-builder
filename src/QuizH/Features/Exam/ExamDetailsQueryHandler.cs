@@ -19,7 +19,7 @@ namespace QuizH.Features.Exam
 
         Task<ExamDetailsViewModel> IAsyncRequestHandler<ExamDetailsQuery, ExamDetailsViewModel>.Handle(ExamDetailsQuery message)
         {
-            return Task.Run(() => ExamDetailsViewModel.Create(exams.GetByTitle(message.Title)));
+            return Task.Run(() => ExamDetailsViewModel.Create(exams.GetById(message.Id)));
         }
     }
 }

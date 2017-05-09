@@ -6,6 +6,6 @@ namespace QuizH.Features.Exam
 {
     public class ExamDetailsQuery : IAsyncRequest<ExamDetailsViewModel>
     {
-        public string Title;
+        public int Id;
     }
 }

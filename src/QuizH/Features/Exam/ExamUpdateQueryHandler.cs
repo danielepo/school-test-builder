@@ -26,7 +26,7 @@ namespace QuizH.Features.Exam
         {
             return Task.Run(() =>
             {
-                var exam = exams.GetByTitle(message.Title);
+                var exam = exams.GetById(message.Id);
                 return new ExamCreationViewModel
                 {
                     Id = exam.ExamId,

@@ -23,24 +23,24 @@ namespace QuizH.Controllers
         public async Task<IActionResult> Index()
         {
             var vm = await _mediator.SendAsync(new ExamListQuery());
-            
-            return View(vm);
-        }
-        [HttpGet]
-        public async Task<IActionResult> Details(string title)
-        {
-            var vm = await _mediator.SendAsync(new ExamDetailsQuery { Title = title });
 
             return View(vm);
         }
         [HttpGet]
-        public async Task<IActionResult> Edit(string title)
+        public async Task<IActionResult> Details(int id)
         {
-            var vm = await _mediator.SendAsync(new ExamUpdateQuery { Title = title });
+            var vm = await _mediator.SendAsync(new ExamDetailsQuery { Id = id });
 
-            return View("Insert",vm);
+            return View(vm);
         }
-        
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var vm = await _mediator.SendAsync(new ExamUpdateQuery { Id = id });
+
+            return View("Insert", vm);
+        }
+
         [HttpGet]
         public async Task<IActionResult> Insert()
         {
@@ -51,7 +51,7 @@ namespace QuizH.Controllers
         [HttpPost]
         public async Task<IActionResult> Insert(ExamCreationViewModel exam)
         {
-            if(exam.Id == 0)
+            if (exam.Id == 0)
                 await _mediator.SendAsync(new ExamInsertCommand { Exam = exam });
             else
                 await _mediator.SendAsync(new ExamUpdateCommand { Exam = exam });
@@ -61,8 +61,8 @@ namespace QuizH.Controllers
         [HttpPost]
         public async Task<IActionResult> Download(int id)
         {
-            
-            var vm = await _mediator.SendAsync(new ExamDownloadQuery { Id = id , User = User});
+
+            var vm = await _mediator.SendAsync(new ExamDownloadQuery { Id = id, User = User });
             return File(vm.Stream, "application/zip", vm.FileName);
         }
     }
