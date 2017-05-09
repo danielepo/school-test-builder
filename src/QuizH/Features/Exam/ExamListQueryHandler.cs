@@ -27,6 +27,7 @@ namespace QuizH.Features.Exam
                 {
                     Exams = exams.GetAll().Select(x => new ExamDetailsViewModel
                     {
+                        Id = x.ExamId,
                         Title = x.Title,
                         Instructions = x.Instructions,
                         Course = x.Course.Title
