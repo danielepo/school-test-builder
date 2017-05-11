@@ -6,7 +6,8 @@ using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using Entities;
-
+using System.Text;
+using NotesFor.HtmlToOpenXml;
 namespace BL
 {
     public class DocumentGenerator
@@ -22,7 +23,7 @@ namespace BL
             {
                 var mainDocumentPart = package.AddMainDocumentPart();
 
-                CreateDocument(type, exam).Save(mainDocumentPart);
+                CreateDocument2(type, exam, mainDocumentPart).Save(mainDocumentPart);
             }
             return stream;
         }
@@ -38,7 +39,54 @@ namespace BL
 
             return new Document(body);
         }
+        private Document CreateDocument2(int type, Exam exam, MainDocumentPart part)
+        {
+            var head = $"<head><title>{exam.Title}</title></head>";
+            var table = $"<table><tbody>" +
+                $"<tr><td>Insegnate:</td><td>{professor?.Name} {professor?.Surname}</td><td></td>Nome: <td></td><td></td></tr>" +
+                $"<tr><td>Variante:</td><td>{type}</td><td></td><td>Classe:</td><td></td></tr>" +
+                $"<tr><td>Voto:</td><td></td><td></td><td>Data:</td><td></td></tr>" +
+                $"</tbody></table>";
+            var instructions = $"<div>{exam.Instructions}</div>";
+            StringBuilder questions = new StringBuilder();
 
+            foreach (var question in exam.Questions)
+            {
+                questions.Append("<div>");
+                questions.Append(question.Text);
+                if (question.Choiches.Any())
+                {
+                    questions.Append("<ol>");
+                    foreach (var choice in question.Choiches)
+                    {
+                        questions.Append($"<li>{choice.Text}</li>");
+                    }
+                    questions.Append("</ol>");
+                }
+                else
+                {
+                    questions.Append("<table><tbody>");
+                    for (var i = 0; i < question.Space; i++)
+                    {
+                        questions.Append($"<tr><td></td><tr>");
+                    }
+                    questions.Append("</tbody></table>");
+                }
+
+            }
+            var document = $"<html>{head}<body>{table}{instructions}{questions.ToString()}</body></html>";
+
+            HtmlConverter converter = new HtmlConverter(part);
+            converter.ImageProcessing = ImageProcessing.ManualProvisioning;
+            //converter.BaseImageUrl = new Uri();
+            converter.ProvisionImage += (sender, e) =>
+            {
+                var imageUrl = e.ImageUrl;
+                e.Provision(File.ReadAllBytes(@"wwwroot"+imageUrl));
+            };
+            converter.ParseHtml(document);
+            return part.Document;
+        }
         protected Table Table(int type, Professor professor)
         {
             var properties = new TableProperties(
