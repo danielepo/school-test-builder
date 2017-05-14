@@ -93,8 +93,8 @@
 
         var model = {
             answers: answers,
-            title: '@Html.Raw(Model.Text)',
-            freeTextLines: '@Model.FreeTextLines'
+            title: "@Html.Raw(Model.Text)",
+            freeTextLines: @Model.FreeTextLines
         };
         vm = new QuestionViewModel(model);
         ko.applyBindings(vm);

@@ -122,8 +122,8 @@
                 alreadySelectedQuestions: questions,
                 subjects: data.subjects,
                 courses: data.courses,
-                title: '@Html.Raw(Model.Title)',
-                instructions: '@Html.Raw(Model.Instructions)'
+                title: "@Html.Raw(Model.Title)",
+                instructions: "@Html.Raw(Model.Instructions)"
             };
             vm = new ExamsViewModel(model);
             ko.applyBindings(vm);
