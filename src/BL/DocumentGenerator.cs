@@ -39,14 +39,15 @@ namespace BL
 
             return new Document(body);
         }
+
         private Document CreateDocument2(int type, Exam exam, MainDocumentPart part)
         {
             var head = $"<head><title>{exam.Title}</title></head>";
-            var table = $"<table><tbody>" +
-                $"<tr><td>Insegnate:</td><td>{professor?.Name} {professor?.Surname}</td><td></td>Nome: <td></td><td></td></tr>" +
-                $"<tr><td>Variante:</td><td>{type}</td><td></td><td>Classe:</td><td></td></tr>" +
-                $"<tr><td>Voto:</td><td></td><td></td><td>Data:</td><td></td></tr>" +
-                $"</tbody></table>";
+            var table = $@"<table width='100%' border='1'><tbody>
+                <tr><td width='13%'>Insegnate:</td><td width='32%'>{professor?.Name} {professor?.Surname}</td></td><td width='16%'>Nome: </td><td width='39%'></td></tr>
+                <tr><td width='13%'>Variante:</td><td width='32%'>{type}</td><td width='16%'>Classe:</td><td width='39%'></td></tr>
+                <tr><td width='13%'>Voto:</td><td width='32%'></td><td width='16%'>Data:</td><td width='39%'></td></tr>
+                </tbody></table>";
             var instructions = $"<div>{exam.Instructions}</div>";
             StringBuilder questions = new StringBuilder();
 
