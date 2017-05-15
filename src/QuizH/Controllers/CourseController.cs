@@ -16,7 +16,8 @@ namespace QuizH.Controllers
         }
         public IActionResult Index()
         {
-            var vm = courses.GetAll().Select(x => new CourseViewModel() { Id = x.CourseId, Title = x.Title });
+            var vm = courses.GetAll()
+                .Select(x => new CourseViewModel() { Id = x.CourseId, Title = x.Title });
             return View(vm);
         }
         [HttpPost]
