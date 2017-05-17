@@ -6,6 +6,9 @@ using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using Entities;
+using System.Text;
+using NotesFor.HtmlToOpenXml;
+using FeatureToggles;
 
 namespace BL
 {
@@ -22,7 +25,14 @@ namespace BL
             {
                 var mainDocumentPart = package.AddMainDocumentPart();
 
-                CreateDocument(type, exam).Save(mainDocumentPart);
+                if ((new HtmlToDocumentFeature()).FeatureEnabled)
+                {
+                    CreateDocument2(type, exam, mainDocumentPart).Save(mainDocumentPart);
+                }
+                else
+                {
+                    CreateDocument(type, exam).Save(mainDocumentPart);
+                }
             }
             return stream;
         }
@@ -39,6 +49,69 @@ namespace BL
             return new Document(body);
         }
 
+        private string GetRow(string first, string second, string third)
+        {
+            return $@"<tr height='50px'>
+                        <td>{first}: {second}</td>
+                        <td>{third}:</td>
+                    </tr>";
+        }
+        private Document CreateDocument2(int type, Exam exam, MainDocumentPart part)
+        {
+            var head = $"<head><title>{exam.Title}</title></head>";
+
+            var table = $@"
+                <table width='100%' border='0'>
+                    <tbody>
+                        {GetRow("Insegnante", $"{professor?.Name} {professor?.Surname}", "Nome")}
+                        {GetRow("Variante", type.ToString(), "Classe")}
+                        {GetRow("Voto", "", "Data")}
+                    </tbody>
+                </table>";
+            var instructions = $"<div><br />{exam.Instructions}</div>";
+            var questions = new StringBuilder();
+
+            foreach (var question in exam.Questions)
+            {
+                questions.Append("<div>");
+                questions.Append(question.Text);
+                if (question.Choiches.Any())
+                {
+                    questions.Append("<ol>");
+                    foreach (var choice in question.Choiches)
+                    {
+                        questions.Append($"<li>{choice.Text}</li>");
+                    }
+                    questions.Append("</ol>");
+                }
+                else
+                {
+                    if (question.Space > 0)
+                    {
+                        questions.Append("<table><tbody>");
+                        for (var i = 0; i < question.Space; i++)
+                        {
+                            questions.Append($"<tr><td></td></tr>");
+                        }
+                        questions.Append("</tbody></table>");
+                    }
+                }
+                questions.Append("</div>");
+
+            }
+            var document = $"<html>{head}<body>{table}{instructions}{questions.ToString()}</body></html>";
+
+            HtmlConverter converter = new HtmlConverter(part);
+            converter.ImageProcessing = ImageProcessing.ManualProvisioning;
+            //converter.BaseImageUrl = new Uri();
+            converter.ProvisionImage += (sender, e) =>
+            {
+                var imageUrl = e.ImageUrl;
+                e.Provision(File.ReadAllBytes(@"wwwroot" + imageUrl));
+            };
+            converter.ParseHtml(document);
+            return part.Document;
+        }
         protected Table Table(int type, Professor professor)
         {
             var properties = new TableProperties(
