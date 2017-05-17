@@ -8,6 +8,8 @@ using DocumentFormat.OpenXml.Wordprocessing;
 using Entities;
 using System.Text;
 using NotesFor.HtmlToOpenXml;
+using FeatureToggles;
+
 namespace BL
 {
     public class DocumentGenerator
@@ -23,7 +25,14 @@ namespace BL
             {
                 var mainDocumentPart = package.AddMainDocumentPart();
 
-                CreateDocument2(type, exam, mainDocumentPart).Save(mainDocumentPart);
+                if ((new HtmlToDocumentFeature()).FeatureEnabled)
+                {
+                    CreateDocument2(type, exam, mainDocumentPart).Save(mainDocumentPart);
+                }
+                else
+                {
+                    CreateDocument(type, exam).Save(mainDocumentPart);
+                }
             }
             return stream;
         }
@@ -40,16 +49,27 @@ namespace BL
             return new Document(body);
         }
 
+        private string GetRow(string first, string second, string third)
+        {
+            return $@"<tr height='50px'>
+                        <td>{first}: {second}</td>
+                        <td>{third}:</td>
+                    </tr>";
+        }
         private Document CreateDocument2(int type, Exam exam, MainDocumentPart part)
         {
             var head = $"<head><title>{exam.Title}</title></head>";
-            var table = $@"<table width='100%' border='1'><tbody>
-                <tr><td width='13%'>Insegnate:</td><td width='32%'>{professor?.Name} {professor?.Surname}</td></td><td width='16%'>Nome: </td><td width='39%'></td></tr>
-                <tr><td width='13%'>Variante:</td><td width='32%'>{type}</td><td width='16%'>Classe:</td><td width='39%'></td></tr>
-                <tr><td width='13%'>Voto:</td><td width='32%'></td><td width='16%'>Data:</td><td width='39%'></td></tr>
-                </tbody></table>";
-            var instructions = $"<div>{exam.Instructions}</div>";
-            StringBuilder questions = new StringBuilder();
+
+            var table = $@"
+                <table width='100%' border='0'>
+                    <tbody>
+                        {GetRow("Insegnante", $"{professor?.Name} {professor?.Surname}", "Nome")}
+                        {GetRow("Variante", type.ToString(), "Classe")}
+                        {GetRow("Voto", "", "Data")}
+                    </tbody>
+                </table>";
+            var instructions = $"<div><br />{exam.Instructions}</div>";
+            var questions = new StringBuilder();
 
             foreach (var question in exam.Questions)
             {
@@ -66,13 +86,17 @@ namespace BL
                 }
                 else
                 {
-                    questions.Append("<table><tbody>");
-                    for (var i = 0; i < question.Space; i++)
+                    if (question.Space > 0)
                     {
-                        questions.Append($"<tr><td></td><tr>");
+                        questions.Append("<table><tbody>");
+                        for (var i = 0; i < question.Space; i++)
+                        {
+                            questions.Append($"<tr><td></td></tr>");
+                        }
+                        questions.Append("</tbody></table>");
                     }
-                    questions.Append("</tbody></table>");
                 }
+                questions.Append("</div>");
 
             }
             var document = $"<html>{head}<body>{table}{instructions}{questions.ToString()}</body></html>";
@@ -83,7 +107,7 @@ namespace BL
             converter.ProvisionImage += (sender, e) =>
             {
                 var imageUrl = e.ImageUrl;
-                e.Provision(File.ReadAllBytes(@"wwwroot"+imageUrl));
+                e.Provision(File.ReadAllBytes(@"wwwroot" + imageUrl));
             };
             converter.ParseHtml(document);
             return part.Document;

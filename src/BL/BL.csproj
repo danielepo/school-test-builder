@@ -127,6 +127,10 @@
     <Compile Include="Zipper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\FeatureToggles\FeatureToggles.csproj">
+      <Project>{D2E60191-8817-4FA6-A502-D106B10D2F3F}</Project>
+      <Name>FeatureToggles</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BL.Interfaces\BL.Interfaces.csproj">
       <Project>{0dbc5603-2625-4088-b9e4-ead51d78485c}</Project>
       <Name>BL.Interfaces</Name>
